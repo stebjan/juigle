@@ -5,9 +5,11 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.swing.AbstractButton;
 import javax.swing.Action;
 import javax.swing.JMenuItem;
+import javax.swing.SwingUtilities;
+
+import nezarazeno.ILanguage;
 
 /**
  * 
@@ -30,6 +32,8 @@ public class JUIGLEMenuItem extends JMenuItem {
 	private Color color;
 		
 	private Collection<JUIGLEMenuItem> subMenuList;
+	
+	private String resourceBundleKey = "";
 	
 	/**
 	 * Default constructor. Variables are not sets.
@@ -57,7 +61,7 @@ public class JUIGLEMenuItem extends JMenuItem {
 		setText(text);
 		setAction(action);
 	}
-	
+		
 	/**
 	 * 
 	 * 
@@ -86,6 +90,14 @@ public class JUIGLEMenuItem extends JMenuItem {
 		this.icon = icon;
 	}
 	
+	public String getResourceBundleKey() {
+		return resourceBundleKey;
+	}
+	
+	public void setResourceBundleKey(String key) {
+		this.resourceBundleKey = key;
+	}
+	
 	public Collection<JUIGLEMenuItem> getSubMenu() {
 		return subMenuList;
 	}
@@ -107,6 +119,10 @@ public class JUIGLEMenuItem extends JMenuItem {
 	
 	public boolean hasSubMenu() {
 		return subMenuList != null;
+	}
+
+	protected void updateText(String text) {
+		setText(text);
 	}
 	
 }
