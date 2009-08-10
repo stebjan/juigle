@@ -7,7 +7,7 @@ import java.util.Collection;
 
 import javax.swing.AbstractButton;
 import javax.swing.Action;
-import javax.swing.JComponent;
+import javax.swing.JMenuItem;
 
 /**
  * 
@@ -16,12 +16,12 @@ import javax.swing.JComponent;
  * @version 0.1.0 07/16/09
  * @since 0.1.0 (05/18/09)
  */
-public class JUIGLEMenuItem extends AbstractButton {
+public class JUIGLEMenuItem extends JMenuItem {
 	
 	/** Only for serialization */
 	private static final long serialVersionUID = -8011842643730136500L;
 
-	private String label;
+	//private String label;
 	
 	private Action action;
 	
@@ -43,8 +43,8 @@ public class JUIGLEMenuItem extends AbstractButton {
 	 * 
 	 * @param label
 	 */
-	public JUIGLEMenuItem(String label) {
-		setLabel(label);
+	public JUIGLEMenuItem(String text) {
+		setText(text);
 	}
 	
 	/**
@@ -53,8 +53,8 @@ public class JUIGLEMenuItem extends AbstractButton {
 	 * @param label
 	 * @param action
 	 */
-	public JUIGLEMenuItem(String label, Action action) {
-		setLabel(label);
+	public JUIGLEMenuItem(String text, Action action) {
+		setText(text);
 		setAction(action);
 	}
 	
@@ -65,25 +65,17 @@ public class JUIGLEMenuItem extends AbstractButton {
 	 * @param action
 	 * @param icon
 	 */
-	public JUIGLEMenuItem(String label, Action action, BufferedImage icon) {
-		this(label, action);
+	public JUIGLEMenuItem(String text, Action action, BufferedImage icon) {
+		this(text, action);
 		setIcon(icon);
 	}
 	
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
 	public Action getAction() {
 		return action;
 	}
 
 	public void setAction(Action action) {
-		this.action = action;
+		super.setAction(action);
 	}
 
 	public BufferedImage getItemIcon() {

@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.RenderingHints;
+import java.util.Locale;
 
 import nezarazeno.PerspectiveException;
 
@@ -14,6 +15,13 @@ import org.jdesktop.swingx.painter.Painter;
 import ch.ethz.origo.jerpaui.prezentation.GraphicsUtilities;
 import ch.ethz.origo.jerpaui.prezentation.JUIGLEFrame;
 
+/**
+ * 
+ * 
+ * @author Vaclav Souhrada (v.souhrada@gmail.com)
+ * @version 0.1.0 07/12/09
+ * @since 0.1.0
+ */
 public class Perspective extends AbstractPerspective {
 
 	/** Only for serialization */
@@ -53,6 +61,21 @@ public class Perspective extends AbstractPerspective {
 
 	@Override
 	public void initPerspectiveMenuPanel() throws PerspectiveException {
+		// do nothing
+	}
+
+	@Override
+	public void updateText() {
+		// do nothing
+	}
+
+	@Override
+  public String getLocalizedString(String string) {
+    return resource.getString(string);
+  }
+
+	@Override
+	public  void setLocalizedResource(Locale locale) {
 		// do nothing
 	}
 
