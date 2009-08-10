@@ -64,7 +64,7 @@ import ch.ethz.origo.jerpaui.prezentation.perspective.Perspective;
 import ch.ethz.origo.jerpaui.prezentation.perspective.PerspectivePanel;
 
 /**
- * Main <code>JERPA<code> software java frame.
+ * Main <code>JUIGLE<code> software java frame.
  * 
  * @author Vaclav Souhrada (v.souhrada@gmail.com)
  * @version 0.1.1 07/11/09
@@ -125,6 +125,13 @@ public class JUIGLEFrame extends JXFrame {
 		}
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param title
+	 * @param logoImg
+	 * @param perspectiveLoader
+	 */
 	public JUIGLEFrame(String title, InputStream logoImg, IPerspectiveLoader perspectiveLoader) {
 		this(title, logoImg);
 		try {
@@ -336,10 +343,9 @@ public class JUIGLEFrame extends JXFrame {
 		return toolbarMenu;
 	}
 	
-	public JXPanel getPerspectivesPanel() throws PerspectiveException {
+	public JXTitledPanel getPerspectivesPanel() throws PerspectiveException {
 		if (perspectivePanel == null) {
 			perspectivePanel = new PerspectivePanel();
-		//	perspectivePanel.setLayout(new BorderLayout());
 			if (perspectiveLoader != null) {
 				Perspective perspective = perspectiveLoader.getDefaultPerspective();
 				perspectivePanel.add(perspective);

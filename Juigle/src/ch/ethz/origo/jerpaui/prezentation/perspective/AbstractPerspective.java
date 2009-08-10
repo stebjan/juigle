@@ -22,9 +22,14 @@
  */
 package ch.ethz.origo.jerpaui.prezentation.perspective;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import nezarazeno.ILanguage;
 import nezarazeno.PerspectiveException;
 
 import org.jdesktop.swingx.JXPanel;
+import org.jdesktop.swingx.JXTitledPanel;
 
 import ch.ethz.origo.jerpaui.prezentation.JUIGLEMenu;
 
@@ -35,24 +40,26 @@ import ch.ethz.origo.jerpaui.prezentation.JUIGLEMenu;
  * @version 0.1.0 07/12/09
  * @since 0.1.0
  */
-public abstract class AbstractPerspective implements IPerspective {
+public abstract class AbstractPerspective implements IPerspective, ILanguage {
 
 	/** Only for serialization */
 	private static final long serialVersionUID = 894536627512039840L;
-	
-	protected JXPanel menuPanel;
-	
+
+	protected JXTitledPanel menuPanel;
+
 	protected JUIGLEMenu menu;
-	
+
 	protected JXPanel mainPanel;
-	
+
 	protected boolean isDefault;
 	
+	protected ResourceBundle resource;
+
 	/**
 	 * Initialize perspective panel
 	 */
 	public abstract void initPerspectivePanel();
-	
+
 	/**
 	 * Initialize menu of perspective.
 	 * 
@@ -61,9 +68,17 @@ public abstract class AbstractPerspective implements IPerspective {
 	 * @since 0.1.0
 	 */
 	public abstract void initPerspectiveMenuPanel() throws PerspectiveException;
-		
+	
+	/**
+   * @param string the String to be localized
+   * @return the localized String
+   */
+  public abstract String getLocalizedString(String string);
+  
+  public abstract void  setLocalizedResource(Locale locale);
 	/**
 	 * Return boolean variable if perspective is default
+	 * 
 	 * @return true - if perspective is default, else return false
 	 */
 	public boolean isDefaultPerspective() {
@@ -71,30 +86,29 @@ public abstract class AbstractPerspective implements IPerspective {
 	}
 
 	public void setPerspectiveAsDefault(boolean value) {
-		isDefault = value;		
+		isDefault = value;
 	}
-	
+
 	/**
 	 * Return perspective menu
-	 *  
+	 * 
 	 * @return perspective menu
 	 */
 	public JUIGLEMenu getMenu() {
 		return menu;
 	}
-	
+
 	/**
-	 * Initialize and return panel which contains main menu
-	 * of perspective.
+	 * Initialize and return panel which contains main menu of perspective.
 	 * 
 	 * @return
 	 */
-	public JXPanel getMenuPanel() {
+	public JXTitledPanel getMenuPanel() {
 		return menuPanel;
 	}
-	
+
 	public JXPanel getMainPerspectivePanel() {
 		return mainPanel;
 	}
-	
+
 }
