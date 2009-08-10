@@ -31,13 +31,13 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
-import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
@@ -60,7 +60,7 @@ import com.jhlabs.image.GlowFilter;
  * @version 0.1.0 07/16/09
  * @since 0.1.0 (05/18/09)
  */
-public class JUIGLEMenu extends JToolBar implements ILanguage {
+public class JUIGLEMenu extends JToolBar {
 
 	/** Only for serialization */
 	private static final long serialVersionUID = 744283918627175663L;
@@ -82,7 +82,9 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 
 	private List<JUIGLEMenuItem> items;// TODO zvazit pouziti
 
-	private GlowFilter glow = new GlowFilter();
+	private static GlowFilter glow = new GlowFilter();
+	
+	private ResourceBundle resource;
 
 	/**
 	 * Create <code>JUIGLE Menu</code>> on specific position.
@@ -93,6 +95,19 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 		this.position = position;
 		glow.setAmount(1.08f);
 		initialize();
+	}
+	
+	/**
+	 * Create <code>JUIGLE Menu</code>> on specific position
+	 * and with localized text
+	 * 
+	 * @param position
+	 * @param resource
+	 * @see ResourceBundle
+	 */
+	public JUIGLEMenu(String position, ResourceBundle resource) {
+		this(position);
+		setLocalizedResource(resource);
 	}
 
 	/**
@@ -106,8 +121,8 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 	}
 
 	public void addItem(JUIGLEMenuItem item) {
-		createButton(item);
 		items.add(item);
+		createButton(item);
 	}
 
 	public List<JUIGLEMenuItem> getMenuItemsList() {
@@ -121,6 +136,10 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 	 */
 	public String getMenuPosition() {
 		return position;
+	}
+	
+	public void setLocalizedResource(ResourceBundle resource) {
+		this.resource = resource;
 	}
 
 	/**
@@ -243,15 +262,6 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 
 	}
 	
-	@Override
-	public void updateText() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				
-			}
-		});		
-	}
 
 	public void addFooterHideButton() {
 		JUIGLEMenuItem footerrCollapseItem = new JUIGLEMenuItem(
@@ -282,5 +292,21 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 		this.add(separator);
 	}
 
+	public void updateText(ResourceBundle resourceBundle) {
+		setLocalizedResource(resourceBundle);
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				for (JUIGLEMenuItem item : items) {
+					item.updateText(resource.getString(item.getResourceBundleKey()));
+					if (item.hasSubMenu()) {
+						for (JUIGLEMenuItem subItem : item.getSubMenu()) {
+							subItem.updateText(resource.getString(subItem.getResourceBundleKey()));
+						}
+					}
+				}
+			}
+		});	
+	}
 
 }
