@@ -2,7 +2,8 @@ package nezarazeno;
 
 import java.util.Collection;
 
-import ch.ethz.origo.jerpaui.prezentation.perspective.Perspective;
+import ch.ethz.origo.juigle.application.exceptions.PerspectiveException;
+import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
 
 /**
  * 
