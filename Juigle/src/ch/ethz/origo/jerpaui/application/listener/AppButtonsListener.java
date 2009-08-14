@@ -20,7 +20,7 @@
  *                       Department of Computer Science and Engineering, 
  *                       Pilsen, Czech Republic
  */
-package ch.ethz.origo.jerpaui.application.listener;
+package ch.ethz.origo.juigle.application.listener;
 
 import java.util.EventListener;
 
