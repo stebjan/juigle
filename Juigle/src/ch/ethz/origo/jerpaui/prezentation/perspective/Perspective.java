@@ -1,19 +1,19 @@
-package ch.ethz.origo.jerpaui.prezentation.perspective;
+package ch.ethz.origo.juigle.prezentation.perspective;
 
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.RenderingHints;
-import java.util.Locale;
-
-import nezarazeno.PerspectiveException;
+import java.util.ResourceBundle;
 
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.painter.Painter;
 
-import ch.ethz.origo.jerpaui.prezentation.GraphicsUtilities;
-import ch.ethz.origo.jerpaui.prezentation.JUIGLEFrame;
+import ch.ethz.origo.juigle.application.exceptions.PerspectiveException;
+import ch.ethz.origo.juigle.application.listener.LanguageEvent;
+import ch.ethz.origo.juigle.prezentation.GraphicsUtilities;
+import ch.ethz.origo.juigle.prezentation.JUIGLEFrame;
 
 /**
  * 
@@ -66,7 +66,7 @@ public class Perspective extends AbstractPerspective {
 
 	@Override
 	public void updateText() {
-		// do nothing
+		setLocalizedResource();
 	}
 
 	@Override
@@ -75,8 +75,37 @@ public class Perspective extends AbstractPerspective {
   }
 
 	@Override
-	public  void setLocalizedResource(Locale locale) {
-		// do nothing
+	public  void setLocalizedResource() {
+		resource = ResourceBundle.getBundle(resourcePath);
 	}
+
+	@Override
+	public void setResourceBundleKey(String key) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void setResourceBundlePath(String path) {
+		this.resourcePath = path;
+		
+	}
+	
+	@Override
+	public String getResourceBundlePath() {
+		return resourcePath;
+	}
+	
+	@Override
+	
+	public void fireLanguageChanged(LanguageEvent e) {
+		if (e.getId() == LanguageEvent.LANGUAGE_CHANGED) {
+			menu.updateText();
+			updateText();
+			System.out.println("...Zmena jazyka v Perspective...");
+		}		
+	}
+
+
 
 }
