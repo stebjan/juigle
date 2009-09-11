@@ -20,7 +20,7 @@
  *                       Department of Computer Science and Engineering, 
  *                       Pilsen, Czech Republic
  */
-package ch.ethz.origo.jerpaui.prezentation.perspective;
+package ch.ethz.origo.juigle.prezentation.perspective;
 
 
 /**

@@ -1,11 +1,12 @@
-package ch.ethz.origo.jerpaui.prezentation.perspective;
+package ch.ethz.origo.juigle.prezentation.perspective;
 
 import java.awt.BorderLayout;
-import java.util.Locale;
-
-import nezarazeno.PerspectiveException;
 
 import org.jdesktop.swingx.JXTitledPanel;
+
+import ch.ethz.origo.juigle.application.exceptions.PerspectiveException;
+import ch.ethz.origo.juigle.application.listener.LanguageEvent;
+import ch.ethz.origo.juigle.application.listener.LanguageListener;
 
 /**
  * 
@@ -14,7 +15,7 @@ import org.jdesktop.swingx.JXTitledPanel;
  * @version 0.1.0 07/19/09
  * @since 0.1.0
  */
-public class PerspectivePanel extends JXTitledPanel {
+public class PerspectivePanel extends JXTitledPanel implements LanguageListener {
 
 	/** Only for serialization */
 	private static final long serialVersionUID = -6773985483599106242L;
@@ -42,15 +43,15 @@ public class PerspectivePanel extends JXTitledPanel {
 
 	private void initialize() throws PerspectiveException {
 		// this.removeAll();
-
 		if (currentPerspective != null) {
 			//this.setLayout(new BorderLayout());
 			this.setOpaque(false);
-			currentPerspective.setLocalizedResource(Locale.getDefault());
+			currentPerspective.setResourceBundlePath(currentPerspective.getResourceBundlePath());
+			currentPerspective.setLocalizedResource();
 			currentPerspective.initPerspectivePanel();
 			currentPerspective.initPerspectiveMenuPanel();
 			currentPerspective.updateText();
-			this.setTitle(currentPerspective.getTitle());
+			this.setTitle(currentPerspective.getTitle()); // TODO tento kod nefunguje
 			if (currentPerspective.getMenu() != null) {
 				currentPerspective.getMenuPanel().setTitle(currentPerspective.getTitle());
 				this.add(currentPerspective.getMenuPanel(), currentPerspective
@@ -70,6 +71,14 @@ public class PerspectivePanel extends JXTitledPanel {
 
 	private void setPerspective(Perspective perspective) {
 		this.currentPerspective = perspective;
+	}
+
+	@Override
+	public void fireLanguageChanged(LanguageEvent e) {
+		if (e.getId() == LanguageEvent.LANGUAGE_CHANGED) {
+			this.setTitle(currentPerspective.getTitle()); // tento kod nefunguje
+			System.out.println("....Zmena titulku v Perspective Panelu.....");
+		}
 	}
 
 }
