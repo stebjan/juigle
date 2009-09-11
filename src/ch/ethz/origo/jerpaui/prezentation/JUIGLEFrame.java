@@ -20,7 +20,7 @@
  *                       Department of Computer Science and Engineering, 
  *                       Pilsen, Czech Republic
  */
-package ch.ethz.origo.jerpaui.prezentation;
+package ch.ethz.origo.juigle.prezentation;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -50,8 +50,8 @@ import javax.swing.JToolBar;
 import javax.swing.UIManager;
 
 import nezarazeno.IPerspectiveLoader;
-import nezarazeno.PerspectiveException;
 
+import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXButton;
 import org.jdesktop.swingx.JXCollapsiblePane;
 import org.jdesktop.swingx.JXFrame;
@@ -60,8 +60,9 @@ import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXTitledPanel;
 import org.jdesktop.swingx.painter.Painter;
 
-import ch.ethz.origo.jerpaui.prezentation.perspective.Perspective;
-import ch.ethz.origo.jerpaui.prezentation.perspective.PerspectivePanel;
+import ch.ethz.origo.juigle.application.exceptions.PerspectiveException;
+import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
+import ch.ethz.origo.juigle.prezentation.perspective.PerspectivePanel;
 
 /**
  * Main <code>JUIGLE<code> software java frame.
@@ -84,11 +85,11 @@ public class JUIGLEFrame extends JXFrame {
 
 	private PerspectivePanel perspectivePanel;
 	
-	private JToolBar toolbarMenu;
+	private JUIGLEMenu mainToolBar;
 
 	private JXButton maximalizeApp;
 
-	private BufferedImage logoImg;
+	private BufferedImage logoImg, testImg;
 	private BufferedImage minimizeImg, closeImg, minimizeOverImg;
 	private BufferedImage closeOverImg, resizerImg;
 	private BufferedImage maximizeImg, maximizeOverImg, maximize2Img,
@@ -99,6 +100,8 @@ public class JUIGLEFrame extends JXFrame {
 	private IPerspectiveLoader perspectiveLoader;
 	
 	private GridBagConstraints gbcCopyright1;
+	
+	private static Logger logger = Logger.getLogger(JUIGLEFrame.class);
 
 	private String title = "";
 	private String copyright = "";
@@ -157,42 +160,44 @@ public class JUIGLEFrame extends JXFrame {
 	 * 
 	 * @since 0.1.0
 	 */
-	private void initImages() {
+	private void initImages() throws PerspectiveException {
 		try {
-			/*
-			 * logoImg = ImageIO.read(ClassLoader
-			 * .getSystemResourceAsStream("ch/ethz/origo/jerpaui/ui/images/icon.gif"
-			 * ));
-			 */
+					 
 			minimizeImg = ImageIO
 					.read(ClassLoader
-							.getSystemResourceAsStream("ch/ethz/origo/jerpaui/data/images/minimize.png"));
+							.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/minimize.png"));
 			maximizeImg = ImageIO
 					.read(ClassLoader
-							.getSystemResourceAsStream("ch/ethz/origo/jerpaui/data/images/maximize.png"));
+							.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/maximize.png"));
 			closeImg = ImageIO
 					.read(ClassLoader
-							.getSystemResourceAsStream("ch/ethz/origo/jerpaui/data/images/close.png"));
+							.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/close.png"));
 			minimizeOverImg = ImageIO
 					.read(ClassLoader
-							.getSystemResourceAsStream("ch/ethz/origo/jerpaui/data/images/minimize_over.png"));
+							.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/minimize_over.png"));
 			maximizeOverImg = ImageIO
 					.read(ClassLoader
-							.getSystemResourceAsStream("ch/ethz/origo/jerpaui/data/images/maximize_over.png"));
+							.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/maximize_over.png"));
 			closeOverImg = ImageIO
 					.read(ClassLoader
-							.getSystemResourceAsStream("ch/ethz/origo/jerpaui/data/images/close_over.png"));
+							.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/close_over.png"));
 			maximize2OverImg = ImageIO
 					.read(ClassLoader
-							.getSystemResourceAsStream("ch/ethz/origo/jerpaui/data/images/maximize2_over.png"));
+							.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/maximize2_over.png"));
 			maximize2Img = ImageIO
 					.read(ClassLoader
-							.getSystemResourceAsStream("ch/ethz/origo/jerpaui/data/images/maximize2.png"));
+							.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/maximize2.png"));
 			resizerImg = ImageIO
 			.read(ClassLoader
-					.getSystemResourceAsStream("ch/ethz/origo/jerpaui/data/images/resizer.png"));
+					.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/resizer.png"));
+			
+			testImg = ImageIO
+			.read(ClassLoader
+					.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/aaa.png"));
 		} catch (IOException e) {
-			e.printStackTrace();
+			JUIGLEFrame.logger.error("Could not read default images...", e); // TODO nefunguje
+			// TODO vylepsit chybu vypisem do GUI
+			throw new PerspectiveException(e);
 		}
 	}
 
@@ -203,6 +208,7 @@ public class JUIGLEFrame extends JXFrame {
 	 * @since 0.1.0
 	 */
 	private void initGUI() throws PerspectiveException {
+		JUIGLEFrame.logger.info("...Initialize The Main Frame...");
 		System.setProperty("sun.awt.noerasebackground", "true");
 		System.setProperty("sun.java2d.noddraw", "true");
 		System.setProperty("sun.java2d.opengl", "true");
@@ -316,7 +322,7 @@ public class JUIGLEFrame extends JXFrame {
 				0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(0,
 						0, 0, 0), 0, 0);
 
-		headerPanel.add(new JXLabel(new ImageIcon(logoImg)), gbcLogoLabel);
+		headerPanel.add(new JXLabel(new ImageIcon(testImg)), gbcLogoLabel);
 		headerPanel.add(minimalizeApp, gbcMinimalizeButt);
 		headerPanel.add(maximalizeApp, gbcMaximalizeButt);
 		headerPanel.add(closeApp, gbcCloseButt);
@@ -332,15 +338,17 @@ public class JUIGLEFrame extends JXFrame {
 		
 		return headerCoollapse;
 	}
-	// TODO GET menu promyslet a dodelat
-	private JToolBar getMenu() {
-		if (toolbarMenu == null) {
-			toolbarMenu = new JToolBar();
-			toolbarMenu.setFloatable(false);
-			toolbarMenu.setRollover(true);
-			toolbarMenu.setOpaque(false);
+	
+	
+	private JToolBar initAndGetMainToolbar() {
+		if (mainToolBar == null) {
+			mainToolBar = new JUIGLEMenu(null);
+			mainToolBar.setFloatable(false);
+			mainToolBar.setRollover(true);
+			mainToolBar.setOpaque(false);
+		
 		}
-		return toolbarMenu;
+		return mainToolBar;
 	}
 	
 	public JXTitledPanel getPerspectivesPanel() throws PerspectiveException {

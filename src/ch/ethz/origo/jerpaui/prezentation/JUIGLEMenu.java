@@ -21,7 +21,7 @@
  *                       Pilsen, Czech Republic
  */
 
-package ch.ethz.origo.jerpaui.prezentation;
+package ch.ethz.origo.juigle.prezentation;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
@@ -31,6 +31,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
@@ -41,15 +42,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JPopupMenu;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-import nezarazeno.ILanguage;
-import nezarazeno.ImageSeparator;
-import nezarazeno.JUIGLEMenuException;
-
-import org.jdesktop.swingx.JXButton;
-import org.jdesktop.swingx.JXCollapsiblePane;
+import ch.ethz.origo.juigle.application.ILanguage;
+import ch.ethz.origo.juigle.application.exceptions.JUIGLELangException;
+import ch.ethz.origo.juigle.application.exceptions.JUIGLEMenuException;
 
 import com.jhlabs.image.GlowFilter;
 
@@ -60,7 +57,7 @@ import com.jhlabs.image.GlowFilter;
  * @version 0.1.0 07/16/09
  * @since 0.1.0 (05/18/09)
  */
-public class JUIGLEMenu extends JToolBar {
+public class JUIGLEMenu extends JToolBar implements ILanguage {
 
 	/** Only for serialization */
 	private static final long serialVersionUID = 744283918627175663L;
@@ -78,13 +75,23 @@ public class JUIGLEMenu extends JToolBar {
 	/**  */
 	public static final String MENU_LOCATION_PAGE_END = BorderLayout.PAGE_END;
 
-	private String position;
+	protected String position;
+	protected String resourcePath;
 
-	private List<JUIGLEMenuItem> items;// TODO zvazit pouziti
+	protected List<JUIGLEMenuItem> listOfitems;
+	protected List<JUIGLEButton> listOfButtons;
 
 	private static GlowFilter glow = new GlowFilter();
-	
-	private ResourceBundle resource;
+
+	protected ResourceBundle resource;
+
+	/**
+	 * Create empty <code>JUIGLE Menu</code>> with no specific position.
+	 * You must set position later.
+	 */
+	public JUIGLEMenu() {
+		initialize();
+	}
 
 	/**
 	 * Create <code>JUIGLE Menu</code>> on specific position.
@@ -93,53 +100,79 @@ public class JUIGLEMenu extends JToolBar {
 	 */
 	public JUIGLEMenu(String position) {
 		this.position = position;
-		glow.setAmount(1.08f);
 		initialize();
 	}
-	
+
 	/**
 	 * Create <code>JUIGLE Menu</code>> on specific position
 	 * and with localized text
 	 * 
 	 * @param position
-	 * @param resource
-	 * @see ResourceBundle
+	 * @param resourcePath
 	 */
-	public JUIGLEMenu(String position, ResourceBundle resource) {
+	public JUIGLEMenu(String position, String resourcePath) {
 		this(position);
-		setLocalizedResource(resource);
+		this.resourcePath = resourcePath;
+		setLocalizedResource();
 	}
 
 	/**
 	 * Initialize menu
 	 */
 	private void initialize() {
-		items = new ArrayList<JUIGLEMenuItem>();
+		glow.setAmount(1.08f);
+		listOfitems = new ArrayList<JUIGLEMenuItem>(); // TODO mozna inicializovat
+																										// pouze kdyz fakt bude
+																										// itema
+		listOfButtons = new ArrayList<JUIGLEButton>();
 		this.setFloatable(false);
 		this.setRollover(true);
 		this.setOpaque(false);
 	}
 
 	public void addItem(JUIGLEMenuItem item) {
-		items.add(item);
+		listOfitems.add(item);
 		createButton(item);
 	}
 
 	public List<JUIGLEMenuItem> getMenuItemsList() {
-		return items;
+		return listOfitems;
 	}
 
 	/**
 	 * Return position of menu
 	 * 
-	 * @return position of menu as String value
+	 * @return position String value of menu position (Location)
 	 */
 	public String getMenuPosition() {
 		return position;
 	}
 	
-	public void setLocalizedResource(ResourceBundle resource) {
-		this.resource = resource;
+	/**
+	 * Set up position of menu
+	 * 
+	 * @param position String value of menu position (Location)
+	 */
+	public void setMenuPosition(String position) {
+		this.position = position;
+	}
+
+	public void setLocalizedResource() {
+		this.resource = ResourceBundle.getBundle(resourcePath);
+	}
+	
+	@Override
+	public void setResourceBundlePath(String path) {
+		this.resourcePath = path;
+	}
+	
+	/**
+	 * This method is not used !!! Is not implemented
+	 * for {@link JUIGLEMenu}. 
+	 */
+	@Override
+	@Deprecated
+	public void setResourceBundleKey(String key) {
 	}
 
 	/**
@@ -155,7 +188,9 @@ public class JUIGLEMenu extends JToolBar {
 			if (it.hasSubMenu()) {
 				it.setComponentPopupMenu(createAndGetSubMenu(it, it));
 			}
-			it.setText(it.getText());
+			if (it.canBeTextShow()) {
+				it.setText(it.getText());
+			}
 			if (it.getItemIcon() != null) {
 				it.setIcon(new ImageIcon(it.getItemIcon()));
 			}
@@ -176,9 +211,9 @@ public class JUIGLEMenu extends JToolBar {
 		return menu;
 	}
 
-	private void createButton(JUIGLEMenuItem item) {
+	protected void createButton(JUIGLEMenuItem item) {
 		boolean isRoot = false;
-		final JXButton button = new JXButton();
+		final JUIGLEButton button = new JUIGLEButton();
 		// button.setAction(item.getAction());
 		if (item.hasSubMenu()) {
 			isRoot = true;
@@ -187,9 +222,12 @@ public class JUIGLEMenu extends JToolBar {
 		if (item.getAction() != null && !isRoot) {
 			button.setAction(item.getAction());
 		}
-		if (item.getText() != null) { // TODO overit tady jestli to takle fakt musi
-			// byt
+		if (item.getText() != null) { 
+		   // TODO overit tady jestli to takle fakt musi byt
 			button.setText(item.getText());
+		}
+		if (!item.canBeTextShow()) {
+			button.showText(false);
 		}
 		if (item.getItemIcon() != null) {
 			button.setIcon(new ImageIcon(item.getItemIcon()));
@@ -197,6 +235,8 @@ public class JUIGLEMenu extends JToolBar {
 					.filter(item.getItemIcon(), null)));
 			button.setForeground(GraphicsUtilities.TRANSPARENT_COLOR);
 		}
+		button.setResourceBundlePath(resourcePath);
+		button.setResourceBundleKey(item.getResourceBundleKey());
 		// button.setForeground(item.getColor() == null ? Color.RED :
 		// item.getColor());*/
 		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -207,6 +247,7 @@ public class JUIGLEMenu extends JToolBar {
 		button.setContentAreaFilled(false);
 		// button.setPreferredSize(new Dimension(32, 1));
 
+		listOfButtons.add(button);
 		this.add(button);
 	}
 
@@ -222,7 +263,7 @@ public class JUIGLEMenu extends JToolBar {
 		try {
 			BufferedImage image = ImageIO
 					.read(ClassLoader
-							.getSystemResourceAsStream("ch/ethz/origo/jerpaui/data/images/toolbar.png"));
+							.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/toolbar.png"));
 			createSeparator(image);
 		} catch (IOException e) {
 			throw new JUIGLEMenuException(e);
@@ -239,49 +280,9 @@ public class JUIGLEMenu extends JToolBar {
 	public void addMenuSeparator(BufferedImage separatorImg) {
 		createSeparator(separatorImg);
 	}
-
-	public void addHeaderHideButton() {
-		JUIGLEMenuItem headerCollapseItem = new JUIGLEMenuItem(
-				"Show/Hide Header Panel");
-
-		Action headerCollpsAction = JUIGLEFrame.headerCoollapse.getActionMap().get(
-				JXCollapsiblePane.TOGGLE_ACTION);
-
-		// use the collapse/expand icons from the JTree UI
-		headerCollpsAction.putValue(JXCollapsiblePane.COLLAPSE_ICON, UIManager
-				.getIcon("Tree.expandedIcon"));
-		headerCollpsAction.putValue(JXCollapsiblePane.EXPAND_ICON, UIManager
-				.getIcon("Tree.collapsedIcon"));
-
-		headerCollapseItem.setAction(headerCollpsAction);
-		addItem(headerCollapseItem);
-	}
-
-	public void addHeaderHideButton(BufferedImage image)
-			throws JUIGLEMenuException {
-
-	}
 	
-
-	public void addFooterHideButton() {
-		JUIGLEMenuItem footerrCollapseItem = new JUIGLEMenuItem(
-		"Show/Hide Footer Panel");
+	protected void createHideButton(boolean showText, Action action) {
 		
-		Action footerCollpsAction = JUIGLEFrame.footerCollapse.getActionMap().get(
-				JXCollapsiblePane.TOGGLE_ACTION);
-		// use the collapse/expand icons from the JTree UI
-		footerCollpsAction.putValue(JXCollapsiblePane.COLLAPSE_ICON, UIManager
-				.getIcon("Tree.expandedIcon"));
-		footerCollpsAction.putValue(JXCollapsiblePane.EXPAND_ICON, UIManager
-				.getIcon("Tree.collapsedIcon"));
-		
-		footerrCollapseItem.setAction(footerCollpsAction);
-		addItem(footerrCollapseItem);
-	}
-
-	public void addFooterHideButton(BufferedImage image)
-			throws JUIGLEMenuException {
-
 	}
 
 	private void createSeparator(BufferedImage image) {
@@ -292,21 +293,40 @@ public class JUIGLEMenu extends JToolBar {
 		this.add(separator);
 	}
 
-	public void updateText(ResourceBundle resourceBundle) {
-		setLocalizedResource(resourceBundle);
+	@Override
+	public void updateText() {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				for (JUIGLEMenuItem item : items) {
-					item.updateText(resource.getString(item.getResourceBundleKey()));
-					if (item.hasSubMenu()) {
-						for (JUIGLEMenuItem subItem : item.getSubMenu()) {
-							subItem.updateText(resource.getString(subItem.getResourceBundleKey()));
+				setLocalizedResource();
+				for (JUIGLEMenuItem item : listOfitems) {
+					if (item.canBeTextShow()) {
+						try {
+							item.updateText(resource.getString(item.getResourceBundleKey()));
+							if (item.hasSubMenu()) {
+								for (JUIGLEMenuItem subItem : item.getSubMenu()) {
+									subItem.updateText(resource.getString(subItem
+											.getResourceBundleKey()));
+								}
+							}
+						} catch (MissingResourceException e) {
+							System.out
+									.println("No specific resource bundle key for items. Please check resources for items ");
+							// TODO dodelat a nejak povymyslet jako z run vyhodit chybu no
+							e.printStackTrace();
 						}
 					}
 				}
+				for (JUIGLEButton butt : listOfButtons) {
+					try {
+						butt.updateText();
+					} catch (JUIGLELangException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 			}
-		});	
+		});
 	}
 
 }

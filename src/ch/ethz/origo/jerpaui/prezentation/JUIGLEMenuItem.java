@@ -1,4 +1,4 @@
-package ch.ethz.origo.jerpaui.prezentation;
+package ch.ethz.origo.juigle.prezentation;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -8,8 +8,6 @@ import java.util.Collection;
 import javax.swing.Action;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
-
-import nezarazeno.ILanguage;
 
 /**
  * 
@@ -33,7 +31,9 @@ public class JUIGLEMenuItem extends JMenuItem {
 		
 	private Collection<JUIGLEMenuItem> subMenuList;
 	
-	private String resourceBundleKey = "";
+	private String resourceBundleKey;
+	
+	private boolean showText = true;
 	
 	/**
 	 * Default constructor. Variables are not sets.
@@ -49,6 +49,7 @@ public class JUIGLEMenuItem extends JMenuItem {
 	 */
 	public JUIGLEMenuItem(String text) {
 		setText(text);
+		setResourceBundleKey(text);
 	}
 	
 	/**
@@ -109,7 +110,7 @@ public class JUIGLEMenuItem extends JMenuItem {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	
+		
 	public void addSubItem(JUIGLEMenuItem subItem) {
 		if (subMenuList == null) {
 			subMenuList = new ArrayList<JUIGLEMenuItem>();
@@ -121,8 +122,32 @@ public class JUIGLEMenuItem extends JMenuItem {
 		return subMenuList != null;
 	}
 
-	protected void updateText(String text) {
-		setText(text);
+	/**
+	 * 
+	 * 
+	 * @param show
+	 */
+	public void showText(boolean show) {
+		this.showText = show;
+	}
+	
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
+	public boolean canBeTextShow() {
+		return showText;
+	}
+
+	public void updateText(final String text) {
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				setText(text);				
+			}
+		});
 	}
 	
 }
