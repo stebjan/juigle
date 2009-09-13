@@ -25,8 +25,11 @@ package ch.ethz.origo.juigle.prezentation.perspective;
 import java.awt.Component;
 import java.util.ResourceBundle;
 
+import javax.swing.JPanel;
+
 
 import org.jdesktop.swingx.JXPanel;
+import org.jdesktop.swingx.JXTaskPane;
 import org.jdesktop.swingx.JXTitledPanel;
 
 import ch.ethz.origo.juigle.application.ILanguage;
@@ -51,7 +54,9 @@ public abstract class AbstractPerspective implements IPerspective, ILanguage, La
 	protected String resourcePath;
 	protected String resourceBundleKey;
 	
-	protected JXTitledPanel menuPanel;
+	protected JXTitledPanel menuTitledPanel;
+	
+	protected JXTaskPane menuTaskPane;
 
 	protected JUIGLEMenu menu;
 
@@ -112,8 +117,12 @@ public abstract class AbstractPerspective implements IPerspective, ILanguage, La
 	 * 
 	 * @return
 	 */
-	public JXTitledPanel getMenuPanel() {
-		return menuPanel;
+	public JPanel getMenuPanel() {
+		if (menuTaskPane != null) {
+			return menuTaskPane;
+		} else {
+			return menuTitledPanel;
+		}
 	}
 
 	public JXPanel getMainPerspectivePanel() {

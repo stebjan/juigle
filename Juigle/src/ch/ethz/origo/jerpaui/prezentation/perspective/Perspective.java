@@ -7,13 +7,15 @@ import java.awt.Paint;
 import java.awt.RenderingHints;
 import java.util.ResourceBundle;
 
+import javax.swing.Icon;
+
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.painter.Painter;
 
 import ch.ethz.origo.juigle.application.exceptions.PerspectiveException;
 import ch.ethz.origo.juigle.application.listener.LanguageEvent;
-import ch.ethz.origo.juigle.prezentation.GraphicsUtilities;
 import ch.ethz.origo.juigle.prezentation.JUIGLEFrame;
+import ch.ethz.origo.juigle.prezentation.JUIGLEGraphicsUtilities;
 
 /**
  * 
@@ -32,7 +34,7 @@ public class Perspective extends AbstractPerspective {
 		// TODO udelat vysku panelu packove, barvy dle uzivatele
 		if (mainPanel == null) {
 			mainPanel = new JXPanel();
-			final Paint perspectiveBackground = GraphicsUtilities
+			final Paint perspectiveBackground = JUIGLEGraphicsUtilities
 					.createBackgroundTexture(Color.YELLOW, Color.LIGHT_GRAY, 400);
 			Painter<Component> p = new Painter<Component>() {
 
@@ -97,7 +99,7 @@ public class Perspective extends AbstractPerspective {
 	}
 	
 	@Override
-	
+	// TODO MOZNA ODSTRANIT JE TU ASI ZBYTECNA
 	public void fireLanguageChanged(LanguageEvent e) {
 		if (e.getId() == LanguageEvent.LANGUAGE_CHANGED) {
 			menu.updateText();
@@ -106,6 +108,9 @@ public class Perspective extends AbstractPerspective {
 		}		
 	}
 
-
+	@Override
+	public Icon getIcon() throws PerspectiveException {
+		return null;
+	}
 
 }

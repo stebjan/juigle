@@ -22,6 +22,10 @@
  */
 package ch.ethz.origo.juigle.prezentation.perspective;
 
+import javax.swing.Icon;
+
+import ch.ethz.origo.juigle.application.exceptions.PerspectiveException;
+
 
 /**
  * 
@@ -40,5 +44,15 @@ public interface IPerspective {
 	 * @since 0.1.0
 	 */
 	public String getTitle(); 
+	
+	/**
+	 * Return perspective image icon 
+	 * 
+	 * @return icon of perspective
+	 * @throws PerspectiveException
+	 * @version 0.1.0
+	 * @since 0.1.0
+	 */
+	public Icon getIcon() throws PerspectiveException;
 		
 }
