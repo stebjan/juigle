@@ -2,6 +2,7 @@ package ch.ethz.origo.juigle.prezentation.perspective;
 
 import java.awt.BorderLayout;
 
+import org.jdesktop.swingx.JXTaskPane;
 import org.jdesktop.swingx.JXTitledPanel;
 
 import ch.ethz.origo.juigle.application.exceptions.PerspectiveException;
@@ -12,8 +13,8 @@ import ch.ethz.origo.juigle.application.listener.LanguageListener;
  * 
  * 
  * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.1.0 07/19/09
- * @since 0.1.0
+ * @version 0.1.1 09/13/09
+ * @since 0.1.0 (07/19/09)
  */
 public class PerspectivePanel extends JXTitledPanel implements LanguageListener {
 
@@ -28,7 +29,7 @@ public class PerspectivePanel extends JXTitledPanel implements LanguageListener 
 	 * @throws PerspectiveException
 	 */
 	public PerspectivePanel() throws PerspectiveException {
-	
+
 	}
 
 	/**
@@ -44,16 +45,25 @@ public class PerspectivePanel extends JXTitledPanel implements LanguageListener 
 	private void initialize() throws PerspectiveException {
 		// this.removeAll();
 		if (currentPerspective != null) {
-			//this.setLayout(new BorderLayout());
+			// this.setLayout(new BorderLayout());
 			this.setOpaque(false);
-			currentPerspective.setResourceBundlePath(currentPerspective.getResourceBundlePath());
+			currentPerspective.setResourceBundlePath(currentPerspective
+					.getResourceBundlePath());
 			currentPerspective.setLocalizedResource();
 			currentPerspective.initPerspectivePanel();
 			currentPerspective.initPerspectiveMenuPanel();
 			currentPerspective.updateText();
 			this.setTitle(currentPerspective.getTitle()); // TODO tento kod nefunguje
 			if (currentPerspective.getMenu() != null) {
-				currentPerspective.getMenuPanel().setTitle(currentPerspective.getTitle());
+				if (currentPerspective.getMenuPanel() instanceof JXTitledPanel) {
+					((JXTitledPanel) currentPerspective.getMenuPanel())
+							.setTitle(currentPerspective.getTitle());
+				} else if (currentPerspective.getMenuPanel() instanceof JXTaskPane) {
+					((JXTaskPane) currentPerspective.getMenuPanel())
+							.setTitle(currentPerspective.getTitle());
+					((JXTaskPane) currentPerspective.getMenuPanel())
+							.setIcon(currentPerspective.getIcon());
+				}
 				this.add(currentPerspective.getMenuPanel(), currentPerspective
 						.getMenu().getMenuPosition());
 			}
@@ -65,6 +75,9 @@ public class PerspectivePanel extends JXTitledPanel implements LanguageListener 
 	}
 
 	public void add(Perspective perspective) throws PerspectiveException {
+		if (currentPerspective != null) {
+			removeCurrentPerspective();
+		}
 		setPerspective(perspective);
 		initialize();
 	}
@@ -73,8 +86,14 @@ public class PerspectivePanel extends JXTitledPanel implements LanguageListener 
 		this.currentPerspective = perspective;
 	}
 
+	private void removeCurrentPerspective() {
+		this.remove(currentPerspective.getMenuPanel());
+		this.remove(currentPerspective.getMainPerspectivePanel());
+	}
+
 	@Override
 	public void fireLanguageChanged(LanguageEvent e) {
+		// TODO tato metoda mozna nepouzita
 		if (e.getId() == LanguageEvent.LANGUAGE_CHANGED) {
 			this.setTitle(currentPerspective.getTitle()); // tento kod nefunguje
 			System.out.println("....Zmena titulku v Perspective Panelu.....");

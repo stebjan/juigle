@@ -233,7 +233,7 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 			button.setIcon(new ImageIcon(item.getItemIcon()));
 			button.setRolloverIcon(new ImageIcon(glow
 					.filter(item.getItemIcon(), null)));
-			button.setForeground(GraphicsUtilities.TRANSPARENT_COLOR);
+			button.setForeground(JUIGLEGraphicsUtilities.TRANSPARENT_COLOR);
 		}
 		button.setResourceBundlePath(resourcePath);
 		button.setResourceBundleKey(item.getResourceBundleKey());
@@ -243,7 +243,7 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 		button.setBorder(new EmptyBorder(0, 6, 0, 6));
 		// button.setBorder(null);
 		button.setFocusPainted(false);
-		button.setBackground(GraphicsUtilities.TRANSPARENT_COLOR);
+		button.setBackground(JUIGLEGraphicsUtilities.TRANSPARENT_COLOR);
 		button.setContentAreaFilled(false);
 		// button.setPreferredSize(new Dimension(32, 1));
 

@@ -44,6 +44,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JToolBar;
@@ -79,12 +81,12 @@ public class JUIGLEFrame extends JXFrame {
 	private JXPanel jContentPane;
 	private JXPanel headerPanel;
 	private JXPanel footerPanel;
-	
+
 	public static JXCollapsiblePane headerCoollapse;
 	public static JXCollapsiblePane footerCollapse;
 
 	private PerspectivePanel perspectivePanel;
-	
+
 	private JUIGLEMenu mainToolBar;
 
 	private JXButton maximalizeApp;
@@ -94,18 +96,18 @@ public class JUIGLEFrame extends JXFrame {
 	private BufferedImage closeOverImg, resizerImg;
 	private BufferedImage maximizeImg, maximizeOverImg, maximize2Img,
 			maximize2OverImg;
-	
-	private InnerListener innerListener; 
-	
+
+	private InnerListener innerListener;
+
 	private IPerspectiveLoader perspectiveLoader;
-	
+
 	private GridBagConstraints gbcCopyright1;
-	
+
 	private static Logger logger = Logger.getLogger(JUIGLEFrame.class);
 
 	private String title = "";
 	private String copyright = "";
-	
+
 	private static int frameExtendState;
 
 	/**
@@ -127,7 +129,7 @@ public class JUIGLEFrame extends JXFrame {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * 
@@ -135,7 +137,8 @@ public class JUIGLEFrame extends JXFrame {
 	 * @param logoImg
 	 * @param perspectiveLoader
 	 */
-	public JUIGLEFrame(String title, InputStream logoImg, IPerspectiveLoader perspectiveLoader) {
+	public JUIGLEFrame(String title, InputStream logoImg,
+			IPerspectiveLoader perspectiveLoader) {
 		this(title, logoImg);
 		try {
 			setPerspectives(perspectiveLoader);
@@ -147,7 +150,7 @@ public class JUIGLEFrame extends JXFrame {
 	/**
 	 * 
 	 * @throws IOException
-	 * @throws PerspectiveException 
+	 * @throws PerspectiveException
 	 * @since 0.1.0
 	 */
 	private void initialize() throws IOException, PerspectiveException {
@@ -162,7 +165,7 @@ public class JUIGLEFrame extends JXFrame {
 	 */
 	private void initImages() throws PerspectiveException {
 		try {
-					 
+
 			minimizeImg = ImageIO
 					.read(ClassLoader
 							.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/minimize.png"));
@@ -188,14 +191,15 @@ public class JUIGLEFrame extends JXFrame {
 					.read(ClassLoader
 							.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/maximize2.png"));
 			resizerImg = ImageIO
-			.read(ClassLoader
-					.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/resizer.png"));
-			
+					.read(ClassLoader
+							.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/resizer.png"));
+
 			testImg = ImageIO
-			.read(ClassLoader
-					.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/aaa.png"));
+					.read(ClassLoader
+							.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/aaa.png"));
 		} catch (IOException e) {
-			JUIGLEFrame.logger.error("Could not read default images...", e); // TODO nefunguje
+			JUIGLEFrame.logger.error("Could not read default images...", e); // TODO
+																																				// nefunguje
 			// TODO vylepsit chybu vypisem do GUI
 			throw new PerspectiveException(e);
 		}
@@ -203,7 +207,8 @@ public class JUIGLEFrame extends JXFrame {
 
 	/**
 	 * Initialize GUI of <code>JERPA</code>> Frame
-	 * @throws PerspectiveException 
+	 * 
+	 * @throws PerspectiveException
 	 * 
 	 * @since 0.1.0
 	 */
@@ -214,7 +219,7 @@ public class JUIGLEFrame extends JXFrame {
 		System.setProperty("sun.java2d.opengl", "true");
 
 		UIManager.put("Button.textShiftOffset", 0);
-		
+
 		innerListener = new InnerListener();
 
 		this.setDefaultCloseOperation(JXFrame.EXIT_ON_CLOSE);
@@ -228,7 +233,7 @@ public class JUIGLEFrame extends JXFrame {
 	/**
 	 * 
 	 * @return
-	 * @throws PerspectiveException 
+	 * @throws PerspectiveException
 	 * @since 0.1.0
 	 */
 	private JXPanel getContetPane() throws PerspectiveException {
@@ -247,11 +252,13 @@ public class JUIGLEFrame extends JXFrame {
 	 * This method create Application header panel
 	 * 
 	 * @return
+	 * @throws PerspectiveException
 	 * @since 0.1.0
 	 */
-	private JXCollapsiblePane getHeaderPanel() {
-		final Paint backgroundMenu = GraphicsUtilities.createBackgroundTexture(new Color(0, 98, 137),
-				new Color(104, 188, 222), logoImg.getHeight() + 5);
+	private JXCollapsiblePane getHeaderPanel() throws PerspectiveException {
+		final Paint backgroundMenu = JUIGLEGraphicsUtilities
+				.createBackgroundTexture(new Color(0, 98, 137),
+						new Color(104, 188, 222), logoImg.getHeight() + 5);
 		headerPanel = new JXPanel(true);
 		Painter<Component> p = new Painter<Component>() {
 			@Override
@@ -317,7 +324,7 @@ public class JUIGLEFrame extends JXFrame {
 		GridBagConstraints gbcCloseButt = new GridBagConstraints(4, 0, 1, 1, 0.0,
 				0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(0,
 						0, 0, 0), 0, 0);
-		
+
 		GridBagConstraints gbcMenuToolBar = new GridBagConstraints(1, 1, 1, 1, 0.0,
 				0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(0,
 						0, 0, 0), 0, 0);
@@ -326,31 +333,31 @@ public class JUIGLEFrame extends JXFrame {
 		headerPanel.add(minimalizeApp, gbcMinimalizeButt);
 		headerPanel.add(maximalizeApp, gbcMaximalizeButt);
 		headerPanel.add(closeApp, gbcCloseButt);
-//		headerPanel.add(getMenu(), gbcMenuToolBar);
-		
+	//	headerPanel.add(initAndGetMainToolbar(), gbcMenuToolBar);
+
 		headerPanel.addMouseListener(innerListener);
 		headerPanel.addMouseMotionListener(innerListener);
 
 		headerPanel.setOpaque(false);
-		
+
 		headerCoollapse = new JXCollapsiblePane();
 		headerCoollapse.add(headerPanel);
-		
+
 		return headerCoollapse;
 	}
-	
-	
-	private JToolBar initAndGetMainToolbar() {
+
+	private JToolBar initAndGetMainToolbar() throws PerspectiveException {
 		if (mainToolBar == null) {
-			mainToolBar = new JUIGLEMenu(null);
+			mainToolBar = new JUIGLEMenu();
+			initMainToolbarItems();
 			mainToolBar.setFloatable(false);
 			mainToolBar.setRollover(true);
 			mainToolBar.setOpaque(false);
-		
+
 		}
 		return mainToolBar;
 	}
-	
+
 	public JXTitledPanel getPerspectivesPanel() throws PerspectiveException {
 		if (perspectivePanel == null) {
 			perspectivePanel = new PerspectivePanel();
@@ -361,7 +368,7 @@ public class JUIGLEFrame extends JXFrame {
 		}
 		return perspectivePanel;
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -369,49 +376,53 @@ public class JUIGLEFrame extends JXFrame {
 	private JXCollapsiblePane getFooterPanel() {
 		if (footerPanel == null) {
 			footerPanel = new JXPanel(new GridBagLayout(), true);
-			final Paint footerBackground = GraphicsUtilities.createBackgroundTexture(Color.WHITE, Color.LIGHT_GRAY, 45);
+			final Paint footerBackground = JUIGLEGraphicsUtilities
+					.createBackgroundTexture(Color.WHITE, Color.LIGHT_GRAY, 45);
 			Painter<Component> painter = new Painter<Component>() {
 
 				@Override
 				public void paint(Graphics2D g, Component c, int width, int height) {
 					Graphics2D g2d = (Graphics2D) g;
-					g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+					g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+							RenderingHints.VALUE_ANTIALIAS_ON);
 					g2d.setPaint(footerBackground);
-					
+
 					if (getExtendedState() != JXFrame.MAXIMIZED_BOTH) {
-						g2d.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 20 , 20);						
+						g2d.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 20, 20);
+					} else {
+						g2d.fillRect(0, 0, c.getWidth(), c.getHeight());
 					}
-					else {
-						g2d.fillRect(0, 0, c.getWidth(), c.getHeight());						
-					}
-				}		
+				}
 			};
 			footerPanel.setPreferredSize(new Dimension(100, 45));
 			footerPanel.setOpaque(false);
 			footerPanel.setBackgroundPainter(painter);
-			
-			GridBagConstraints gbcResizer = new GridBagConstraints(2, 0, 1, 1, 1, 1, GridBagConstraints.SOUTHEAST, GridBagConstraints.NONE,
-					new Insets(0, 0, 3, 3), 0, 0);
-			GridBagConstraints gbcAppName = new GridBagConstraints(1, 0, 1, 1, 1, 1, GridBagConstraints.SOUTHEAST, GridBagConstraints.NONE,
-					new Insets(0, 0, 3, 0), 0, 0);
-			gbcCopyright1 = new GridBagConstraints(1, 1, 1, 1, 1, 1, GridBagConstraints.SOUTHEAST, GridBagConstraints.NONE,
-					new Insets(0, 0, 3, 0), 0, 0);
-			
+
+			GridBagConstraints gbcResizer = new GridBagConstraints(2, 0, 1, 1, 1, 1,
+					GridBagConstraints.SOUTHEAST, GridBagConstraints.NONE, new Insets(0,
+							0, 3, 3), 0, 0);
+			GridBagConstraints gbcAppName = new GridBagConstraints(1, 0, 1, 1, 1, 1,
+					GridBagConstraints.SOUTHEAST, GridBagConstraints.NONE, new Insets(0,
+							0, 3, 0), 0, 0);
+			gbcCopyright1 = new GridBagConstraints(1, 1, 1, 1, 1, 1,
+					GridBagConstraints.SOUTHEAST, GridBagConstraints.NONE, new Insets(0,
+							0, 3, 0), 0, 0);
+
 			JLabel resizer = new JLabel(new ImageIcon(resizerImg));
 			resizer.setCursor(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
 			resizer.addMouseMotionListener(innerListener);
 			resizer.addMouseListener(innerListener);
-			
+
 			footerPanel.add(resizer, gbcResizer);
 			footerPanel.add(new JXLabel(title), gbcAppName);
 			footerPanel.add(new JXLabel(copyright), gbcCopyright1);
-			
+
 			footerCollapse = new JXCollapsiblePane();
 			footerCollapse.add(footerPanel);
 		}
 		return footerCollapse;
 	}
-	
+
 	/**
 	 * 
 	 * 
@@ -490,17 +501,18 @@ public class JUIGLEFrame extends JXFrame {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void setAppTitle(String title) {
 		this.title = title;
 	}
-	
+
 	public void setCopyrightTitle(String copyright) {
 		this.copyright = copyright;
 		footerPanel.add(new JXLabel(copyright), gbcCopyright1);
 	}
-	
-	public void setAndInitPerspective(Perspective perspective) throws PerspectiveException {
+
+	public void setAndInitPerspective(Perspective perspective)
+			throws PerspectiveException {
 		perspectivePanel.add(perspective);
 	}
 
@@ -516,18 +528,53 @@ public class JUIGLEFrame extends JXFrame {
 			maximalizeApp.setRolloverIcon(new ImageIcon(maximizeOverImg));
 		}
 	}
-	
-	public void setPerspectives(IPerspectiveLoader perspectiveLoader) throws PerspectiveException {
+
+	public void setPerspectives(IPerspectiveLoader perspectiveLoader)
+			throws PerspectiveException {
 		this.perspectiveLoader = perspectiveLoader;
+		initPerspectiveMenu();
 		perspectivePanel.add(perspectiveLoader.getDefaultPerspective());
 	}
-		
+
 	/**
 	 * This method return current extended state of <code>JERPAFrame</code>.
+	 * 
 	 * @return current extended state of <code>JERPAFrame</code>> as integer type.
 	 */
 	public static int getFrameState() {
 		return JUIGLEFrame.frameExtendState;
+	}
+
+	private void initMainToolbarItems() {
+		
+	}
+	
+	private void initPerspectiveMenu() throws PerspectiveException {
+		JUIGLEMenuItem perspectivesItem = new JUIGLEMenuItem();
+
+		for (final Perspective perspective : perspectiveLoader
+				.getListOfPerspectives()) {
+			JUIGLEMenuItem item = new JUIGLEMenuItem();
+			
+
+			Action action = new AbstractAction() {
+				private static final long serialVersionUID = 1796718465304187844L;
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					try {
+						perspectivePanel.add(perspective);
+					} catch (PerspectiveException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					// TODO UPOZORNI OSTATNI PERSPECTIVY ZE SE MENI NA JINOU
+				}
+			};
+			item.setAction(action);
+			perspectivesItem.addSubItem(item);
+		}
+		mainToolBar.addItem(perspectivesItem);
 	}
 
 	/**
@@ -536,7 +583,7 @@ public class JUIGLEFrame extends JXFrame {
 	 * @author Vaclav Souhrada
 	 * @version 0.1.0 07/12/2009
 	 * @since 0.1.0
-	 *
+	 * 
 	 */
 	protected class InnerListener extends MouseAdapter implements
 			MouseMotionListener {
@@ -585,7 +632,8 @@ public class JUIGLEFrame extends JXFrame {
 			}
 		}
 
-		public void mouseMoved(MouseEvent e) {}
-		
+		public void mouseMoved(MouseEvent e) {
+		}
+
 	}
 }
