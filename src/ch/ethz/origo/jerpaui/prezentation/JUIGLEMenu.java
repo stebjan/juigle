@@ -44,7 +44,10 @@ import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.log4j.Logger;
+
 import ch.ethz.origo.juigle.application.ILanguage;
+import ch.ethz.origo.juigle.application.PropertiesLoader;
 import ch.ethz.origo.juigle.application.exceptions.JUIGLELangException;
 import ch.ethz.origo.juigle.application.exceptions.JUIGLEMenuException;
 
@@ -54,8 +57,8 @@ import com.jhlabs.image.GlowFilter;
  * 
  * 
  * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.1.0 07/16/09
- * @since 0.1.0 (05/18/09)
+ * @version 0.1.2 10/28/09
+ * @since 0.1.0 / (07/16/09)
  */
 public class JUIGLEMenu extends JToolBar implements ILanguage {
 
@@ -82,6 +85,8 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 	protected List<JUIGLEButton> listOfButtons;
 
 	private static GlowFilter glow = new GlowFilter();
+
+	private static Logger logger = Logger.getLogger(JUIGLEMenu.class);
 
 	protected ResourceBundle resource;
 
@@ -113,17 +118,21 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 	public JUIGLEMenu(String position, String resourcePath) {
 		this(position);
 		this.resourcePath = resourcePath;
-		setLocalizedResource();
+		setLocalizedResourceBundle(resourcePath);
 	}
 
 	/**
 	 * Initialize menu
+	 * 
+	 * @version 0.1.1 (10/28/09)
+	 * @since 0.1.0
 	 */
 	private void initialize() {
-		glow.setAmount(1.08f);
+		// 1.08f
+		glow.setAmount(0.04f);
 		listOfitems = new ArrayList<JUIGLEMenuItem>(); // TODO mozna inicializovat
-																										// pouze kdyz fakt bude
-																										// itema
+		// pouze kdyz fakt bude
+		// itema
 		listOfButtons = new ArrayList<JUIGLEButton>();
 		this.setFloatable(false);
 		this.setRollover(true);
@@ -147,28 +156,25 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 	public String getMenuPosition() {
 		return position;
 	}
-	
+
 	/**
 	 * Set up position of menu
 	 * 
-	 * @param position String value of menu position (Location)
+	 * @param position
+	 *          String value of menu position (Location)
 	 */
 	public void setMenuPosition(String position) {
 		this.position = position;
 	}
 
-	public void setLocalizedResource() {
+	@Override
+	public void setLocalizedResourceBundle(String path) {
+		this.resourcePath = path;
 		this.resource = ResourceBundle.getBundle(resourcePath);
 	}
-	
-	@Override
-	public void setResourceBundlePath(String path) {
-		this.resourcePath = path;
-	}
-	
+
 	/**
-	 * This method is not used !!! Is not implemented
-	 * for {@link JUIGLEMenu}. 
+	 * This method is not used !!! Is not implemented for {@link JUIGLEMenu}.
 	 */
 	@Override
 	@Deprecated
@@ -188,11 +194,20 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 			if (it.hasSubMenu()) {
 				it.setComponentPopupMenu(createAndGetSubMenu(it, it));
 			}
-			if (it.canBeTextShow()) {
-				it.setText(it.getText());
+			// TODO tohle nefunguje
+			/*
+			 * if (it.canBeTextShow()) { it.setText(it.getT); }
+			 */
+			if (it.isOwnResourceBundleSets()) {
+				try {
+					it.updateText();
+				} catch (JUIGLELangException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
-			if (it.getItemIcon() != null) {
-				it.setIcon(new ImageIcon(it.getItemIcon()));
+			if (it.getIcon() != null) {
+				it.setIcon(it.getIcon());
 			}
 			menu.add(it);
 			menu.revalidate();
@@ -219,23 +234,27 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 			isRoot = true;
 			button.setComponentPopupMenu(createAndGetSubMenu(item, button));
 		}
-		if (item.getAction() != null && !isRoot) {
+		if (item.getAction()!= null && !isRoot) {
 			button.setAction(item.getAction());
 		}
-		if (item.getText() != null) { 
-		   // TODO overit tady jestli to takle fakt musi byt
+		if (item.getText() != null) {
+			// TODO overit tady jestli to takle fakt musi byt
 			button.setText(item.getText());
 		}
 		if (!item.canBeTextShow()) {
 			button.showText(false);
 		}
-		if (item.getItemIcon() != null) {
-			button.setIcon(new ImageIcon(item.getItemIcon()));
+		if (item.getIcon() != null) {
+			button.setIcon(item.getIcon());
 			button.setRolloverIcon(new ImageIcon(glow
 					.filter(item.getItemIcon(), null)));
 			button.setForeground(JUIGLEGraphicsUtilities.TRANSPARENT_COLOR);
 		}
-		button.setResourceBundlePath(resourcePath);
+		if (resourcePath != null) {
+			button.setLocalizedResourceBundle(resourcePath);
+		} else {
+			button.setLocalizedResourceBundle(item.getResourceBundlePath());
+		}
 		button.setResourceBundleKey(item.getResourceBundleKey());
 		// button.setForeground(item.getColor() == null ? Color.RED :
 		// item.getColor());*/
@@ -280,9 +299,9 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 	public void addMenuSeparator(BufferedImage separatorImg) {
 		createSeparator(separatorImg);
 	}
-	
+
 	protected void createHideButton(boolean showText, Action action) {
-		
+
 	}
 
 	private void createSeparator(BufferedImage image) {
@@ -298,21 +317,23 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				setLocalizedResource();
+				setLocalizedResourceBundle(resourcePath);
 				for (JUIGLEMenuItem item : listOfitems) {
 					if (item.canBeTextShow()) {
 						try {
-							item.updateText(resource.getString(item.getResourceBundleKey()));
+							updateItemText(item);
 							if (item.hasSubMenu()) {
 								for (JUIGLEMenuItem subItem : item.getSubMenu()) {
-									subItem.updateText(resource.getString(subItem
-											.getResourceBundleKey()));
+									updateItemText(subItem);
 								}
 							}
 						} catch (MissingResourceException e) {
-							System.out
-									.println("No specific resource bundle key for items. Please check resources for items ");
+							JUIGLEMenu.logger.error(PropertiesLoader.getProperty("JG003",
+									PropertiesLoader.ERRORS), e);
 							// TODO dodelat a nejak povymyslet jako z run vyhodit chybu no
+							e.printStackTrace();
+						} catch (JUIGLELangException e) {
+							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
@@ -327,6 +348,23 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 				}
 			}
 		});
+	}
+
+	private void updateItemText(JUIGLEMenuItem item) throws JUIGLELangException {
+		if (!item.isOwnResourceBundleSets()) {
+			item.updateText(resource.getString(item.getResourceBundleKey()));
+		} else {
+			item.updateText();
+		}
+	}
+
+	/**
+	 * THIS method always return for this class value NULL. Method is not used.
+	 */
+	@Override
+	public String getResourceBundlePath() {
+		// NOT USED FOR THIS CLASS
+		return null;
 	}
 
 }

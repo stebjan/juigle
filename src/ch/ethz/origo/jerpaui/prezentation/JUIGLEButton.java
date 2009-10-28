@@ -61,13 +61,9 @@ public class JUIGLEButton extends JXButton implements ILanguage {
 	}
 
 	@Override
-	public void setLocalizedResource() {
-		this.resource = ResourceBundle.getBundle(resourcePath);
-	}
-	
-	@Override
-	public void setResourceBundlePath(String path) {
+	public void setLocalizedResourceBundle(String path) {
 		this.resourcePath = path;
+		this.resource = ResourceBundle.getBundle(resourcePath);
 	}
 	
 	@Override
@@ -81,9 +77,17 @@ public class JUIGLEButton extends JXButton implements ILanguage {
 
 			@Override
 			public void run() {
-				setLocalizedResource();
+				setLocalizedResourceBundle(resourcePath);
 				setText(resource.getString(resourceBundleKey));
 			}		
 		});
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public String getResourceBundlePath() {
+		return resourcePath;
 	}
 }

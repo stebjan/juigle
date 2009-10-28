@@ -71,7 +71,7 @@ public class JUIGLEPerspectiveMenu extends JUIGLEMenu {
 
 		headerCollapseItem.setAction(headerCollpsAction);
 		headerCollapseItem.setResourceBundleKey("juigle.buttons.hide.header");
-		createButton(headerCollapseItem);
+		this.addItem(headerCollapseItem);
 	}
 
 	public void addHeaderHideButton(BufferedImage image)
@@ -97,7 +97,8 @@ public class JUIGLEPerspectiveMenu extends JUIGLEMenu {
 				.getIcon("Tree.collapsedIcon"));
 
 		footerrCollapseItem.setAction(footerCollpsAction);
-		createButton(footerrCollapseItem);
+		footerrCollapseItem.setResourceBundleKey("juigle.buttons.hide.footer");
+		this.addItem(footerrCollapseItem);
 	}
 
 	public void addFooterHideButton(BufferedImage image)
