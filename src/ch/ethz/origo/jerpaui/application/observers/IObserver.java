@@ -13,6 +13,8 @@ public interface IObserver extends Observer {
 
 	public void update();
 	
+	public void update(Object state);
+	
 	public void update(Object object, int state);	
 	
 }

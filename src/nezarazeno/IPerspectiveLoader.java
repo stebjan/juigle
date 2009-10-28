@@ -1,6 +1,7 @@
 package nezarazeno;
 
 import java.util.Collection;
+import java.util.List;
 
 import ch.ethz.origo.juigle.application.exceptions.PerspectiveException;
 import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
@@ -15,17 +16,17 @@ import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
 public interface IPerspectiveLoader {
 
 	/**
+	 * List of available perspectives.
 	 * 
-	 * 
-	 * @return
+	 * @return List of available perspectives as Collection
 	 * @throws PerspectiveException
 	 */
-	public Collection<Perspective> getListOfPerspectives() throws PerspectiveException;
+	public List<Perspective> getListOfPerspectives() throws PerspectiveException;
 	
 	/**
+	 * Return default (main) perspective
 	 * 
-	 * 
-	 * @return
+	 * @return default perspective
 	 */
 	public Perspective getDefaultPerspective(); 
 	
