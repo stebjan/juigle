@@ -10,6 +10,6 @@ package nezarazeno;
 public class Utils {
 
 	/**  */
-	public static final String RESOURCE_JERPA = "ch.ethz.origo.jerpaui.data.JUIGLE";
+	public static final String RESOURCE_JERPA = "ch.ethz.origo.juigle.data.JUIGLE";
 	
 }
