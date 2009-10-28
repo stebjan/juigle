@@ -1,13 +1,18 @@
 package ch.ethz.origo.juigle.prezentation;
 
 import java.awt.Color;
+import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.ResourceBundle;
 
 import javax.swing.Action;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
+
+import ch.ethz.origo.juigle.application.ILanguage;
+import ch.ethz.origo.juigle.application.exceptions.JUIGLELangException;
 
 /**
  * 
@@ -16,14 +21,14 @@ import javax.swing.SwingUtilities;
  * @version 0.1.0 07/16/09
  * @since 0.1.0 (05/18/09)
  */
-public class JUIGLEMenuItem extends JMenuItem {
+public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
 	
 	/** Only for serialization */
 	private static final long serialVersionUID = -8011842643730136500L;
 
 	//private String label;
 	
-	private Action action;
+	//private Action action;
 	
 	private BufferedImage icon;
 	
@@ -33,13 +38,17 @@ public class JUIGLEMenuItem extends JMenuItem {
 	
 	private String resourceBundleKey;
 	
+	protected String resourcePath;
+	
+	private ResourceBundle resource;
+	
 	private boolean showText = true;
 	
 	/**
 	 * Default constructor. Variables are not sets.
 	 */
 	public JUIGLEMenuItem() {
-		
+		super();
 	}
 	
 	/**
@@ -59,7 +68,7 @@ public class JUIGLEMenuItem extends JMenuItem {
 	 * @param action
 	 */
 	public JUIGLEMenuItem(String text, Action action) {
-		setText(text);
+		this(text);
 		setAction(action);
 	}
 		
@@ -72,29 +81,32 @@ public class JUIGLEMenuItem extends JMenuItem {
 	 */
 	public JUIGLEMenuItem(String text, Action action, BufferedImage icon) {
 		this(text, action);
-		setIcon(icon);
+	//	setIcon(icon);
 	}
-	
+/*	
 	public Action getAction() {
 		return action;
-	}
+	}*/
 
 	public void setAction(Action action) {
 		super.setAction(action);
 	}
 
 	public BufferedImage getItemIcon() {
-		return icon;
+		BufferedImage bi = new BufferedImage(getIcon().getIconWidth(), getIcon().getIconHeight(), Transparency.TRANSLUCENT);
+		getIcon().paintIcon(null, bi.createGraphics(), 0, 0);
+		return bi;
 	}
-
+/*
 	public void setIcon(BufferedImage icon) {
 		this.icon = icon;
-	}
+	}*/
 	
 	public String getResourceBundleKey() {
 		return resourceBundleKey;
 	}
 	
+	@Override
 	public void setResourceBundleKey(String key) {
 		this.resourceBundleKey = key;
 	}
@@ -148,6 +160,27 @@ public class JUIGLEMenuItem extends JMenuItem {
 				setText(text);				
 			}
 		});
+	}
+	
+	protected boolean isOwnResourceBundleSets() {
+		return resource == null ? false : true;
+	}
+
+	@Override
+	public void setLocalizedResourceBundle(String resourcePath) {
+		this.resourcePath = resourcePath;
+		this.resource = ResourceBundle.getBundle(resourcePath);		
+	}
+
+	@Override
+	public void updateText() throws JUIGLELangException {
+		super.setText(resource.getString(getResourceBundleKey()));		
+	}
+	
+	
+	@Override
+	public String getResourceBundlePath() {
+		return resourcePath;
 	}
 	
 }

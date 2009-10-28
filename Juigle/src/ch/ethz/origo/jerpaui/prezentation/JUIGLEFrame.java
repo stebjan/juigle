@@ -15,7 +15,7 @@
  */
 
 /*
- *    JERPAFrame.java
+ *    JUIGLEFrame.java
  *    Copyright (C) 2009 University of West Bohemia, 
  *                       Department of Computer Science and Engineering, 
  *                       Pilsen, Czech Republic
@@ -42,15 +42,14 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Observable;
 
 import javax.imageio.ImageIO;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JToolBar;
 import javax.swing.UIManager;
 
+import nezarazeno.GUIController;
 import nezarazeno.IPerspectiveLoader;
 
 import org.apache.log4j.Logger;
@@ -59,10 +58,11 @@ import org.jdesktop.swingx.JXCollapsiblePane;
 import org.jdesktop.swingx.JXFrame;
 import org.jdesktop.swingx.JXLabel;
 import org.jdesktop.swingx.JXPanel;
-import org.jdesktop.swingx.JXTitledPanel;
 import org.jdesktop.swingx.painter.Painter;
 
 import ch.ethz.origo.juigle.application.exceptions.PerspectiveException;
+import ch.ethz.origo.juigle.application.observers.IObserver;
+import ch.ethz.origo.juigle.application.observers.PerspectiveObservable;
 import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
 import ch.ethz.origo.juigle.prezentation.perspective.PerspectivePanel;
 
@@ -70,14 +70,25 @@ import ch.ethz.origo.juigle.prezentation.perspective.PerspectivePanel;
  * Main <code>JUIGLE<code> software java frame.
  * 
  * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.1.1 07/11/09
+ * @version 0.2.1 10/25/09
  * @since 0.1.0 (05/18/09)
+ * @see JXFrame
+ * @see IObserver
  */
-public class JUIGLEFrame extends JXFrame {
+public class JUIGLEFrame extends JXFrame implements IObserver {
 
 	/** Only for serialization */
 	private static final long serialVersionUID = -6992843525391631876L;
 
+	private String title = "";
+	private String copyright = "";
+	
+	private static Logger logger = Logger.getLogger(JUIGLEFrame.class);
+	
+	private GUIController guiController = new GUIController();
+	
+	private GridBagConstraints gbcMenuToolBar;
+	
 	private JXPanel jContentPane;
 	private JXPanel headerPanel;
 	private JXPanel footerPanel;
@@ -87,7 +98,7 @@ public class JUIGLEFrame extends JXFrame {
 
 	private PerspectivePanel perspectivePanel;
 
-	private JUIGLEMenu mainToolBar;
+	private JUIGLEMainMenu mainToolBar;
 
 	private JXButton maximalizeApp;
 
@@ -103,10 +114,7 @@ public class JUIGLEFrame extends JXFrame {
 
 	private GridBagConstraints gbcCopyright1;
 
-	private static Logger logger = Logger.getLogger(JUIGLEFrame.class);
 
-	private String title = "";
-	private String copyright = "";
 
 	private static int frameExtendState;
 
@@ -136,6 +144,7 @@ public class JUIGLEFrame extends JXFrame {
 	 * @param title
 	 * @param logoImg
 	 * @param perspectiveLoader
+	 * @since 0.1.0
 	 */
 	public JUIGLEFrame(String title, InputStream logoImg,
 			IPerspectiveLoader perspectiveLoader) {
@@ -156,6 +165,8 @@ public class JUIGLEFrame extends JXFrame {
 	private void initialize() throws IOException, PerspectiveException {
 		initImages();
 		initGUI();
+		guiController.attach(this);
+		PerspectiveObservable.getInstance().attach(guiController);
 	}
 
 	/**
@@ -325,7 +336,7 @@ public class JUIGLEFrame extends JXFrame {
 				0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(0,
 						0, 0, 0), 0, 0);
 
-		GridBagConstraints gbcMenuToolBar = new GridBagConstraints(1, 1, 1, 1, 0.0,
+		gbcMenuToolBar = new GridBagConstraints(1, 1, 1, 1, 0.0,
 				0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(0,
 						0, 0, 0), 0, 0);
 
@@ -333,7 +344,6 @@ public class JUIGLEFrame extends JXFrame {
 		headerPanel.add(minimalizeApp, gbcMinimalizeButt);
 		headerPanel.add(maximalizeApp, gbcMaximalizeButt);
 		headerPanel.add(closeApp, gbcCloseButt);
-	//	headerPanel.add(initAndGetMainToolbar(), gbcMenuToolBar);
 
 		headerPanel.addMouseListener(innerListener);
 		headerPanel.addMouseMotionListener(innerListener);
@@ -346,19 +356,28 @@ public class JUIGLEFrame extends JXFrame {
 		return headerCoollapse;
 	}
 
-	private JToolBar initAndGetMainToolbar() throws PerspectiveException {
-		if (mainToolBar == null) {
-			mainToolBar = new JUIGLEMenu();
-			initMainToolbarItems();
+	/**
+	 * 
+	 * @throws PerspectiveException
+	 * @version 1.0.0
+	 * @since 0.1.0
+	 */
+	public void addMainMenu(JUIGLEMainMenu mainMenu) throws PerspectiveException {
+			mainToolBar = mainMenu;
 			mainToolBar.setFloatable(false);
 			mainToolBar.setRollover(true);
 			mainToolBar.setOpaque(false);
+			headerPanel.add(mainToolBar, gbcMenuToolBar);
 
-		}
-		return mainToolBar;
 	}
 
-	public JXTitledPanel getPerspectivesPanel() throws PerspectiveException {
+	/**
+	 * 
+	 * @return
+	 * @throws PerspectiveException
+	 * @since 0.1.0
+	 */
+	public JXPanel getPerspectivesPanel() throws PerspectiveException {
 		if (perspectivePanel == null) {
 			perspectivePanel = new PerspectivePanel();
 			if (perspectiveLoader != null) {
@@ -372,6 +391,7 @@ public class JUIGLEFrame extends JXFrame {
 	/**
 	 * 
 	 * @return
+	 * @since 0.1.0
 	 */
 	private JXCollapsiblePane getFooterPanel() {
 		if (footerPanel == null) {
@@ -532,7 +552,7 @@ public class JUIGLEFrame extends JXFrame {
 	public void setPerspectives(IPerspectiveLoader perspectiveLoader)
 			throws PerspectiveException {
 		this.perspectiveLoader = perspectiveLoader;
-		initPerspectiveMenu();
+		mainToolBar.addPerspectiveItems(JUIGLEGraphicsUtilities.createImageIcon("ch/ethz/origo/juigle/data/images/tabs_48.png", 32, 32), perspectivePanel, perspectiveLoader.getListOfPerspectives());
 		perspectivePanel.add(perspectiveLoader.getDefaultPerspective());
 	}
 
@@ -543,38 +563,6 @@ public class JUIGLEFrame extends JXFrame {
 	 */
 	public static int getFrameState() {
 		return JUIGLEFrame.frameExtendState;
-	}
-
-	private void initMainToolbarItems() {
-		
-	}
-	
-	private void initPerspectiveMenu() throws PerspectiveException {
-		JUIGLEMenuItem perspectivesItem = new JUIGLEMenuItem();
-
-		for (final Perspective perspective : perspectiveLoader
-				.getListOfPerspectives()) {
-			JUIGLEMenuItem item = new JUIGLEMenuItem();
-			
-
-			Action action = new AbstractAction() {
-				private static final long serialVersionUID = 1796718465304187844L;
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					try {
-						perspectivePanel.add(perspective);
-					} catch (PerspectiveException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					// TODO UPOZORNI OSTATNI PERSPECTIVY ZE SE MENI NA JINOU
-				}
-			};
-			item.setAction(action);
-			perspectivesItem.addSubItem(item);
-		}
-		mainToolBar.addItem(perspectivesItem);
 	}
 
 	/**
@@ -635,5 +623,29 @@ public class JUIGLEFrame extends JXFrame {
 		public void mouseMoved(MouseEvent e) {
 		}
 
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Object state) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Object object, int state) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 }

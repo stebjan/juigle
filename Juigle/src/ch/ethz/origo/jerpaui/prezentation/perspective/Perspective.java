@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.Icon;
 
+import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.painter.Painter;
 
@@ -28,7 +29,9 @@ public class Perspective extends AbstractPerspective {
 
 	/** Only for serialization */
 	private static final long serialVersionUID = 1111614707483173796L;
-
+	
+	protected static final Logger logger = Logger.getLogger(Perspective.class);
+	
 	@Override
 	public void initPerspectivePanel() {
 		// TODO udelat vysku panelu packove, barvy dle uzivatele
@@ -68,7 +71,7 @@ public class Perspective extends AbstractPerspective {
 
 	@Override
 	public void updateText() {
-		setLocalizedResource();
+		setLocalizedResourceBundle(resourcePath);
 	}
 
 	@Override
@@ -77,20 +80,17 @@ public class Perspective extends AbstractPerspective {
   }
 
 	@Override
-	public  void setLocalizedResource() {
-		resource = ResourceBundle.getBundle(resourcePath);
+	public  void setLocalizedResourceBundle(String path) {
+		this.resourcePath = path;
+		resource = ResourceBundle.getBundle(path);
 	}
 
+	/**
+	 * NOT USED FOR THI CLASS
+	 */
 	@Override
 	public void setResourceBundleKey(String key) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void setResourceBundlePath(String path) {
-		this.resourcePath = path;
-		
+		// NOT USED FOR THIS CLASS
 	}
 	
 	@Override
@@ -110,6 +110,11 @@ public class Perspective extends AbstractPerspective {
 
 	@Override
 	public Icon getIcon() throws PerspectiveException {
+		return null;
+	}
+
+	@Override
+	public String getRBPerspectiveTitleKey() {
 		return null;
 	}
 

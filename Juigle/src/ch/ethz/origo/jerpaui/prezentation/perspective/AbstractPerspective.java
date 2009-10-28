@@ -22,11 +22,9 @@
  */
 package ch.ethz.origo.juigle.prezentation.perspective;
 
-import java.awt.Component;
 import java.util.ResourceBundle;
 
 import javax.swing.JPanel;
-
 
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXTaskPane;
@@ -35,14 +33,18 @@ import org.jdesktop.swingx.JXTitledPanel;
 import ch.ethz.origo.juigle.application.ILanguage;
 import ch.ethz.origo.juigle.application.exceptions.PerspectiveException;
 import ch.ethz.origo.juigle.application.listener.LanguageListener;
+import ch.ethz.origo.juigle.application.observers.PerspectiveObservable;
 import ch.ethz.origo.juigle.prezentation.JUIGLEMenu;
+import ch.ethz.origo.juigle.prezentation.JUIGLEPerspectiveMenu;
 
 /**
  * 
  * 
  * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.1.0 07/12/09
- * @since 0.1.0
+ * @version 0.1.1 10/25/09
+ * @since 0.1.0 (v 07/12/09)
+ * @see IPerspective
+ * 
  */
 public abstract class AbstractPerspective implements IPerspective, ILanguage, LanguageListener {
 
@@ -58,14 +60,14 @@ public abstract class AbstractPerspective implements IPerspective, ILanguage, La
 	
 	protected JXTaskPane menuTaskPane;
 
-	protected JUIGLEMenu menu;
+	protected JUIGLEPerspectiveMenu menu;
 
 	protected JXPanel mainPanel;
 	
 	protected ResourceBundle resource;
 	
+	protected PerspectiveObservable perspectiveObservable = PerspectiveObservable.getInstance();
 	
-
 	/**
 	 * Initialize perspective panel
 	 */
@@ -110,7 +112,7 @@ public abstract class AbstractPerspective implements IPerspective, ILanguage, La
 		return menu;
 	}
 	
-	public abstract String getResourceBundlePath();
+	public abstract String getRBPerspectiveTitleKey();
 
 	/**
 	 * Initialize and return panel which contains main menu of perspective.
