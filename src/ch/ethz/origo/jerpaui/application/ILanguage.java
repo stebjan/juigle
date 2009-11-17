@@ -2,7 +2,7 @@ package ch.ethz.origo.juigle.application;
 
 import java.util.ResourceBundle;
 
-import ch.ethz.origo.juigle.application.aaaaaa.JUIGLELangException;
+import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 
 /**
  * 
