@@ -3,7 +3,7 @@ package nezarazeno;
 import java.util.Collection;
 import java.util.List;
 
-import ch.ethz.origo.juigle.application.exceptions.PerspectiveException;
+import ch.ethz.origo.juigle.application.aaaaaa.PerspectiveException;
 import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
 
 /**
