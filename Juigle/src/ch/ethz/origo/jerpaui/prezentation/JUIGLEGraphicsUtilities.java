@@ -18,7 +18,7 @@ import javax.swing.ImageIcon;
 
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 
-import ch.ethz.origo.juigle.application.exceptions.PerspectiveException;
+import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 
 import com.jhlabs.image.NoiseFilter;
 
@@ -73,6 +73,23 @@ public class JUIGLEGraphicsUtilities {
 
 		Paint result = new TexturePaint(image, new Rectangle(size, size));
 		return result;
+	}
+	
+	/**
+	 * Returns an ImageIcon, or null if the path was invalid.
+	 * 
+	 * @param path
+	 * @return
+	 */
+	public static Icon createImageIcon(String path) {
+		java.net.URL imgURL = ClassLoader.getSystemResource(path);
+		if (imgURL != null) {
+			return new ImageIcon(imgURL);
+		} else {
+			// TODO udelat lepsi error
+			System.err.println("Couldn't find file: " + path);
+			return null;
+		}
 	}
 
 	/**

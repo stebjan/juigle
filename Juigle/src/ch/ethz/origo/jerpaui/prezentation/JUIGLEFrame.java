@@ -60,7 +60,7 @@ import org.jdesktop.swingx.JXLabel;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.painter.Painter;
 
-import ch.ethz.origo.juigle.application.exceptions.PerspectiveException;
+import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 import ch.ethz.origo.juigle.application.observers.IObserver;
 import ch.ethz.origo.juigle.application.observers.PerspectiveObservable;
 import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
@@ -70,7 +70,7 @@ import ch.ethz.origo.juigle.prezentation.perspective.PerspectivePanel;
  * Main <code>JUIGLE<code> software java frame.
  * 
  * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.2.1 10/25/09
+ * @version 0.2.2 11/18/09
  * @since 0.1.0 (05/18/09)
  * @see JXFrame
  * @see IObserver
@@ -82,13 +82,13 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 
 	private String title = "";
 	private String copyright = "";
-	
+
 	private static Logger logger = Logger.getLogger(JUIGLEFrame.class);
-	
+
 	private GUIController guiController = new GUIController();
-	
+
 	private GridBagConstraints gbcMenuToolBar;
-	
+
 	private JXPanel jContentPane;
 	private JXPanel headerPanel;
 	private JXPanel footerPanel;
@@ -114,9 +114,19 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 
 	private GridBagConstraints gbcCopyright1;
 
-
-
 	private static int frameExtendState;
+
+	public JUIGLEFrame() {
+		try {
+			initialize();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PerspectiveException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * 
@@ -210,7 +220,7 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 							.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/aaa.png"));
 		} catch (IOException e) {
 			JUIGLEFrame.logger.error("Could not read default images...", e); // TODO
-																																				// nefunguje
+			// nefunguje
 			// TODO vylepsit chybu vypisem do GUI
 			throw new PerspectiveException(e);
 		}
@@ -336,9 +346,9 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 				0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(0,
 						0, 0, 0), 0, 0);
 
-		gbcMenuToolBar = new GridBagConstraints(1, 1, 1, 1, 0.0,
-				0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(0,
-						0, 0, 0), 0, 0);
+		gbcMenuToolBar = new GridBagConstraints(1, 1, 1, 1, 0.0, 0,
+				GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(0, 0,
+						0, 0), 0, 0);
 
 		headerPanel.add(new JXLabel(new ImageIcon(testImg)), gbcLogoLabel);
 		headerPanel.add(minimalizeApp, gbcMinimalizeButt);
@@ -363,11 +373,11 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 	 * @since 0.1.0
 	 */
 	public void addMainMenu(JUIGLEMainMenu mainMenu) throws PerspectiveException {
-			mainToolBar = mainMenu;
-			mainToolBar.setFloatable(false);
-			mainToolBar.setRollover(true);
-			mainToolBar.setOpaque(false);
-			headerPanel.add(mainToolBar, gbcMenuToolBar);
+		mainToolBar = mainMenu;
+		mainToolBar.setFloatable(false);
+		mainToolBar.setRollover(true);
+		mainToolBar.setOpaque(false);
+		headerPanel.add(mainToolBar, gbcMenuToolBar);
 
 	}
 
@@ -552,7 +562,9 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 	public void setPerspectives(IPerspectiveLoader perspectiveLoader)
 			throws PerspectiveException {
 		this.perspectiveLoader = perspectiveLoader;
-		mainToolBar.addPerspectiveItems(JUIGLEGraphicsUtilities.createImageIcon("ch/ethz/origo/juigle/data/images/tabs_48.png", 32, 32), perspectivePanel, perspectiveLoader.getListOfPerspectives());
+		mainToolBar.addPerspectiveItems(JUIGLEGraphicsUtilities.createImageIcon(
+				"ch/ethz/origo/juigle/data/images/tabs_48.png", 32, 32),
+				perspectivePanel, perspectiveLoader.getListOfPerspectives());
 		perspectivePanel.add(perspectiveLoader.getDefaultPerspective());
 	}
 
@@ -563,6 +575,20 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 	 */
 	public static int getFrameState() {
 		return JUIGLEFrame.frameExtendState;
+	}
+
+	/**
+	 * 
+	 * 
+	 * @param fullScreen
+	 * @version 0.1.0
+	 * @since 0.2.2
+	 */
+	public void setFullScreen(boolean fullScreen) {
+		if (fullScreen && getExtendedState() != JXFrame.MAXIMIZED_BOTH) {
+			setExtendedState(JXFrame.MAXIMIZED_BOTH);
+		}
+
 	}
 
 	/**
@@ -628,24 +654,24 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void update(Object state) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void update(Object object, int state) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

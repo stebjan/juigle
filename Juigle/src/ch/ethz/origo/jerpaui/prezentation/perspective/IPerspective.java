@@ -24,7 +24,7 @@ package ch.ethz.origo.juigle.prezentation.perspective;
 
 import javax.swing.Icon;
 
-import ch.ethz.origo.juigle.application.exceptions.PerspectiveException;
+import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 
 
 /**
