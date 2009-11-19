@@ -9,7 +9,7 @@ import javax.swing.SwingUtilities;
 import org.jdesktop.swingx.JXButton;
 
 import ch.ethz.origo.juigle.application.ILanguage;
-import ch.ethz.origo.juigle.application.exceptions.JUIGLELangException;
+import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 
 /**
  * 

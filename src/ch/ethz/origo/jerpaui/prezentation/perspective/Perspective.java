@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.painter.Painter;
 
-import ch.ethz.origo.juigle.application.exceptions.PerspectiveException;
+import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 import ch.ethz.origo.juigle.application.listener.LanguageEvent;
 import ch.ethz.origo.juigle.prezentation.JUIGLEFrame;
 import ch.ethz.origo.juigle.prezentation.JUIGLEGraphicsUtilities;
@@ -38,7 +38,7 @@ public class Perspective extends AbstractPerspective {
 		if (mainPanel == null) {
 			mainPanel = new JXPanel();
 			final Paint perspectiveBackground = JUIGLEGraphicsUtilities
-					.createBackgroundTexture(Color.YELLOW, Color.LIGHT_GRAY, 400);
+					.createBackgroundTexture(Color.WHITE, Color.LIGHT_GRAY, 400);
 			Painter<Component> p = new Painter<Component>() {
 
 				@Override

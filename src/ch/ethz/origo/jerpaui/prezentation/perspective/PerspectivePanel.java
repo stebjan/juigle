@@ -8,7 +8,7 @@ import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXTaskPane;
 import org.jdesktop.swingx.JXTitledPanel;
 
-import ch.ethz.origo.juigle.application.exceptions.PerspectiveException;
+import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 
 /**
  * 
@@ -47,8 +47,8 @@ public class PerspectivePanel extends JXPanel {
 
 	private void initialize() throws PerspectiveException {
 		if (currentPerspective != null) {
-			this.setLayout(new BorderLayout());
-			this.setOpaque(false);
+			setLayout(new BorderLayout());
+			setOpaque(false);
 			currentPerspective.setLocalizedResourceBundle(currentPerspective
 					.getResourceBundlePath());
 			currentPerspective.initPerspectivePanel();
@@ -65,14 +65,15 @@ public class PerspectivePanel extends JXPanel {
 					((JXTaskPane) currentPerspective.getMenuPanel())
 							.setIcon(currentPerspective.getIcon());
 				}
-				this.add(currentPerspective.getMenuPanel(), currentPerspective
-						.getMenu().getMenuPosition());
+				add(currentPerspective.getMenuPanel(), currentPerspective.getMenu()
+						.getMenuPosition());
 			}
-			this.add(currentPerspective.getMainPerspectivePanel(),
-					BorderLayout.CENTER);
+			add(currentPerspective.getMainPerspectivePanel(), BorderLayout.CENTER);
 			// TODO zvazit jestli pridat neco do footeru
+			revalidate();
+
 		}
-		this.revalidate();
+
 	}
 
 	public void add(final Perspective perspective) throws PerspectiveException {

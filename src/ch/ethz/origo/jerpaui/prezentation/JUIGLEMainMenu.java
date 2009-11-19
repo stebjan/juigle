@@ -8,7 +8,7 @@ import javax.swing.Action;
 import javax.swing.Icon;
 
 import ch.ethz.origo.juigle.application.BrowserLaunch;
-import ch.ethz.origo.juigle.application.exceptions.PerspectiveException;
+import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
 import ch.ethz.origo.juigle.prezentation.perspective.PerspectivePanel;
 
@@ -73,7 +73,6 @@ public class JUIGLEMainMenu extends JUIGLEMenu {
 	public void addSettingsItem(Icon icon) {
 		
 	}
-	
 	
 	public void addHomePageItem(Icon icon, final String url) throws PerspectiveException {
 		JUIGLEMenuItem item = new JUIGLEMenuItem();

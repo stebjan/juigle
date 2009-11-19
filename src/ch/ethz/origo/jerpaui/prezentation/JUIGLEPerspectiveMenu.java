@@ -10,7 +10,7 @@ import nezarazeno.Utils;
 
 import org.jdesktop.swingx.JXCollapsiblePane;
 
-import ch.ethz.origo.juigle.application.exceptions.JUIGLEMenuException;
+import ch.ethz.origo.juigle.application.exception.JUIGLEMenuException;
 
 /**
  * 
@@ -47,8 +47,6 @@ public class JUIGLEPerspectiveMenu extends JUIGLEMenu {
 	public JUIGLEPerspectiveMenu(String position, String resourcePath) {
 		super(position, resourcePath);
 	}
-	
-	
 	
 	public void addHeaderHideButton(boolean showText) {
 		if (showText) {

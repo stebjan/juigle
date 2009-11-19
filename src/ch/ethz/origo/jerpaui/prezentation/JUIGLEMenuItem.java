@@ -12,7 +12,7 @@ import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
 import ch.ethz.origo.juigle.application.ILanguage;
-import ch.ethz.origo.juigle.application.exceptions.JUIGLELangException;
+import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 
 /**
  * 

@@ -48,8 +48,8 @@ import org.apache.log4j.Logger;
 
 import ch.ethz.origo.juigle.application.ILanguage;
 import ch.ethz.origo.juigle.application.PropertiesLoader;
-import ch.ethz.origo.juigle.application.exceptions.JUIGLELangException;
-import ch.ethz.origo.juigle.application.exceptions.JUIGLEMenuException;
+import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
+import ch.ethz.origo.juigle.application.exception.JUIGLEMenuException;
 
 import com.jhlabs.image.GlowFilter;
 
