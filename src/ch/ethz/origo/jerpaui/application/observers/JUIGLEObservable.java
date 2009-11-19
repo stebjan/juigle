@@ -16,9 +16,9 @@ public class JUIGLEObservable extends AbstractJUIGLEObservable {
 	
 	public static final int DEFAULT_STATE = -1;
 
-	public static final int MSG_LANGUAGE_CHANGED = 0;
+	public static final int MSG_LANGUAGE_CHANGED = -2;
 	
-	public static final int MSG_APPLICATION_CLOSING = 1;
+	public static final int MSG_APPLICATION_CLOSING = -3;
 	
 	private int state;
 	
@@ -64,7 +64,7 @@ public class JUIGLEObservable extends AbstractJUIGLEObservable {
 	}
 
 	@Override
-	protected synchronized void setState(Object state) {
+	public synchronized void setState(Object state) {
 		if (state instanceof Integer) {
 			this.state = (Integer)state;
 			notifyObservers();
