@@ -33,6 +33,7 @@ import org.jdesktop.swingx.JXTitledPanel;
 import ch.ethz.origo.juigle.application.ILanguage;
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 import ch.ethz.origo.juigle.application.listener.LanguageListener;
+import ch.ethz.origo.juigle.application.observers.LanguageObservable;
 import ch.ethz.origo.juigle.application.observers.PerspectiveObservable;
 import ch.ethz.origo.juigle.prezentation.JUIGLEMenu;
 import ch.ethz.origo.juigle.prezentation.JUIGLEPerspectiveMenu;
@@ -41,19 +42,20 @@ import ch.ethz.origo.juigle.prezentation.JUIGLEPerspectiveMenu;
  * 
  * 
  * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.1.1 10/25/09
- * @since 0.1.0 (v 07/12/09)
+ * @version 0.1.2 (11/29/09)
+ * @since 0.1.0 (07/12/09)
  * @see IPerspective
  * 
  */
 public abstract class AbstractPerspective implements IPerspective, ILanguage, LanguageListener {
-
+	
+	//FIXME ILanguage a LangListener - zjisti jestli je to nutne
 	/** Only for serialization */
 	private static final long serialVersionUID = 894536627512039840L;
 
 	protected boolean isDefault;
 	
-	protected String resourcePath;
+	protected static String resourcePath;
 	protected String resourceBundleKey;
 	
 	protected JXTitledPanel menuTitledPanel;
@@ -70,15 +72,19 @@ public abstract class AbstractPerspective implements IPerspective, ILanguage, La
 	
 	/**
 	 * Initialize perspective panel
+	 * 
+	 * @throws PerspectiveException
+	 * @version 0.1.1 (11/29/09)
+	 * @since 0.1.0
 	 */
-	public abstract void initPerspectivePanel();
+	public abstract void initPerspectivePanel() throws PerspectiveException;
 
 	/**
 	 * Initialize menu of perspective.
 	 * 
 	 * @throws PerspectiveException
 	 * @version 0.1.0
-	 * @since 0.1.0
+	 * @since 0.1.0 (07/12/09)
 	 */
 	public abstract void initPerspectiveMenuPanel() throws PerspectiveException;
 	
@@ -94,6 +100,8 @@ public abstract class AbstractPerspective implements IPerspective, ILanguage, La
 	 * Return boolean variable if perspective is default
 	 * 
 	 * @return true - if perspective is default, else return false
+	 * @version 0.1.0 (07/12/09)
+	 * @since 0.1.0 (07/12/09)
 	 */
 	public boolean isDefaultPerspective() {
 		return isDefault;
@@ -130,5 +138,6 @@ public abstract class AbstractPerspective implements IPerspective, ILanguage, La
 	public JXPanel getMainPerspectivePanel() {
 		return mainPanel;
 	}
-
+	
+	
 }
