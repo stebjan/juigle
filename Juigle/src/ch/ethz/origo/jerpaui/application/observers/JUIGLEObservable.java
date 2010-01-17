@@ -8,7 +8,7 @@ import java.util.List;
  * 
  * 
  * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.2.0 10/02/09
+ * @version 0.2.1 01/15/2010
  * @since 0.1.0 (08/15/09)
  * @see AbstractJUIGLEObservable
  */
@@ -22,25 +22,10 @@ public class JUIGLEObservable extends AbstractJUIGLEObservable {
 	
 	private int state;
 	
-	private static JUIGLEObservable instance;
-	
 	private List<IObserver> listOfObservers = new ArrayList<IObserver>();
 	
 	public JUIGLEObservable() {
 		this.state = -1;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 * @version 0.1.0
-	 * @since 0.1.0
-	 */
-	public static synchronized JUIGLEObservable getInstance() {
-		if (instance == null) {
-			instance = new JUIGLEObservable();
-		}
-		return instance;
 	}
 	
 	/**
@@ -84,7 +69,6 @@ public class JUIGLEObservable extends AbstractJUIGLEObservable {
 		}
 		clearChanged();
 	}
-
 
 	@Override
 	public synchronized void attach(IObserver observer) {

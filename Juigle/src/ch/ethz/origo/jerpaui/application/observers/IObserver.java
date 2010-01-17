@@ -15,6 +15,6 @@ public interface IObserver extends Observer {
 	
 	public void update(Object state);
 	
-	public void update(Object object, int state);	
+	public void update(Object object, Object state);	
 	
 }

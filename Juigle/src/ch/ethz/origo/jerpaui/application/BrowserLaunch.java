@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 /**
  * 
  * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0 10/28/09
  * @since 0.1.0
  *
