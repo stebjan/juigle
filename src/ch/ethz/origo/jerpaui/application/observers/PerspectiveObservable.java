@@ -17,6 +17,7 @@ public class PerspectiveObservable extends JUIGLEObservable {
 	public static final int MSG_CLOSE = 4;
 	public static final int MSG_IMPORT = 5;
 	public static final int MSG_PERSPECTIVE_CHANGED = 6;
+	public static final int MSG_LANGUAGE_CHANGED = 7;
 	
 	private static PerspectiveObservable instance;
 	
