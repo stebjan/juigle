@@ -107,8 +107,12 @@ public class PerspectivePanel extends JXPanel {
 	}
 
 	private void removeCurrentPerspective() {
-		this.remove(currentPerspective.getMenuPanel());
-		this.remove(currentPerspective.getMainPerspectivePanel());
+		if (currentPerspective.getMenuPanel() != null) {
+			this.remove(currentPerspective.getMenuPanel());			
+		}
+		if (currentPerspective.getMainPerspectivePanel() != null) {
+			this.remove(currentPerspective.getMainPerspectivePanel());			
+		}
 		this.repaint();
 	}
 

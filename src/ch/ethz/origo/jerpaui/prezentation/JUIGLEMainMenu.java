@@ -18,7 +18,7 @@ import ch.ethz.origo.juigle.prezentation.perspective.PerspectivePanel;
  * @author Vaclav Souhrada (v.souhrada@gmail.com)
  * @version 0.2.0 10/28/09
  * @since 0.1.0 (c.v. 08/14/09)
- *
+ * @see JUIGLEMenu
  */
 public class JUIGLEMainMenu extends JUIGLEMenu {
 
@@ -31,6 +31,7 @@ public class JUIGLEMainMenu extends JUIGLEMenu {
 	}
 	
 	/**
+	 * 
 	 * 
 	 * @param icon
 	 * @param container
@@ -92,7 +93,7 @@ public class JUIGLEMainMenu extends JUIGLEMenu {
 	}
 	
 	public void addAboutItem(Icon icon) {
-		
+
 	}
 	
 	public void addCalendarItem(Icon icon) {

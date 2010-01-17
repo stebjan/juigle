@@ -48,6 +48,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import nezarazeno.GUIController;
 import nezarazeno.IPerspectiveLoader;
@@ -65,6 +66,9 @@ import ch.ethz.origo.juigle.application.observers.IObserver;
 import ch.ethz.origo.juigle.application.observers.PerspectiveObservable;
 import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
 import ch.ethz.origo.juigle.prezentation.perspective.PerspectivePanel;
+
+import com.nilo.plaf.nimrod.NimRODLookAndFeel;
+import com.nilo.plaf.nimrod.NimRODTheme;
 
 /**
  * Main <code>JUIGLE<code> software java frame.
@@ -240,6 +244,19 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 		System.setProperty("sun.java2d.opengl", "true");
 
 		UIManager.put("Button.textShiftOffset", 0);
+		
+		try {
+			NimRODTheme nt = new NimRODTheme();
+			nt.setPrimary1(new Color(0, 98, 137));
+			nt.setPrimary2( new Color(104, 188, 222));
+			nt.setPrimary3( new Color(104, 188, 222));
+			NimRODLookAndFeel look = new NimRODLookAndFeel();
+			NimRODLookAndFeel.setCurrentTheme(nt);
+			UIManager.setLookAndFeel(look);
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		innerListener = new InnerListener();
 
@@ -664,7 +681,7 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 	}
 
 	@Override
-	public void update(Object object, int state) {
+	public void update(Object object, Object state) {
 		// TODO Auto-generated method stub
 
 	}

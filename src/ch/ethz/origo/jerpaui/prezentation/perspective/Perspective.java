@@ -30,17 +30,18 @@ public class Perspective extends AbstractPerspective {
 	/** Only for serialization */
 	private static final long serialVersionUID = 1111614707483173796L;
 	
+	protected String resourcePath;
+	
 	protected static final Logger logger = Logger.getLogger(Perspective.class);
 	
 	@Override
-	public void initPerspectivePanel() {
+	public void initPerspectivePanel() throws PerspectiveException {
 		// TODO udelat vysku panelu packove, barvy dle uzivatele
 		if (mainPanel == null) {
 			mainPanel = new JXPanel();
 			final Paint perspectiveBackground = JUIGLEGraphicsUtilities
 					.createBackgroundTexture(Color.WHITE, Color.LIGHT_GRAY, 400);
 			Painter<Component> p = new Painter<Component>() {
-
 				@Override
 				public void paint(Graphics2D g, Component c, int width, int height) {
 					g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -61,7 +62,7 @@ public class Perspective extends AbstractPerspective {
 
 	@Override
 	public String getTitle() {
-		return "No title";
+		return resource.getString(getRBPerspectiveTitleKey());
 	}
 
 	@Override
@@ -81,7 +82,7 @@ public class Perspective extends AbstractPerspective {
 
 	@Override
 	public  void setLocalizedResourceBundle(String path) {
-		this.resourcePath = path;
+		resourcePath = path;
 		resource = ResourceBundle.getBundle(path);
 	}
 
@@ -99,7 +100,7 @@ public class Perspective extends AbstractPerspective {
 	}
 	
 	@Override
-	// TODO MOZNA ODSTRANIT JE TU ASI ZBYTECNA
+	// FIXME MOZNA ODSTRANIT JE TU ASI ZBYTECNA
 	public void fireLanguageChanged(LanguageEvent e) {
 		if (e.getId() == LanguageEvent.LANGUAGE_CHANGED) {
 			menu.updateText();
@@ -115,7 +116,7 @@ public class Perspective extends AbstractPerspective {
 
 	@Override
 	public String getRBPerspectiveTitleKey() {
-		return null;
+		return "perspective.title";
 	}
 
 }
