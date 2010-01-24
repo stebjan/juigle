@@ -34,7 +34,7 @@ public class GUIController extends JUIGLEObservable  implements IObserver {
 	}
 
 	@Override
-	public void update(Object object, int state) {
+	public void update(Object object, Object state) {
 		// TODO Auto-generated method stub
 		
 	}
