@@ -71,34 +71,34 @@ public class PerspectivePanel extends JXPanel {
 			add(currentPerspective.getMainPerspectivePanel(), BorderLayout.CENTER);
 			// TODO zvazit jestli pridat neco do footeru
 			revalidate();
-
 		}
-
 	}
 
+	/**
+	 * Adding perspective to current view
+	 * 
+	 * @param perspective
+	 *          new perspective which will be added to current perspective view
+	 * @throws PerspectiveException
+	 * @version 0.2.0 (1/24/2010)
+	 * @since 0.1.0 (07/19/09)
+	 */
 	public void add(final Perspective perspective) throws PerspectiveException {
-		if (currentPerspective != null) {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					removeCurrentPerspective();
-					// TODO Auto-generated method stub
-				}
-			});
-		}
 		SwingUtilities.invokeLater(new Runnable() {
-
 			@Override
 			public void run() {
+				if (currentPerspective != null) {
+					removeCurrentPerspective();
+				}
 				setPerspective(perspective);
 				try {
 					initialize();
 				} catch (PerspectiveException e) {
-					// TODO Auto-generated catch block
+					// throw new PerspectiveException("JG005:" + perspective.getTitle(),
+					// e);
 					e.printStackTrace();
-				}
+				} 
 			}
-
 		});
 	}
 
@@ -108,12 +108,13 @@ public class PerspectivePanel extends JXPanel {
 
 	private void removeCurrentPerspective() {
 		if (currentPerspective.getMenuPanel() != null) {
-			this.remove(currentPerspective.getMenuPanel());			
+			this.remove(currentPerspective.getMenuPanel());
 		}
 		if (currentPerspective.getMainPerspectivePanel() != null) {
-			this.remove(currentPerspective.getMainPerspectivePanel());			
+			this.remove(currentPerspective.getMainPerspectivePanel());
 		}
 		this.repaint();
+		this.validate();
 	}
 
 	/*
