@@ -89,6 +89,7 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 
 	private static Logger logger = Logger.getLogger(JUIGLEFrame.class);
 
+	// FIXME not used yet
 	private GUIController guiController = new GUIController();
 
 	private GridBagConstraints gbcMenuToolBar;

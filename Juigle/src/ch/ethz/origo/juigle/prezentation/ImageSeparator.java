@@ -28,11 +28,17 @@ public class ImageSeparator extends BasicToolBarSeparatorUI {
 		this.image = image;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		g.drawImage(image, 0, 0, null);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Dimension getPreferredSize(JComponent c) {
 		return new Dimension(image.getWidth(null), image.getHeight(null));

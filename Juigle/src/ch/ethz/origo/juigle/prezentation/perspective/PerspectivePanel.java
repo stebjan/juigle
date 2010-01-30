@@ -1,6 +1,8 @@
 package ch.ethz.origo.juigle.prezentation.perspective;
 
 import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.SwingUtilities;
 
@@ -25,6 +27,10 @@ public class PerspectivePanel extends JXPanel {
 	private static final long serialVersionUID = -6773985483599106242L;
 
 	private Perspective currentPerspective;
+	
+	private static int count = 1;
+
+	private boolean test = true;
 
 	/**
 	 * Default constructor
@@ -32,7 +38,7 @@ public class PerspectivePanel extends JXPanel {
 	 * @throws PerspectiveException
 	 */
 	public PerspectivePanel() throws PerspectiveException {
-
+		
 	}
 
 	/**
@@ -48,11 +54,14 @@ public class PerspectivePanel extends JXPanel {
 	private void initialize() throws PerspectiveException {
 		if (currentPerspective != null) {
 			setLayout(new BorderLayout());
-			setOpaque(false);
 			currentPerspective.setLocalizedResourceBundle(currentPerspective
 					.getResourceBundlePath());
-			currentPerspective.initPerspectivePanel();
-			currentPerspective.initPerspectiveMenuPanel();
+			if (currentPerspective.getMainPerspectivePanel() == null) {
+				currentPerspective.initPerspectivePanel();				
+			}
+			if (currentPerspective.getMenuPanel() == null ) {
+				currentPerspective.initPerspectiveMenuPanel();				
+			}
 			currentPerspective.updateText();
 
 			if (currentPerspective.getMenu() != null) {
@@ -81,6 +90,8 @@ public class PerspectivePanel extends JXPanel {
 	 *          new perspective which will be added to current perspective view
 	 * @throws PerspectiveException
 	 * @version 0.2.0 (1/24/2010)
+	 * @throws InvocationTargetException
+	 * @throws InterruptedException
 	 * @since 0.1.0 (07/19/09)
 	 */
 	public void add(final Perspective perspective) throws PerspectiveException {
@@ -88,16 +99,23 @@ public class PerspectivePanel extends JXPanel {
 			@Override
 			public void run() {
 				if (currentPerspective != null) {
-					removeCurrentPerspective();
+					removeAll();
+					repaint();
+					validate();
+					//test = false;
 				}
-				setPerspective(perspective);
-				try {
-					initialize();
-				} catch (PerspectiveException e) {
-					// throw new PerspectiveException("JG005:" + perspective.getTitle(),
-					// e);
-					e.printStackTrace();
-				} 
+				if (test) { // FIXME only for testing
+					setPerspective(perspective);
+					try {
+						initialize();
+						repaint();
+						validate();
+					} catch (PerspectiveException e) {
+						// throw new PerspectiveException("JG005:" + perspective.getTitle(),
+						// e);
+						e.printStackTrace();
+					}
+				}
 			}
 		});
 	}
@@ -113,6 +131,7 @@ public class PerspectivePanel extends JXPanel {
 		if (currentPerspective.getMainPerspectivePanel() != null) {
 			this.remove(currentPerspective.getMainPerspectivePanel());
 		}
+		this.removeAll();
 		this.repaint();
 		this.validate();
 	}

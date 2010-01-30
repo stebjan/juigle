@@ -25,10 +25,6 @@ public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
 	
 	/** Only for serialization */
 	private static final long serialVersionUID = -8011842643730136500L;
-
-	//private String label;
-	
-	//private Action action;
 	
 	private BufferedImage icon;
 	
