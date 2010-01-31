@@ -26,7 +26,7 @@ public abstract class AbstractJUIGLEObservable implements IObservable {
 	 * @version 0.1.1 (10/02/09)
 	 * @since 0.1.0
 	 */
-	protected abstract void setState(Object state);
+	protected abstract void setState(int state);
 	
 	/**
 	 * Indicates that this object has no longer changed, 
