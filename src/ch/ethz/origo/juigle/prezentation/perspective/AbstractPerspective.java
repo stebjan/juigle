@@ -32,8 +32,6 @@ import org.jdesktop.swingx.JXTitledPanel;
 
 import ch.ethz.origo.juigle.application.ILanguage;
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
-import ch.ethz.origo.juigle.application.listener.LanguageListener;
-import ch.ethz.origo.juigle.application.observers.LanguageObservable;
 import ch.ethz.origo.juigle.application.observers.PerspectiveObservable;
 import ch.ethz.origo.juigle.prezentation.JUIGLEMenu;
 import ch.ethz.origo.juigle.prezentation.JUIGLEPerspectiveMenu;
@@ -47,7 +45,7 @@ import ch.ethz.origo.juigle.prezentation.JUIGLEPerspectiveMenu;
  * @see IPerspective
  * 
  */
-public abstract class AbstractPerspective implements IPerspective, ILanguage, LanguageListener {
+public abstract class AbstractPerspective implements IPerspective, ILanguage {
 	
 	//FIXME ILanguage a LangListener - zjisti jestli je to nutne
 	/** Only for serialization */
