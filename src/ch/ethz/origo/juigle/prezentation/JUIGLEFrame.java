@@ -42,7 +42,6 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Observable;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -62,6 +61,7 @@ import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.painter.Painter;
 
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
+import ch.ethz.origo.juigle.application.observers.IObservable;
 import ch.ethz.origo.juigle.application.observers.IObserver;
 import ch.ethz.origo.juigle.application.observers.PerspectiveObservable;
 import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
@@ -682,13 +682,7 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 	}
 
 	@Override
-	public void update(Object object, Object state) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
+	public void update(IObservable o, Object arg) {
 		// TODO Auto-generated method stub
 
 	}
