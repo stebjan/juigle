@@ -42,6 +42,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.Level;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -64,6 +65,8 @@ import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 import ch.ethz.origo.juigle.application.observers.IObservable;
 import ch.ethz.origo.juigle.application.observers.IObserver;
 import ch.ethz.origo.juigle.application.observers.PerspectiveObservable;
+import ch.ethz.origo.juigle.data.EmailErrorReporter;
+import ch.ethz.origo.juigle.data.JUIGLEErrorParser;
 import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
 import ch.ethz.origo.juigle.prezentation.perspective.PerspectivePanel;
 
@@ -128,7 +131,12 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (PerspectiveException e) {
-			// TODO Auto-generated catch block
+		// parsing error message
+			String errorMSG = JUIGLEErrorParser.getJuigleErrorMessage(e.getMessage());
+			// display error GUI
+			JUIGLErrorInfoUtils.showErrorDialog("Error dialog", errorMSG, e,
+					Level.WARNING, new EmailErrorReporter());
+			logger.warn(errorMSG, e);
 			e.printStackTrace();
 		}
 	}
@@ -295,7 +303,7 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 	 * @since 0.1.0
 	 */
 	private JXCollapsiblePane getHeaderPanel() throws PerspectiveException {
-		final Paint backgroundMenu = JUIGLEGraphicsUtilities
+		final Paint backgroundMenu = JUIGLEGraphicsUtils
 				.createBackgroundTexture(new Color(0, 98, 137),
 						new Color(104, 188, 222), logoImg.getHeight() + 5);
 		headerPanel = new JXPanel(true);
@@ -424,7 +432,7 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 	private JXCollapsiblePane getFooterPanel() {
 		if (footerPanel == null) {
 			footerPanel = new JXPanel(new GridBagLayout(), true);
-			final Paint footerBackground = JUIGLEGraphicsUtilities
+			final Paint footerBackground = JUIGLEGraphicsUtils
 					.createBackgroundTexture(Color.WHITE, Color.LIGHT_GRAY, 45);
 			Painter<Component> painter = new Painter<Component>() {
 
@@ -580,7 +588,7 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 	public void setPerspectives(IPerspectiveLoader perspectiveLoader)
 			throws PerspectiveException {
 		this.perspectiveLoader = perspectiveLoader;
-		mainToolBar.addPerspectiveItems(JUIGLEGraphicsUtilities.createImageIcon(
+		mainToolBar.addPerspectiveItems(JUIGLEGraphicsUtils.createImageIcon(
 				"ch/ethz/origo/juigle/data/images/tabs_48.png", 32, 32),
 				perspectivePanel, perspectiveLoader.getListOfPerspectives());
 		perspectivePanel.add(perspectiveLoader.getDefaultPerspective());

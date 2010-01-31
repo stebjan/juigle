@@ -2,15 +2,16 @@ package ch.ethz.origo.juigle.prezentation;
 
 import java.awt.event.ActionEvent;
 import java.util.List;
+import java.util.logging.Level;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Icon;
 
-import org.jdesktop.swingx.action.OpenBrowserAction;
-
 import ch.ethz.origo.juigle.application.BrowserLaunch;
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
+import ch.ethz.origo.juigle.data.EmailErrorReporter;
+import ch.ethz.origo.juigle.data.JUIGLEErrorParser;
 import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
 import ch.ethz.origo.juigle.prezentation.perspective.PerspectivePanel;
 
@@ -60,7 +61,11 @@ public class JUIGLEMainMenu extends JUIGLEMenu {
 					try {
 						container.add(perspective);
 					} catch (PerspectiveException e1) {
-						// TODO Auto-generated catch block
+					// parsing error message
+						String errorMSG = JUIGLEErrorParser.getJuigleErrorMessage(e1.getMessage());
+						// display error GUI
+						JUIGLErrorInfoUtils.showErrorDialog("JUIGLE Error", errorMSG, e1,
+								Level.WARNING, new EmailErrorReporter());
 						e1.printStackTrace();
 					}
 					// TODO UPOZORNI OSTATNI PERSPECTIVY ZE SE MENI NA JINOU
@@ -89,7 +94,7 @@ public class JUIGLEMainMenu extends JUIGLEMenu {
 		};
 		item.setAction(action);
 		if (icon == null) {
-			item.setIcon(JUIGLEGraphicsUtilities.createImageIcon("ch/ethz/origo/juigle/data/images/Firefox_48x48.png", 32, 32));
+			item.setIcon(JUIGLEGraphicsUtils.createImageIcon("ch/ethz/origo/juigle/data/images/Firefox_48x48.png", 32, 32));
 		}
 		this.addItem(item);
 		this.revalidate();

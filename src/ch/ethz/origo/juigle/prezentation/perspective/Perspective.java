@@ -16,7 +16,7 @@ import org.jdesktop.swingx.painter.Painter;
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 import ch.ethz.origo.juigle.application.listener.LanguageEvent;
 import ch.ethz.origo.juigle.prezentation.JUIGLEFrame;
-import ch.ethz.origo.juigle.prezentation.JUIGLEGraphicsUtilities;
+import ch.ethz.origo.juigle.prezentation.JUIGLEGraphicsUtils;
 
 /**
  * 
@@ -39,7 +39,7 @@ public class Perspective extends AbstractPerspective {
 		// TODO udelat vysku panelu packove, barvy dle uzivatele
 		if (mainPanel == null) {
 			mainPanel = new JXPanel();
-			final Paint perspectiveBackground = JUIGLEGraphicsUtilities
+			final Paint perspectiveBackground = JUIGLEGraphicsUtils
 					.createBackgroundTexture(Color.WHITE, Color.LIGHT_GRAY, 400);
 			Painter<Component> p = new Painter<Component>() {
 				@Override

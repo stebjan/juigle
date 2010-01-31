@@ -46,12 +46,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import org.apache.log4j.Logger;
-import org.jdesktop.swingx.JXErrorPane;
-import org.jdesktop.swingx.error.ErrorInfo;
-import org.jdesktop.swingx.error.ErrorLevel;
 
 import ch.ethz.origo.juigle.application.ILanguage;
-import ch.ethz.origo.juigle.application.PropertiesLoader;
 import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 import ch.ethz.origo.juigle.application.exception.JUIGLEMenuException;
 import ch.ethz.origo.juigle.data.EmailErrorReporter;
@@ -254,7 +250,7 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 			button.setIcon(item.getIcon());
 			button.setRolloverIcon(new ImageIcon(glow
 					.filter(item.getItemIcon(), null)));
-			button.setForeground(JUIGLEGraphicsUtilities.TRANSPARENT_COLOR);
+			button.setForeground(JUIGLEGraphicsUtils.TRANSPARENT_COLOR);
 		}
 		if (resourcePath != null) {
 			button.setLocalizedResourceBundle(resourcePath);
@@ -268,7 +264,7 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 		button.setBorder(new EmptyBorder(0, 6, 0, 6));
 		// button.setBorder(null);
 		button.setFocusPainted(false);
-		button.setBackground(JUIGLEGraphicsUtilities.TRANSPARENT_COLOR);
+		button.setBackground(JUIGLEGraphicsUtils.TRANSPARENT_COLOR);
 		button.setContentAreaFilled(false);
 		// button.setPreferredSize(new Dimension(32, 1));
 
@@ -335,12 +331,14 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 							}
 						} catch (MissingResourceException e) {
 							// parsing error message
-							String errorMSG = JUIGLEErrorParser.getJuigleErrorMessage("JG003");
-							// write message to logger
-							JUIGLEMenu.logger.error(errorMSG, e);
+							String errorMSG = JUIGLEErrorParser
+									.getJuigleErrorMessage("JG003:" + item.getResourceBundleKey()
+											+ ":" + (resourcePath != null ? resourcePath : item.getResourceBundlePath()));
 							// display error GUI
 							JUIGLErrorInfoUtils.showErrorDialog("JUIGLE Error", errorMSG, e,
 									Level.WARNING, new EmailErrorReporter());
+							// write message to logger
+							JUIGLEMenu.logger.error(errorMSG, e);
 							// print error to stack trace
 							e.printStackTrace();
 						} catch (JUIGLELangException e) {
