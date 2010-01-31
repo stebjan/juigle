@@ -1,7 +1,6 @@
 package ch.ethz.origo.juigle.prezentation.perspective;
 
 import java.awt.BorderLayout;
-import java.awt.Graphics;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.SwingUtilities;
