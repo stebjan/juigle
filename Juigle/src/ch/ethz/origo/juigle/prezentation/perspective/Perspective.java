@@ -14,7 +14,6 @@ import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.painter.Painter;
 
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
-import ch.ethz.origo.juigle.application.listener.LanguageEvent;
 import ch.ethz.origo.juigle.prezentation.JUIGLEFrame;
 import ch.ethz.origo.juigle.prezentation.JUIGLEGraphicsUtils;
 
@@ -97,16 +96,6 @@ public class Perspective extends AbstractPerspective {
 	@Override
 	public String getResourceBundlePath() {
 		return resourcePath;
-	}
-	
-	@Override
-	// FIXME MOZNA ODSTRANIT JE TU ASI ZBYTECNA
-	public void fireLanguageChanged(LanguageEvent e) {
-		if (e.getId() == LanguageEvent.LANGUAGE_CHANGED) {
-			menu.updateText();
-			updateText();
-			System.out.println("...Zmena jazyka v Perspective...");
-		}		
 	}
 
 	@Override
