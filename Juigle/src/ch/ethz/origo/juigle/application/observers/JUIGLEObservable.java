@@ -8,7 +8,7 @@ import java.util.List;
  * 
  * 
  * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.2.1 01/15/2010
+ * @version 0.2.2 (01/30/2010)
  * @since 0.1.0 (08/15/09)
  * @see AbstractJUIGLEObservable
  */
@@ -65,7 +65,7 @@ public class JUIGLEObservable extends AbstractJUIGLEObservable {
 	@Override
 	protected void notifyObservers() {
 		for (IObserver observer : listOfObservers) {
-			observer.update(getState());
+			observer.update(this, getState());
 		}
 		clearChanged();
 	}

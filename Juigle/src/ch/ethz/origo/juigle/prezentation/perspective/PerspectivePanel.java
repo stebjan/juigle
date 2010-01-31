@@ -27,10 +27,6 @@ public class PerspectivePanel extends JXPanel {
 	private static final long serialVersionUID = -6773985483599106242L;
 
 	private Perspective currentPerspective;
-	
-	private static int count = 1;
-
-	private boolean test = true;
 
 	/**
 	 * Default constructor
@@ -38,7 +34,7 @@ public class PerspectivePanel extends JXPanel {
 	 * @throws PerspectiveException
 	 */
 	public PerspectivePanel() throws PerspectiveException {
-		
+
 	}
 
 	/**
@@ -57,10 +53,10 @@ public class PerspectivePanel extends JXPanel {
 			currentPerspective.setLocalizedResourceBundle(currentPerspective
 					.getResourceBundlePath());
 			if (currentPerspective.getMainPerspectivePanel() == null) {
-				currentPerspective.initPerspectivePanel();				
+				currentPerspective.initPerspectivePanel();
 			}
-			if (currentPerspective.getMenuPanel() == null ) {
-				currentPerspective.initPerspectiveMenuPanel();				
+			if (currentPerspective.getMenuPanel() == null) {
+				currentPerspective.initPerspectiveMenuPanel();
 			}
 			currentPerspective.updateText();
 
@@ -102,19 +98,16 @@ public class PerspectivePanel extends JXPanel {
 					removeAll();
 					repaint();
 					validate();
-					//test = false;
 				}
-				if (test) { // FIXME only for testing
-					setPerspective(perspective);
-					try {
-						initialize();
-						repaint();
-						validate();
-					} catch (PerspectiveException e) {
-						// throw new PerspectiveException("JG005:" + perspective.getTitle(),
-						// e);
-						e.printStackTrace();
-					}
+				setPerspective(perspective);
+				try {
+					initialize();
+					repaint();
+					validate();
+				} catch (PerspectiveException e) {
+					// throw new PerspectiveException("JG005:" + perspective.getTitle(),
+					// e);
+					e.printStackTrace();
 				}
 			}
 		});

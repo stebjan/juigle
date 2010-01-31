@@ -1,7 +1,6 @@
 package nezarazeno;
 
-import java.util.Observable;
-
+import ch.ethz.origo.juigle.application.observers.IObservable;
 import ch.ethz.origo.juigle.application.observers.IObserver;
 import ch.ethz.origo.juigle.application.observers.JUIGLEObservable;
 
@@ -34,13 +33,7 @@ public class GUIController extends JUIGLEObservable  implements IObserver {
 	}
 
 	@Override
-	public void update(Object object, Object state) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
+	public void update(IObservable o, Object arg) {
 		// TODO Auto-generated method stub
 		
 	}	
