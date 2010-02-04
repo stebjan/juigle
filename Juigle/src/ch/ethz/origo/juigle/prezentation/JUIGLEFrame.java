@@ -50,8 +50,8 @@ import javax.swing.JLabel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import nezarazeno.GUIController;
 import nezarazeno.IPerspectiveLoader;
+import notUsedYet.GUIController;
 
 import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXButton;
@@ -131,7 +131,7 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (PerspectiveException e) {
-		// parsing error message
+			// parsing error message
 			String errorMSG = JUIGLEErrorParser.getJuigleErrorMessage(e.getMessage());
 			// display error GUI
 			JUIGLErrorInfoUtils.showErrorDialog("Error dialog", errorMSG, e,
@@ -253,12 +253,12 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 		System.setProperty("sun.java2d.opengl", "true");
 
 		UIManager.put("Button.textShiftOffset", 0);
-		
+
 		try {
 			NimRODTheme nt = new NimRODTheme();
 			nt.setPrimary1(new Color(0, 98, 137));
-			nt.setPrimary2( new Color(104, 188, 222));
-			nt.setPrimary3( new Color(104, 188, 222));
+			nt.setPrimary2(new Color(104, 188, 222));
+			nt.setPrimary3(new Color(104, 188, 222));
 			NimRODLookAndFeel look = new NimRODLookAndFeel();
 			NimRODLookAndFeel.setCurrentTheme(nt);
 			UIManager.setLookAndFeel(look);
@@ -303,9 +303,9 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 	 * @since 0.1.0
 	 */
 	private JXCollapsiblePane getHeaderPanel() throws PerspectiveException {
-		final Paint backgroundMenu = JUIGLEGraphicsUtils
-				.createBackgroundTexture(new Color(0, 98, 137),
-						new Color(104, 188, 222), logoImg.getHeight() + 5);
+		final Paint backgroundMenu = JUIGLEGraphicsUtils.createBackgroundTexture(
+				new Color(0, 98, 137), new Color(104, 188, 222),
+				logoImg.getHeight() + 5);
 		headerPanel = new JXPanel(true);
 		Painter<Component> p = new Painter<Component>() {
 			@Override
@@ -676,6 +676,8 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 		}
 
 	}
+
+	
 
 	@Override
 	public void update() {
