@@ -29,5 +29,5 @@ public interface IObservable {
 	 * @return count of registered observers
 	 */
 	public int countObservers();
-	
+
 }

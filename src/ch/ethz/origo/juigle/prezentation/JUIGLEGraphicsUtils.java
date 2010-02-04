@@ -28,10 +28,11 @@ import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 import com.jhlabs.image.NoiseFilter;
 
 /**
- * 
+ * Class which contains a lot of graphics utilities methods for
+ * <code>JUIGLE</code> Library and user applications.
  * 
  * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.1.1 (1/31/2010)
+ * @version 0.1.2 (2/03/2010)
  * @since 0.1.0 (05/18/09)
  */
 public class JUIGLEGraphicsUtils {
@@ -62,8 +63,8 @@ public class JUIGLEGraphicsUtils {
 	 */
 	public static Paint createBackgroundTexture(Color color1, Color color2,
 			int size) {
-		BufferedImage image = JUIGLEGraphicsUtils
-				.createTranslucentCompatibleImage(size, size);
+		BufferedImage image = JUIGLEGraphicsUtils.createTranslucentCompatibleImage(
+				size, size);
 		Graphics2D g2d = image.createGraphics();
 		Paint paint = new GradientPaint(0, 0, color1, 0, size, color2);
 		g2d.setPaint(paint);
@@ -79,7 +80,7 @@ public class JUIGLEGraphicsUtils {
 		Paint result = new TexturePaint(image, new Rectangle(size, size));
 		return result;
 	}
-	
+
 	/**
 	 * Returns an ImageIcon, or null if the path was invalid.
 	 * 
@@ -114,9 +115,11 @@ public class JUIGLEGraphicsUtils {
 			return null;
 		}
 	}
-		
-	public static Icon createImageIcon(String path, int width, int height) throws PerspectiveException {
-			return new ImageIcon(GraphicsUtilities.createThumbnail(JUIGLEGraphicsUtils.getImage(path), width, height));			
+
+	public static Icon createImageIcon(String path, int width, int height)
+			throws PerspectiveException {
+		return new ImageIcon(GraphicsUtilities.createThumbnail(JUIGLEGraphicsUtils
+				.getImage(path), width, height));
 	}
 
 	public static BufferedImage getImage(String path) throws PerspectiveException {
@@ -126,7 +129,7 @@ public class JUIGLEGraphicsUtils {
 			throw new PerspectiveException(e);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @return

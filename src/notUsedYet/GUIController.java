@@ -1,4 +1,4 @@
-package nezarazeno;
+package notUsedYet;
 
 import ch.ethz.origo.juigle.application.observers.IObservable;
 import ch.ethz.origo.juigle.application.observers.IObserver;
