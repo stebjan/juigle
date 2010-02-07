@@ -8,7 +8,7 @@ package ch.ethz.origo.juigle.application.database;
  * @since 0.1.0 (1/29/2010)
  * 
  */
-public class Provider {
+public class DbProvider {
 	
 	private String name;
 	private String host;

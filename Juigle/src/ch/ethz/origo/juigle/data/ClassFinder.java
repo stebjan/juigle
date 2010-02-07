@@ -1,4 +1,4 @@
-package nezarazeno;
+package ch.ethz.origo.juigle.data;
 
 /*
  * ClassFinder.java
