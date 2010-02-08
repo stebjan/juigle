@@ -8,7 +8,7 @@ package ch.ethz.origo.juigle.data.database;
  * @since 0.1.0 (1/24/2010)
  *
  */
-public class DbUtils {
+public class DBUtils {
 	
 	private static int CONSTRAINT;
 
@@ -22,7 +22,7 @@ public class DbUtils {
 	 * @return constraint name
 	 */
 	public static String getAutoConstraintName(String name, String tableName) {
-		return tableName + "_" + name + "_" + (DbUtils.CONSTRAINT++);
+		return tableName + "_" + name + "_" + (DBUtils.CONSTRAINT++);
 	}
 	
 }

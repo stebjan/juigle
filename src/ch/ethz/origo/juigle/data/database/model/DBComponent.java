@@ -10,10 +10,10 @@ import org.apache.log4j.Logger;
  * @since 0.1.0 (1/24/2010)
  * 
  */
-public abstract class DbComponent {
+public abstract class DBComponent {
 
 	/** Logger */
-	protected final static Logger logger = Logger.getLogger(DbComponent.class);  
+	protected final static Logger logger = Logger.getLogger(DBComponent.class);  
 	
 	/** Component name */
 	protected final String name;
@@ -33,7 +33,7 @@ public abstract class DbComponent {
 	 * @param name component name
 	 * @param type component type
 	 */
-	public DbComponent(String name, String type) {
+	public DBComponent(String name, String type) {
 		this.name = name;
 		this.type = type;
 	}

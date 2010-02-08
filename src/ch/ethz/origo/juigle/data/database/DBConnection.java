@@ -7,6 +7,6 @@ package ch.ethz.origo.juigle.data.database;
  * @since 0.1.0 (1/24/2010)
  * 
  */
-public class DbConnection {
+public class DBConnection {
 
 }

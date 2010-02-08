@@ -9,24 +9,24 @@ import java.util.List;
  * @author Vaclav Souhrada
  * @version 0.1.0 (1/24/2010)
  * @since 0.1.0 (1/24/2010)
- * @see DbComponent
+ * @see DBComponent
  */
-public class DbTable extends DbComponent {
+public class DBTable extends DBComponent {
 	
 	/** Columns list */
-	private List<DbColumn> columns;
+	private List<DBColumn> columns;
 	/** Constraints list */
-	private List<DbConstraint> constraints;
+	private List<DBConstraint> constraints;
 
 	/**
 	 * Construct the database table component
 	 *  
 	 * @param name table name
 	 */
-	public DbTable(String name) {
-		super(name, DbComponent.TABLE_COMPONENT_TYPE);
-		columns = new ArrayList<DbColumn>();
-		constraints = new ArrayList<DbConstraint>();
+	public DBTable(String name) {
+		super(name, DBComponent.TABLE_COMPONENT_TYPE);
+		columns = new ArrayList<DBColumn>();
+		constraints = new ArrayList<DBConstraint>();
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public class DbTable extends DbComponent {
 	 * 
 	 * @param column of table
 	 */
-	public void addColumn(DbColumn column) {
+	public void addColumn(DBColumn column) {
 		columns.add(column);
 	}
 	
@@ -44,7 +44,7 @@ public class DbTable extends DbComponent {
 	 * list.
 	 * @param constraint of column
 	 */
-	public void addConstraint(DbConstraint constraint) {
+	public void addConstraint(DBConstraint constraint) {
 		constraints.add(constraint);
 	}
 	/**
@@ -55,11 +55,11 @@ public class DbTable extends DbComponent {
 	 * @since 0.1.0
 	 * 
 	 */
-	public void addComponent(DbComponent component) {
-		if (component instanceof DbColumn) {
-			columns.add((DbColumn)component);			
-		} else if (component instanceof DbConstraint) {
-			constraints.add((DbConstraint)component);
+	public void addComponent(DBComponent component) {
+		if (component instanceof DBColumn) {
+			columns.add((DBColumn)component);			
+		} else if (component instanceof DBConstraint) {
+			constraints.add((DBConstraint)component);
 		}
 	}
 	
@@ -71,11 +71,11 @@ public class DbTable extends DbComponent {
 	 * @since 0.1.0
 	 * 
 	 */
-	public void removeComponent(DbComponent component) {
-		if (component instanceof DbColumn) {
-			columns.remove((DbColumn)component);			
-		} else if (component instanceof DbConstraint) {
-			constraints.remove((DbConstraint)component);
+	public void removeComponent(DBComponent component) {
+		if (component instanceof DBColumn) {
+			columns.remove((DBColumn)component);			
+		} else if (component instanceof DBConstraint) {
+			constraints.remove((DBConstraint)component);
 		}
 	}
 	
