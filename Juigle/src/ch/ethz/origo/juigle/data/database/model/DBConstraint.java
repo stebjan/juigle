@@ -9,17 +9,17 @@ import java.util.List;
  * @author Vaclav Souhrada
  * @version 0.1.0 (1/24/2010)
  * @since 0.1.0 (1/24/2010)
- * @see DbComponent
+ * @see DBComponent
  */
-public class DbConstraint extends DbComponent {
+public class DBConstraint extends DBComponent {
 
 	/** Name of constraint **/
 	protected String name;
 	/** List of columns **/
-	protected List<DbColumn> columns;
+	protected List<DBColumn> columns;
 
 	/** Owner table */
-	private DbTable owner;
+	private DBTable owner;
 
 	/**
 	 * Construct a new constraint
@@ -29,10 +29,10 @@ public class DbConstraint extends DbComponent {
 	 * @param owner
 	 *          of constraint
 	 */
-	public DbConstraint(String name, DbTable owner) {
-		super(name, DbComponent.CONSTRAINT_COMPONENT_TYPE);
+	public DBConstraint(String name, DBTable owner) {
+		super(name, DBComponent.CONSTRAINT_COMPONENT_TYPE);
 		this.owner = owner;
-		columns = new ArrayList<DbColumn>();
+		columns = new ArrayList<DBColumn>();
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class DbConstraint extends DbComponent {
 	 *          for constraint
 	 * 
 	 */
-	public void addColumn(DbColumn column) {
+	public void addColumn(DBColumn column) {
 		columns.add(column);
 	}
 
@@ -50,11 +50,11 @@ public class DbConstraint extends DbComponent {
 		return name;
 	}
 
-	public List<DbColumn> getColumns() {
+	public List<DBColumn> getColumns() {
 		return columns;
 	}
 
-	public DbTable getOwner() {
+	public DBTable getOwner() {
 		return owner;
 	}
 

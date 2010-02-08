@@ -3,7 +3,7 @@ package ch.ethz.origo.juigle.application.database;
 import java.io.File;
 import java.sql.Connection;
 
-import ch.ethz.origo.juigle.data.database.DbHandler;
+import ch.ethz.origo.juigle.data.database.DBHandler;
 
 /**
  * 
@@ -16,7 +16,7 @@ import ch.ethz.origo.juigle.data.database.DbHandler;
  */
 public class DatabaseManager implements IDbHandler, IDbConnection {
 	
-	private DbHandler dbHandler;
+	private DBHandler dbHandler;
 	
 	public DatabaseManager() {
 		

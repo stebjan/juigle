@@ -12,7 +12,7 @@ import ch.ethz.origo.juigle.application.database.IDbHandler;
  * @see IDbHandler
  * 
  */
-public class DbHandler implements IDbHandler {
+public class DBHandler implements IDbHandler {
 
 	@Override
 	public void createDatabase(String command) {
