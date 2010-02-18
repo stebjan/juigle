@@ -3,8 +3,8 @@ package nezarazeno;
 /**
  * 
  * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.1.0 08/13/09
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
+ * @version 0.1.0 (08/13/09)
  * @since 0.1.0 (05/18/09)
  */
 public class Utils {

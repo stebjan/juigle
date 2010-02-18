@@ -132,7 +132,7 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 			e.printStackTrace();
 		} catch (PerspectiveException e) {
 			// parsing error message
-			String errorMSG = JUIGLEErrorParser.getJuigleErrorMessage(e.getMessage());
+			String errorMSG = JUIGLEErrorParser.getJUIGLEErrorMessage(e.getMessage());
 			// display error GUI
 			JUIGLErrorInfoUtils.showErrorDialog("Error dialog", errorMSG, e,
 					Level.WARNING, new EmailErrorReporter());
