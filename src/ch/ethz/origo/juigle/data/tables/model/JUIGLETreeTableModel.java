@@ -2,6 +2,7 @@ package ch.ethz.origo.juigle.data.tables.model;
 
 import org.jdesktop.swingx.treetable.DefaultTreeTableModel;
 
+import ch.ethz.origo.juigle.application.ILanguage;
 import ch.ethz.origo.juigle.application.exception.DataStoreException;
 
 /**
@@ -13,7 +14,7 @@ import ch.ethz.origo.juigle.application.exception.DataStoreException;
  * @see DefaultTreeTableModel
  * 
  */
-public abstract class JUIGLETreeTableModel extends DefaultTreeTableModel {
+public abstract class JUIGLETreeTableModel extends DefaultTreeTableModel implements ILanguage {
 
 	/**
 	 * Insert values to table model

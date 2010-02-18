@@ -332,7 +332,7 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 						} catch (MissingResourceException e) {
 							// parsing error message
 							String errorMSG = JUIGLEErrorParser
-									.getJuigleErrorMessage("JG003:" + item.getResourceBundleKey()
+									.getJUIGLEErrorMessage("JG003:" + item.getResourceBundleKey()
 											+ ":" + (resourcePath != null ? resourcePath : item.getResourceBundlePath()));
 							// display error GUI
 							JUIGLErrorInfoUtils.showErrorDialog("JUIGLE Error", errorMSG, e,
