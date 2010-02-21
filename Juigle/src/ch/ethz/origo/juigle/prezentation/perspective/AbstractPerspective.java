@@ -65,6 +65,8 @@ public abstract class AbstractPerspective implements IPerspective, ILanguage {
 	
 	protected ResourceBundle resource;
 	
+	protected static PerspectiveObservable perspectiveObservable = PerspectiveObservable.getInstance();
+	
 	/**
 	 * Initialize perspective panel
 	 * 
