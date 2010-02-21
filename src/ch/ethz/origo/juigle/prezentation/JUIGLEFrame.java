@@ -51,7 +51,6 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import nezarazeno.IPerspectiveLoader;
-import notUsedYet.GUIController;
 
 import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXButton;
@@ -62,9 +61,6 @@ import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.painter.Painter;
 
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
-import ch.ethz.origo.juigle.application.observers.IObservable;
-import ch.ethz.origo.juigle.application.observers.IObserver;
-import ch.ethz.origo.juigle.application.observers.PerspectiveObservable;
 import ch.ethz.origo.juigle.data.EmailErrorReporter;
 import ch.ethz.origo.juigle.data.JUIGLEErrorParser;
 import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
@@ -76,13 +72,12 @@ import com.nilo.plaf.nimrod.NimRODTheme;
 /**
  * Main <code>JUIGLE<code> software java frame.
  * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.2.2 11/18/09
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
+ * @version 0.2.3 (2/21/2010)
  * @since 0.1.0 (05/18/09)
  * @see JXFrame
- * @see IObserver
  */
-public class JUIGLEFrame extends JXFrame implements IObserver {
+public class JUIGLEFrame extends JXFrame {
 
 	/** Only for serialization */
 	private static final long serialVersionUID = -6992843525391631876L;
@@ -91,9 +86,6 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 	private String copyright = "";
 
 	private static Logger logger = Logger.getLogger(JUIGLEFrame.class);
-
-	// FIXME not used yet
-	private GUIController guiController = new GUIController();
 
 	private GridBagConstraints gbcMenuToolBar;
 
@@ -188,8 +180,6 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 	private void initialize() throws IOException, PerspectiveException {
 		initImages();
 		initGUI();
-		guiController.attach(this);
-		PerspectiveObservable.getInstance().attach(guiController);
 	}
 
 	/**
@@ -676,24 +666,5 @@ public class JUIGLEFrame extends JXFrame implements IObserver {
 		}
 
 	}
-
 	
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void update(Object state) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void update(IObservable o, Object arg) {
-		// TODO Auto-generated method stub
-
-	}
 }

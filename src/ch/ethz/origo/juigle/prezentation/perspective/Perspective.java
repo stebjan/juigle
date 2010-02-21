@@ -21,8 +21,8 @@ import ch.ethz.origo.juigle.prezentation.JUIGLEGraphicsUtils;
  * 
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.0 07/12/09
- * @since 0.1.0
+ * @version 0.1.0 (07/12/09)
+ * @since 0.1.0 (07/12/09)
  */
 public class Perspective extends AbstractPerspective {
 

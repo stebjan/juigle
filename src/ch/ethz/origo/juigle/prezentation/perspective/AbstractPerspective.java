@@ -32,15 +32,14 @@ import org.jdesktop.swingx.JXTitledPanel;
 
 import ch.ethz.origo.juigle.application.ILanguage;
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
-import ch.ethz.origo.juigle.application.observers.PerspectiveObservable;
 import ch.ethz.origo.juigle.prezentation.JUIGLEMenu;
 import ch.ethz.origo.juigle.prezentation.JUIGLEPerspectiveMenu;
 
 /**
  * 
  * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.1.2 (11/29/09)
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
+ * @version 0.1.3 (2/21/2010)
  * @since 0.1.0 (07/12/09)
  * @see IPerspective
  * 
@@ -65,8 +64,6 @@ public abstract class AbstractPerspective implements IPerspective, ILanguage {
 	protected JXPanel mainPanel;
 	
 	protected ResourceBundle resource;
-	
-	protected PerspectiveObservable perspectiveObservable = PerspectiveObservable.getInstance();
 	
 	/**
 	 * Initialize perspective panel
