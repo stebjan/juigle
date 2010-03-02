@@ -3,6 +3,8 @@ package ch.ethz.origo.juigle.data.database.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.ethz.origo.juigle.data.database.model.constraint.DBConstraint;
+
 /**
  * 
  * 
@@ -47,6 +49,16 @@ public class DBTable extends DBComponent {
 	public void addConstraint(DBConstraint constraint) {
 		constraints.add(constraint);
 	}
+	
+  /**
+   * Get Wrapped table name
+   * 
+   * @return wrapped table name String
+   */
+  public String getWrappedTableName() {
+    return getWrappedCommand(name);
+  }
+  
 	/**
 	 * Add component to components list.
 	 * 
@@ -77,6 +89,12 @@ public class DBTable extends DBComponent {
 		} else if (component instanceof DBConstraint) {
 			constraints.remove((DBConstraint)component);
 		}
+	}
+
+	@Override
+	public Class<?> getDDLSQLSyntaxClass() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
