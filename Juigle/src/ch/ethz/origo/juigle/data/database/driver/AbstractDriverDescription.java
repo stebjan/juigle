@@ -201,6 +201,11 @@ public abstract class AbstractDriverDescription implements DriverDescription,
 		return sb.toString();
 	}
 
+	/**
+	 * Return connection string
+	 * 
+	 * @return coonnection as string
+	 */
 	public String getConnectionString() {
 		return connectionString;
 	}
@@ -209,6 +214,11 @@ public abstract class AbstractDriverDescription implements DriverDescription,
 		return classnName;
 	}
 
+	/**
+	 * Return driver name
+	 * 
+	 * @return name of driver
+	 */
 	public String getDriverName() {
 		return driverName;
 	}
@@ -232,6 +242,9 @@ public abstract class AbstractDriverDescription implements DriverDescription,
 		connectionString = JUIGLEDomParser.getTextFromElement(driver, "connectionstring");
 	}
 
+	/**
+	 * NOT IMPLEMENTED
+	 */
 	public Node xmlSave(Document doc) {
 		// not implemented
 		return null;
