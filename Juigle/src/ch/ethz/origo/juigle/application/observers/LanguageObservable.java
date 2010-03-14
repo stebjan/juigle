@@ -9,7 +9,8 @@ import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 /**
  * 
  * @author Vaclav Souhrada
- * @version 0.1.0 (10/15/2010)
+ * @version 0.1.1 (3/14/2010)
+ * @since 0.1.0 (10/15/2010)
  * @see JUIGLEObservable
  *
  */
@@ -95,6 +96,14 @@ public class LanguageObservable extends AbstractJUIGLEObservable {
 	@Override
 	public void detach(IObserver observer) {
 		listOfObservers.remove(observer);	
+	}
+
+	/**
+	 * NOT IMPLEMENTED FOR THIS CLASS
+	 */
+	@Override
+	protected void notifyObserver(Object obj) {
+		/* NOT IMPLEMENTED */		
 	}
 	
 	

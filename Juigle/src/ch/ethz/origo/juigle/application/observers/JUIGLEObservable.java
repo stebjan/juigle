@@ -19,7 +19,7 @@ public class JUIGLEObservable extends AbstractJUIGLEObservable {
 
 	public static final int MSG_APPLICATION_CLOSING = -3;
 
-	private int state;
+	protected int state;
 
 	private List<IObserver> listOfObservers = new ArrayList<IObserver>();
 
@@ -68,6 +68,14 @@ public class JUIGLEObservable extends AbstractJUIGLEObservable {
 		}
 		clearChanged();
 	}
+	
+	@Override
+	protected void notifyObserver(Object obj) {
+		for (IObserver observer : listOfObservers) {
+			observer.update(this, obj);
+		}
+		clearChanged();		
+	}
 
 	@Override
 	public synchronized void attach(IObserver observer) {
@@ -83,5 +91,6 @@ public class JUIGLEObservable extends AbstractJUIGLEObservable {
 	public synchronized int countObservers() {
 		return listOfObservers.size();
 	}
+
 
 }

@@ -3,8 +3,8 @@ package ch.ethz.origo.juigle.application.observers;
 /**
  * 
  * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.1.1 10/02/09
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
+ * @version 0.1.2 (3/14/2010)
  * @since 0.1.0 (08/16/09)
  * @see IObservable
  */
@@ -45,6 +45,15 @@ public abstract class AbstractJUIGLEObservable implements IObservable {
 	 * @since 0.1.0
 	 */
 	protected abstract void notifyObserver(IObserver observer);
+	
+	/**
+	 * 
+	 * 
+	 * @param obj
+	 * @version 0.1.0
+	 * @since 0.1.2
+	 */
+	protected abstract void notifyObserver(Object obj);
 	
 	/**
 	 * 
