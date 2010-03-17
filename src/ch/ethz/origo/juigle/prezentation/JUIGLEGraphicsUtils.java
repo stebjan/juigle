@@ -2,13 +2,16 @@ package ch.ethz.origo.juigle.prezentation;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
 import java.awt.Paint;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.TexturePaint;
+import java.awt.Toolkit;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -31,8 +34,8 @@ import com.jhlabs.image.NoiseFilter;
  * Class which contains a lot of graphics utilities methods for
  * <code>JUIGLE</code> Library and user applications.
  * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.1.2 (2/03/2010)
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
+ * @version 0.1.3 (3/17/2010)
  * @since 0.1.0 (05/18/09)
  */
 public class JUIGLEGraphicsUtils {
@@ -147,6 +150,26 @@ public class JUIGLEGraphicsUtils {
 		// hl = new ColorHighlighter(Color.LIGHT_GRAY, Color.orange);
 		hl = new HighlighterFactory.UIColorHighlighter(feverWarning);
 		return hl;
+	}
+
+	/**
+	 * Return center position as instance of class <code>Point</code> for current
+	 * component
+	 * 
+	 * @param comp
+	 *          instance of <code>Component</code> class on which will be computed
+	 *          center position
+	 * @return center position as instance of class <code>Point</code>
+	 * @version 0.1.0 (3/17/2010)
+	 * @since 0.1.3 (3/17/2010)
+	 * @see Point
+	 */
+	public static Point getCenterPosition(Component comp) {
+		Dimension dimJFV = comp.getSize();
+		Dimension dimScreen = Toolkit.getDefaultToolkit().getScreenSize();
+		Point p = new Point((dimScreen.width - dimJFV.width) / 2,
+				(dimScreen.height - dimJFV.height) / 2);
+		return p;
 	}
 
 }
