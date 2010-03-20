@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
  * This class provide parser for Exception messages.
  * 
  * @author Vaclav Souhrada
- * @version 0.1.1 (2/14/2010)
+ * @version 0.1.2 (3/20/2010)
  * @since 0.1.0 (1/30/2010)
  *
  */
@@ -15,7 +15,8 @@ public class JUIGLEErrorParser {
 
 	
 	public static String getJUIGLEErrorMessage(String errorCode) {
-		return JUIGLEErrorParser.parseMessage(errorCode, "errors");
+		System.out.println(System.getProperty("user.dir"));
+		return JUIGLEErrorParser.parseMessage(errorCode, "ch.ethz.origo.juigle.data.errors");
 	}
 	
 	public static String getErrorMessage(String errorCode, String filePath) {

@@ -73,7 +73,7 @@ import com.nilo.plaf.nimrod.NimRODTheme;
  * Main <code>JUIGLE<code> software java frame.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.2.3 (2/21/2010)
+ * @version 0.2.4 (3/20/2010)
  * @since 0.1.0 (05/18/09)
  * @see JXFrame
  */
@@ -138,7 +138,7 @@ public class JUIGLEFrame extends JXFrame {
 	 * @param title
 	 *          Frame title
 	 * @param logoImg
-	 * 
+	 * @version 0.1.1
 	 * @since 0.1.0
 	 */
 	public JUIGLEFrame(String title, InputStream logoImg) {
@@ -149,6 +149,12 @@ public class JUIGLEFrame extends JXFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (PerspectiveException e) {
+			// parsing error message
+			String errorMSG = JUIGLEErrorParser.getJUIGLEErrorMessage(e.getMessage());
+			// display error GUI
+			JUIGLErrorInfoUtils.showErrorDialog("Error dialog", errorMSG, e,
+					Level.WARNING, new EmailErrorReporter());
+			logger.warn(errorMSG, e);
 			e.printStackTrace();
 		}
 	}
@@ -185,6 +191,7 @@ public class JUIGLEFrame extends JXFrame {
 	/**
 	 * Initialize images
 	 * 
+	 * @version 0.1.2
 	 * @since 0.1.0
 	 */
 	private void initImages() throws PerspectiveException {
@@ -222,10 +229,8 @@ public class JUIGLEFrame extends JXFrame {
 					.read(ClassLoader
 							.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/aaa.png"));
 		} catch (IOException e) {
-			JUIGLEFrame.logger.error("Could not read default images...", e); // TODO
-			// nefunguje
-			// TODO vylepsit chybu vypisem do GUI
-			throw new PerspectiveException(e);
+			JUIGLEFrame.logger.error("Could not read default images...", e);
+			throw new PerspectiveException("JG013");
 		}
 	}
 
