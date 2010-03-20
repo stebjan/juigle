@@ -49,7 +49,15 @@
 		</copy>	
 	</target>
 	
-	<target name="makejar" description="generate the distribution" depends="copy_img">
+	<target name="copy_props" depends="copy_img">
+		<copy todir="${build}/ch/ethz/origo/juigle/data/">
+			<fileset dir="${src}/ch/ethz/origo/juigle/data/">
+				<include name="**/*.properties"/>
+			</fileset>
+		</copy>	
+	</target>
+	
+	<target name="makejar" description="generate the distribution" depends="copy_props">
 		<mkdir dir="${jars}" />
 		<jar jarfile="${jars}/${buildfilename}" basedir="${build}">
 		</jar>
