@@ -49,14 +49,8 @@ public class JUIGLEPerspectiveMenu extends JUIGLEMenu {
 	}
 	
 	public void addHeaderHideButton(boolean showText) {
-		if (showText) {
-			headerCollapseItem = new JUIGLEMenuItem(ResourceBundle.getBundle(
-					Utils.RESOURCE_JERPA).getString(
-					"juigle.buttons.hide.header"));
-		} else {
 			headerCollapseItem = new JUIGLEMenuItem();
 			headerCollapseItem.showText(false);
-		}
 
 		Action headerCollpsAction = JUIGLEFrame.headerCoollapse.getActionMap().get(
 				JXCollapsiblePane.TOGGLE_ACTION);
@@ -78,13 +72,8 @@ public class JUIGLEPerspectiveMenu extends JUIGLEMenu {
 	}
 
 	public void addFooterHideButton(boolean showText) {
-		if (showText) {
-			footerrCollapseItem = new JUIGLEMenuItem(ResourceBundle.getBundle(
-					Utils.RESOURCE_JERPA).getString("juigle.buttons.hide.footer"));
-		} else {
 			footerrCollapseItem = new JUIGLEMenuItem();
 			footerrCollapseItem.showText(false);
-		}
 
 		Action footerCollpsAction = JUIGLEFrame.footerCollapse.getActionMap().get(
 				JXCollapsiblePane.TOGGLE_ACTION);
@@ -103,4 +92,5 @@ public class JUIGLEPerspectiveMenu extends JUIGLEMenu {
 			throws JUIGLEMenuException {
 
 	}
+	
 }
