@@ -13,7 +13,7 @@ import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 /**
  * 
  * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.1 (1/31/2010)
  * @since 0.1.0 (05/18/09)
  * @see JXButton
@@ -95,7 +95,9 @@ public class JUIGLEButton extends JXButton implements ILanguage {
 			public void run() {
 				setLocalizedResourceBundle(resourcePath);
 				try {
-					setText(resource.getString(resourceBundleKey));
+					if (resourceBundleKey != null) {
+						setText(resource.getString(resourceBundleKey));						
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

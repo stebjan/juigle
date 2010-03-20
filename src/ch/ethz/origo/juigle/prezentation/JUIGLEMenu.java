@@ -58,9 +58,9 @@ import com.jhlabs.image.GlowFilter;
 /**
  * 
  * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.1.2 10/28/09
- * @since 0.1.0 / (07/16/09)
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
+ * @version 0.1.3 (3/20/2010)
+ * @since 0.1.0 (07/16/09)
  */
 public class JUIGLEMenu extends JToolBar implements ILanguage {
 
@@ -246,6 +246,9 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 		if (!item.canBeTextShow()) {
 			button.showText(false);
 		}
+		if (item.isToolTipTextExist()) {
+			button.setToolTipText(item.getToolTipText());
+		}
 		if (item.getIcon() != null) {
 			button.setIcon(item.getIcon());
 			button.setRolloverIcon(new ImageIcon(glow
@@ -321,32 +324,33 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 			public void run() {
 				setLocalizedResourceBundle(resourcePath);
 				for (JUIGLEMenuItem item : listOfitems) {
-					if (item.canBeTextShow()) {
-						try {
-							updateItemText(item);
-							if (item.hasSubMenu()) {
-								for (JUIGLEMenuItem subItem : item.getSubMenu()) {
-									updateItemText(subItem);
-								}
+					try {
+						updateItemText(item);
+						if (item.hasSubMenu()) {
+							for (JUIGLEMenuItem subItem : item.getSubMenu()) {
+								updateItemText(subItem);
 							}
-						} catch (MissingResourceException e) {
-							// parsing error message
-							String errorMSG = JUIGLEErrorParser
-									.getJUIGLEErrorMessage("JG003:" + item.getResourceBundleKey()
-											+ ":" + (resourcePath != null ? resourcePath : item.getResourceBundlePath()));
-							// display error GUI
-							JUIGLErrorInfoUtils.showErrorDialog("JUIGLE Error", errorMSG, e,
-									Level.WARNING, new EmailErrorReporter());
-							// write message to logger
-							JUIGLEMenu.logger.error(errorMSG, e);
-							// print error to stack trace
-							e.printStackTrace();
-						} catch (JUIGLELangException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
 						}
+					} catch (MissingResourceException e) {
+						// parsing error message
+						String errorMSG = JUIGLEErrorParser.getJUIGLEErrorMessage("JG003:"
+								+ item.getResourceBundleKey()
+								+ ":"
+								+ (resourcePath != null ? resourcePath : item
+										.getResourceBundlePath()));
+						// display error GUI
+						JUIGLErrorInfoUtils.showErrorDialog("JUIGLE Error", errorMSG, e,
+								Level.WARNING, new EmailErrorReporter());
+						// write message to logger
+						JUIGLEMenu.logger.error(errorMSG, e);
+						// print error to stack trace
+						e.printStackTrace();
+					} catch (JUIGLELangException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				}
+
 				for (JUIGLEButton butt : listOfButtons) {
 					try {
 						butt.updateText();
@@ -359,9 +363,24 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 		});
 	}
 
+	/**
+	 * Updated item text. If item has toolTip text, than is also updated.
+	 * 
+	 * @param item
+	 * @throws JUIGLELangException
+	 * @version 0.1.1 (3/20/2010)
+	 * @since 0.1.0 (07/16/09)
+	 */
 	private void updateItemText(JUIGLEMenuItem item) throws JUIGLELangException {
 		if (!item.isOwnResourceBundleSets()) {
-			item.updateText(resource.getString(item.getResourceBundleKey()));
+			if (item.canBeTextShow()) {
+				if (item.getResourceBundleKey() != null)
+				item.updateText(resource.getString(item.getResourceBundleKey()));
+			}
+			if (item.isToolTipTextExist()) {
+				item.updateToolTipText(resource.getString(item
+						.getToolTipResourceBundleKey()));
+			}
 		} else {
 			item.updateText();
 		}

@@ -23,7 +23,7 @@ import ch.ethz.origo.juigle.prezentation.perspective.PerspectivePanel;
  * 
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.2.1 (2/14/2010)
+ * @version 0.2.2 (3/20/2010)
  * @since 0.1.0 (c.v. 08/14/09)
  * @see JUIGLEMenu
  */
