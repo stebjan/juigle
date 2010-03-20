@@ -17,8 +17,8 @@ import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 /**
  * 
  * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.1.0 07/16/09
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
+ * @version 0.1.1 (3/20/2010)
  * @since 0.1.0 (05/18/09)
  */
 public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
@@ -34,17 +34,23 @@ public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
 	
 	private String resourceBundleKey;
 	
+	private String tooltipResourceBundleKey;
+	
 	protected String resourcePath;
 	
 	private ResourceBundle resource;
 	
 	private boolean showText = true;
 	
+	private boolean isToolTipText = false;
+	
+	private String toolTipText;
+	
 	/**
 	 * Default constructor. Variables are not sets.
 	 */
 	public JUIGLEMenuItem() {
-		super();
+		//super();
 	}
 	
 	/**
@@ -98,6 +104,11 @@ public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
 		return resourceBundleKey;
 	}
 	
+	// version 0.1.0 since 0.1.1 (3/20/2010)
+	public String getToolTipResourceBundleKey() {
+		return tooltipResourceBundleKey;
+	}
+	
 	@Override
 	public void setResourceBundleKey(String key) {
 		this.resourceBundleKey = key;
@@ -135,6 +146,19 @@ public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
 		this.showText = show;
 	}
 	
+	public void setToolTipResourceBundleKey(String tooltipResourceBundleKey) {
+		this.tooltipResourceBundleKey = tooltipResourceBundleKey;
+		isToolTipText = true;
+	}
+	
+	public void setToolTipText(String text) {
+		this.toolTipText = text;
+	}
+	
+	public String getToolTipText() {
+		return toolTipText;
+	}
+	
 	/**
 	 * 
 	 * 
@@ -143,6 +167,10 @@ public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
 	public boolean canBeTextShow() {
 		return showText;
 	}
+	
+	public boolean isToolTipTextExist() {
+		return isToolTipText;
+	}
 
 	public void updateText(final String text) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -150,6 +178,16 @@ public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
 			@Override
 			public void run() {
 				setText(text);				
+			}
+		});
+	}
+	
+	public void updateToolTipText(final String text) {
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				setToolTipText(text);				
 			}
 		});
 	}
@@ -166,7 +204,12 @@ public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
 
 	@Override
 	public void updateText() throws JUIGLELangException {
-		super.setText(resource.getString(getResourceBundleKey()));		
+		if (canBeTextShow() && getResourceBundleKey() != null) {
+			super.setText(resource.getString(getResourceBundleKey()));			
+		}
+		if (isToolTipText) {
+			setToolTipText(resource.getString(tooltipResourceBundleKey));
+		}
 	}
 	
 	
