@@ -11,10 +11,12 @@ import ch.ethz.origo.juigle.application.ILanguage;
 import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 
 /**
- * 
+ * Create modified <code>J(X)Button</code>.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.1 (1/31/2010)
+ * 
+ * 
+ * @version 0.1.2 (3/20/2010)
  * @since 0.1.0 (05/18/09)
  * @see JXButton
  * @see JButton
@@ -29,6 +31,7 @@ public class JUIGLEButton extends JXButton implements ILanguage {
 
 	private String resourcePath;
 	private String resourceBundleKey;
+	private String resourceTooTipBundleKey;
 
 	private ResourceBundle resource;
 
@@ -54,6 +57,26 @@ public class JUIGLEButton extends JXButton implements ILanguage {
 	public JUIGLEButton(String resourceBundlePath, String resourceBundleKey) {
 		this.resourcePath = resourceBundlePath;
 		this.resourceBundleKey = resourceBundleKey;
+	}
+
+	/**
+	 * Create <code>Button</code> with resource bundle (localized file) path and
+	 * key
+	 * 
+	 * @param resourceBundlePath
+	 *          path of file with localized text
+	 * @param resourceBundleKey
+	 *          resource bundle properties key
+	 * @param resourceToolTipBundleKey
+	 *          resource bundle properties key for tool tip text
+	 * @version 0.1.0
+	 * @since 0.1.2 (3/20/2010)
+	 * 
+	 */
+	public JUIGLEButton(String resourceBundlePath, String resourceBundleKey,
+			String resourceToolTipBundleKey) {
+		this(resourceBundlePath, resourceBundleKey);
+		this.resourceTooTipBundleKey = resourceToolTipBundleKey;
 	}
 
 	/**
@@ -96,7 +119,10 @@ public class JUIGLEButton extends JXButton implements ILanguage {
 				setLocalizedResourceBundle(resourcePath);
 				try {
 					if (resourceBundleKey != null) {
-						setText(resource.getString(resourceBundleKey));						
+						setText(resource.getString(resourceBundleKey));
+					}
+					if (resourceTooTipBundleKey != null) {
+						setToolTipText(resource.getString(resourceTooTipBundleKey));
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -112,4 +138,17 @@ public class JUIGLEButton extends JXButton implements ILanguage {
 	public String getResourceBundlePath() {
 		return resourcePath;
 	}
+
+	/**
+	 * Set resource bundle key for button's tool tip.
+	 * 
+	 * @param key
+	 * 
+	 * @version 0.1.0 (3/20/2010)
+	 * @since 0.1.2 (3/20/2010)
+	 */
+	public void setToolTipResourceBundleKey(String key) {
+		this.resourceTooTipBundleKey = key;
+	}
+	
 }
