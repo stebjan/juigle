@@ -247,6 +247,7 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 			button.showText(false);
 		}
 		if (item.isToolTipTextExist()) {
+			button.setToolTipResourceBundleKey(item.getToolTipResourceBundleKey());
 			button.setToolTipText(item.getToolTipText());
 		}
 		if (item.getIcon() != null) {
