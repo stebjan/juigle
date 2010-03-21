@@ -1,12 +1,9 @@
 package ch.ethz.origo.juigle.prezentation;
 
 import java.awt.image.BufferedImage;
-import java.util.ResourceBundle;
 
 import javax.swing.Action;
 import javax.swing.UIManager;
-
-import nezarazeno.Utils;
 
 import org.jdesktop.swingx.JXCollapsiblePane;
 
@@ -15,8 +12,8 @@ import ch.ethz.origo.juigle.application.exception.JUIGLEMenuException;
 /**
  * 
  * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.1.0 08/14/09
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
+ * @version 0.1.1 (3/21/2010)
  * @since 0.1.0 (05/18/09)
  *
  */
