@@ -42,6 +42,10 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 
 import javax.imageio.ImageIO;
@@ -61,6 +65,9 @@ import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.painter.Painter;
 
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
+import ch.ethz.origo.juigle.application.observers.IObservable;
+import ch.ethz.origo.juigle.application.observers.IObserver;
+import ch.ethz.origo.juigle.application.observers.JUIGLEObservable;
 import ch.ethz.origo.juigle.data.EmailErrorReporter;
 import ch.ethz.origo.juigle.data.JUIGLEErrorParser;
 import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
@@ -73,7 +80,7 @@ import com.nilo.plaf.nimrod.NimRODTheme;
  * Main <code>JUIGLE<code> software java frame.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.2.4 (3/20/2010)
+ * @version 0.2.5 (3/24/2010)
  * @since 0.1.0 (05/18/09)
  * @see JXFrame
  */
@@ -349,7 +356,7 @@ public class JUIGLEFrame extends JXFrame {
 		closeApp.setContentAreaFilled(false);
 		closeApp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				JUIGLEObservable.getInstance().setState(JUIGLEObservable.MSG_APPLICATION_CLOSING);
 			}
 		});
 		headerPanel.setLayout(new GridBagLayout());
@@ -671,5 +678,5 @@ public class JUIGLEFrame extends JXFrame {
 		}
 
 	}
-	
+
 }
