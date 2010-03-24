@@ -1,19 +1,21 @@
 package ch.ethz.origo.juigle.application.exception;
+
 /**
  * 
  * 
- * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.0 10/18/09
+ * @author Vaclav Souhrada (v.souhrada@gmail.com)
+ * @version 0.1.0 07/18/09
  * @since 0.1.0 (05/18/09)
  * @see Exception
+ * 
  */
 public class PropertiesException extends Exception {
 
 	/** Only for serialization */
-	private static final long serialVersionUID = -2097931993392172925L;
+	private static final long serialVersionUID = -7769001815447383463L;
 	
 	/**
-   * Constructs a new Properties ResourceBundle exception with the specified cause and  a detail
+   * Constructs a new Properties exception with the specified cause and a detail
    * message of <tt>(cause==null ? null : cause.toString())</tt> (which
    * typically contains the class and detail message of <tt>cause</tt>).
    * This constructor is useful for exceptions that are little more than
@@ -27,18 +29,6 @@ public class PropertiesException extends Exception {
    */
   public PropertiesException(Throwable cause) {
       super(cause);
-  }
-  
-  /**
-   * Constructs a new exception with the specified detail message.  The
-   * cause is not initialized, and may subsequently be initialized by
-   * a call to {@link #initCause}.
-   *
-   * @param   message   the detail message. The detail message is saved for 
-   *          later retrieval by the {@link #getMessage()} method.
-   */
-  public PropertiesException(String message) {
-  	super(message);
   }
 
 	/**
