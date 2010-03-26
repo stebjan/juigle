@@ -17,6 +17,7 @@ public class GUIController extends JUIGLEObservable  implements IObserver {
 
 	public static final int MSG_PERSPECTIVE_CHANGED = 0;
 	
+	
 	public static final int MSG_APPLICATION_CLOSING = 1;
 	
 
