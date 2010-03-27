@@ -1,6 +1,8 @@
-package ch.ethz.origo.juigle.prezentation.charts;
+package ch.ethz.origo.juigle.data.charts;
 
 import org.jfree.chart.plot.PlotOrientation;
+
+import ch.ethz.origo.juigle.prezentation.charts.ChartPlotOrientation;
 
 /**
  * 
