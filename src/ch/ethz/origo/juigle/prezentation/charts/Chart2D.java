@@ -1,17 +1,19 @@
-package ch.ethz.origo.juigle.prezentation.graph;
+package ch.ethz.origo.juigle.prezentation.charts;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.awt.geom.Line2D;
 
 import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  * 
@@ -45,16 +47,16 @@ public class Chart2D extends JComponent {
 	public Chart2D(double[] signal) {
 		this();
 		this.signal = signal;
+		this.setAutoscrolls(true);
 	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		initParameters();
-		
-	  g2.setColor(Color.WHITE);
-	  g2.fillRect(0, 0, (int) getWidth(), (int) getHeight());
 
+		g2.setColor(Color.WHITE);
+		g2.fillRect(0, 0, (int) getWidth(), (int) getHeight());
 
 		g2.setColor(axisY);
 		g2.drawLine(top, top, top, bottom);
@@ -69,14 +71,14 @@ public class Chart2D extends JComponent {
 
 		g2.setColor(Color.BLACK);
 		for (int j = 0; j < signal.length - 1; j++) {
-			//System.out.println("X1:" + positionX1 + " X2:" + positionX2);
+			// System.out.println("X1:" + positionX1 + " X2:" + positionX2);
 			g2.draw(new Line2D.Double((top + positionX1),
 					(bottom - (signal[j] * bottom)), (top + positionX2),
 					(bottom - (signal[j + 1] * bottom))));
 			positionX1 += parts;
 			positionX2 += parts;
 		}
-		
+
 	}
 
 	private void initParameters() {
@@ -84,8 +86,8 @@ public class Chart2D extends JComponent {
 		int height = getHeight();
 
 		top = 40;
-		bottom = height - 40;
-		//graphLength = width - 40;
+		bottom = 300;// height - 40;
+		// graphLength = width - 40;
 		graphLength = signal.length;
 	}
 
@@ -106,21 +108,41 @@ public class Chart2D extends JComponent {
 	}
 
 	public static void main(String[] args) {
-		double[] signals = new double[360];
+		XYSeries series = new XYSeries("ICA result sinus");
+		XYSeries series2 = new XYSeries("ICA result cosinu");
+		//double[] signals = new double[360];
+		
+		
 		for (int i = 0; i < 360; i++) {
-			signals[i] = Math.sin(Math.PI / 180 * i);
-			System.out.println(signals[i]);
+			//signals[i] = Math.sin(Math.PI / 180 * i);
+			//System.out.println(signals[i]);
+			series.add(i, Math.sin(Math.PI / 180 * i));
+			series2.add(i, Math.cos(Math.PI / 180 * i));
 		}
-
+		XYSeriesCollection collectionSeries = new XYSeriesCollection();
+		collectionSeries.addSeries(series);
+		collectionSeries.addSeries(series2);
+		XYDataset dataset = collectionSeries;
+		
+		JFreeChart jc = ChartFactory.createXYLineChart("Result of FastICA", "X", "Y", dataset, PlotOrientation.VERTICAL, true, true, true);
+		ChartFrame cf = new ChartFrame("XY Chart", jc, true);
+		cf.setSize(800, 600);
+		cf.setVisible(true);
+		
+		
+		
+/*
 		JFrame f = new JFrame();
-		f.setSize(300, 300);
+		f.setSize(350, 400);
 		
 		Chart2D ch = new Chart2D(signals);
 		
 
-    int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
+    int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
     int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
+    
     JScrollPane jsp = new JScrollPane(ch, v, h);
+    jsp.setEnabled(true);
 		
 		f.getContentPane().add(jsp);
 
@@ -130,7 +152,7 @@ public class Chart2D extends JComponent {
 			}
 		};
 		f.addWindowListener(wndCloser);
-		f.setVisible(true);
+		f.setVisible(true);*/
+	
 	}
-
 }
