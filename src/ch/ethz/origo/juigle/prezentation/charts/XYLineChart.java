@@ -15,6 +15,9 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeriesCollection;
 
+import ch.ethz.origo.juigle.data.charts.ChartUtils;
+import ch.ethz.origo.juigle.data.charts.XYLineChartRecord;
+
 /**
  * 
  * 

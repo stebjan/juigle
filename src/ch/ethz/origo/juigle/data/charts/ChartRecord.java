@@ -1,4 +1,4 @@
-package ch.ethz.origo.juigle.prezentation.charts;
+package ch.ethz.origo.juigle.data.charts;
 
 /**
  * 
