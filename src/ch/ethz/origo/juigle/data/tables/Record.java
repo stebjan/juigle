@@ -1,5 +1,6 @@
 package ch.ethz.origo.juigle.data.tables;
 
+
 /**
  * Abstract class for classes (objects) which represents any type of record and
  * need use ID. For example it should be used for database records.
