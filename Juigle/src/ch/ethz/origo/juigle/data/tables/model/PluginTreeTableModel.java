@@ -24,7 +24,7 @@ public class PluginTreeTableModel extends JUIGLETreeTableModel {
 	/** Only for serialization */
 	private static final long serialVersionUID = -3327739502180192368L;
 
-	PluginEngine pluginEngine;
+	private PluginEngine pluginEngine;
 
 	@Override
 	public void fillByValues() throws DataStoreException {
