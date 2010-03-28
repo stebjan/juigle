@@ -30,8 +30,8 @@ import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 /**
  * 
  * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.1.0 07/12/09
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
+ * @version 0.1.1 (3/28/2010)
  * @since 0.1.0 (project version)
  */
 public interface IPerspective {
@@ -50,9 +50,9 @@ public interface IPerspective {
 	 * 
 	 * @return icon of perspective
 	 * @throws PerspectiveException
-	 * @version 0.1.0
-	 * @since 0.1.0
+	 * @version 0.1.1 (3/28/2010)
+	 * @since 0.1.0 (07/12/09)
 	 */
-	public Icon getIcon() throws PerspectiveException;
+	public Icon getPerspectiveIcon() throws PerspectiveException;
 		
 }

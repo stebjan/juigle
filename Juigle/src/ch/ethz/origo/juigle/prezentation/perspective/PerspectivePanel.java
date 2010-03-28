@@ -67,7 +67,7 @@ public class PerspectivePanel extends JXPanel {
 					((JXTaskPane) currentPerspective.getMenuPanel())
 							.setTitle(currentPerspective.getTitle());
 					((JXTaskPane) currentPerspective.getMenuPanel())
-							.setIcon(currentPerspective.getIcon());
+							.setIcon(currentPerspective.getPerspectiveIcon());
 				}
 				add(currentPerspective.getMenuPanel(), currentPerspective.getMenu()
 						.getMenuPosition());

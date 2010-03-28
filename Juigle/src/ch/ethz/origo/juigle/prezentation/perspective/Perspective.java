@@ -21,7 +21,7 @@ import ch.ethz.origo.juigle.prezentation.JUIGLEGraphicsUtils;
  * 
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.0 (07/12/09)
+ * @version 0.1.1 (3/28/2010)
  * @since 0.1.0 (07/12/09)
  */
 public class Perspective extends AbstractPerspective {
@@ -99,7 +99,7 @@ public class Perspective extends AbstractPerspective {
 	}
 
 	@Override
-	public Icon getIcon() throws PerspectiveException {
+	public Icon getPerspectiveIcon() throws PerspectiveException {
 		return null;
 	}
 
