@@ -42,7 +42,6 @@ import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JPopupMenu;
 import javax.swing.JToolBar;
-import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import org.apache.log4j.Logger;
@@ -50,6 +49,7 @@ import org.apache.log4j.Logger;
 import ch.ethz.origo.juigle.application.ILanguage;
 import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 import ch.ethz.origo.juigle.application.exception.JUIGLEMenuException;
+import ch.ethz.origo.juigle.application.observers.LanguageObservable;
 import ch.ethz.origo.juigle.data.EmailErrorReporter;
 import ch.ethz.origo.juigle.data.JUIGLEErrorParser;
 
@@ -59,7 +59,7 @@ import com.jhlabs.image.GlowFilter;
  * 
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.3 (3/20/2010)
+ * @version 0.1.4 (3/29/2010)
  * @since 0.1.0 (07/16/09)
  */
 public class JUIGLEMenu extends JToolBar implements ILanguage {
@@ -130,6 +130,8 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 	 * @since 0.1.0
 	 */
 	private void initialize() {
+		// register as language observer
+		LanguageObservable.getInstance().attach(this);
 		// 1.08f
 		glow.setAmount(0.04f);
 		listOfitems = new ArrayList<JUIGLEMenuItem>(); // TODO mozna inicializovat
@@ -271,6 +273,7 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 		button.setBackground(JUIGLEGraphicsUtils.TRANSPARENT_COLOR);
 		button.setContentAreaFilled(false);
 		// button.setPreferredSize(new Dimension(32, 1));
+		updateText();
 
 		listOfButtons.add(button);
 		this.add(button);
@@ -320,9 +323,9 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 
 	@Override
 	public void updateText() {
-		SwingUtilities.invokeLater(new Runnable() {
+	/*	SwingUtilities.invokeLater(new Runnable() {
 			@Override
-			public void run() {
+			public void run() {*/
 				setLocalizedResourceBundle(resourcePath);
 				for (JUIGLEMenuItem item : listOfitems) {
 					try {
@@ -360,8 +363,8 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 						e.printStackTrace();
 					}
 				}
-			}
-		});
+			//}
+	//	});
 	}
 
 	/**
@@ -387,13 +390,9 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 		}
 	}
 
-	/**
-	 * THIS method always return for this class value NULL. Method is not used.
-	 */
 	@Override
 	public String getResourceBundlePath() {
-		// NOT USED FOR THIS CLASS
-		return null;
+		return resourcePath;
 	}
 
 }

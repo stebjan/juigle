@@ -8,10 +8,11 @@ import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 
 /**
  * 
+ * 
  * @author Vaclav Souhrada
- * @version 0.1.1 (3/14/2010)
+ * @version 0.1.2 (3/30/2010)
  * @since 0.1.0 (10/15/2010)
- * @see JUIGLEObservable
+ * @see AbstractJUIGLEObservable
  *
  */
 public class LanguageObservable extends AbstractJUIGLEObservable {

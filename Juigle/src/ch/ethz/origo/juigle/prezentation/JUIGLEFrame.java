@@ -169,10 +169,10 @@ public class JUIGLEFrame extends JXFrame {
 	 * @since 0.1.0
 	 */
 	public JUIGLEFrame(String title, InputStream logoImg,
-			IPerspectiveLoader perspectiveLoader) {
+			IPerspectiveLoader perspectiveLoader, String perspectiveResourceBundleKey) {
 		this(title, logoImg);
 		try {
-			setPerspectives(perspectiveLoader);
+			setPerspectives(perspectiveLoader, perspectiveResourceBundleKey);
 		} catch (PerspectiveException e) {
 			e.printStackTrace();
 		}
@@ -581,12 +581,12 @@ public class JUIGLEFrame extends JXFrame {
 		}
 	}
 
-	public void setPerspectives(IPerspectiveLoader perspectiveLoader)
+	public void setPerspectives(IPerspectiveLoader perspectiveLoader, String perspResourceBundleKey)
 			throws PerspectiveException {
 		this.perspectiveLoader = perspectiveLoader;
 		mainToolBar.addPerspectiveItems(JUIGLEGraphicsUtils.createImageIcon(
 				"ch/ethz/origo/juigle/data/images/tabs_48.png", 32, 32),
-				perspectivePanel, perspectiveLoader.getListOfPerspectives());
+				perspectivePanel, perspectiveLoader.getListOfPerspectives(), perspResourceBundleKey);
 		perspectivePanel.add(perspectiveLoader.getDefaultPerspective());
 	}
 

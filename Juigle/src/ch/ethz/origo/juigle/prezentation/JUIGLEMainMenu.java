@@ -23,7 +23,7 @@ import ch.ethz.origo.juigle.prezentation.perspective.PerspectivePanel;
  * 
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.2.2 (3/20/2010)
+ * @version 0.2.3 (3/29/2010)
  * @since 0.1.0 (c.v. 08/14/09)
  * @see JUIGLEMenu
  */
@@ -33,9 +33,12 @@ public class JUIGLEMainMenu extends JUIGLEMenu {
 	private static final long serialVersionUID = 2839975234788319679L;
 	
 	private JXDatePicker datePicker;
+	
+	private JUIGLEMenuItem perspectivesItem;
 
-	public JUIGLEMainMenu() {
+	public JUIGLEMainMenu(String resourceBundlePath) {
 		super();
+		setLocalizedResourceBundle(resourceBundlePath);
 	}
 
 	/**
@@ -44,17 +47,17 @@ public class JUIGLEMainMenu extends JUIGLEMenu {
 	 * @param icon
 	 * @param container
 	 * @param perspectives
-	 * @version 0.1.1
+	 * @version 0.1.2
 	 * @since 0.1.0
 	 */
 	public void addPerspectiveItems(Icon icon, final PerspectivePanel container,
-			List<Perspective> perspectives) {
-		JUIGLEMenuItem perspectivesItem = new JUIGLEMenuItem("Perspectives");
+			List<Perspective> perspectives, String resourceBundleKey) {
+		perspectivesItem = new JUIGLEMenuItem(resourceBundleKey);
+		perspectivesItem.setLocalizedResourceBundle(getResourceBundlePath());
 		if (icon != null) {
 			perspectivesItem.setIcon(icon);
 		}
 		// Collections.sort(perspectives);
-
 		for (final Perspective perspective : perspectives) {
 			JUIGLEMenuItem item = new JUIGLEMenuItem();
 			item.setLocalizedResourceBundle(perspective.getResourceBundlePath());
