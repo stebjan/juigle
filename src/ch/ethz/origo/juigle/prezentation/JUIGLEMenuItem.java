@@ -18,8 +18,10 @@ import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
  * 
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.1 (3/20/2010)
+ * @version 0.1.2 (3/29/2010)
  * @since 0.1.0 (05/18/09)
+ * @see JMenuItem
+ * @see ILanguage
  */
 public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
 	
@@ -204,6 +206,7 @@ public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
 
 	@Override
 	public void updateText() throws JUIGLELangException {
+		setLocalizedResourceBundle(getResourceBundlePath());
 		if (canBeTextShow() && getResourceBundleKey() != null) {
 			super.setText(resource.getString(getResourceBundleKey()));			
 		}
@@ -211,7 +214,6 @@ public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
 			setToolTipText(resource.getString(tooltipResourceBundleKey));
 		}
 	}
-	
 	
 	@Override
 	public String getResourceBundlePath() {
