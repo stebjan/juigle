@@ -12,7 +12,7 @@ import ch.ethz.origo.juigle.data.database.model.DBComponent;
  * @see Exception
  * 
  */
-public interface DriverDescription {
+public interface IDriverDescription {
 
 	/**
 	 * Driver description name

@@ -4,14 +4,14 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.ethz.origo.juigle.data.database.driver.DriverDescription;
+import ch.ethz.origo.juigle.data.database.driver.IDriverDescription;
 import ch.ethz.origo.juigle.data.database.model.ddl.IndexDDLSQLSyntax;
 
 /**
  * 
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.0 (3/02/2010)
+ * @version 0.1.1 (3/31/2010)
  * @since 0.1.0 (3/02/2010)
  * @see DBComponent
  *
@@ -52,7 +52,7 @@ public class DBIndex extends DBComponent {
    * @param ownerTable DbTable
    */
   public DBIndex(DBTable ownerTable) {
-    this(autoNameGenerator("I", ownerTable.getComponentName()), ownerTable);
+    this(getGeneratedName("I", ownerTable.getComponentName()), ownerTable);
   }
 
 
@@ -60,7 +60,7 @@ public class DBIndex extends DBComponent {
     return IndexDDLSQLSyntax.class;
   }
 
-  public void useDriverDescription(DriverDescription driver) throws Exception {
+  public void useDriverDescription(IDriverDescription driver) throws Exception {
     driver.assignDriverFeatures(this);
   }
 
@@ -191,7 +191,7 @@ public class DBIndex extends DBComponent {
    * @param tableName String
    * @return name String
    */
-  protected static String autoNameGenerator(String index, String tableName) {
+  protected static String getGeneratedName(String index, String tableName) {
     NumberFormat nf = NumberFormat.getInstance();
     nf.setMinimumIntegerDigits(3);
     return index + "_" + tableName + "_" + nf.format(seed++);

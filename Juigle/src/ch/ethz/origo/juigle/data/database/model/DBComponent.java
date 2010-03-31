@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import ch.ethz.origo.juigle.application.exception.database.SQLDDLException;
 import ch.ethz.origo.juigle.data.database.ComponentProperties;
+import ch.ethz.origo.juigle.data.database.driver.IDriverDescription;
 import ch.ethz.origo.juigle.data.database.model.ddl.IDDLSQLSyntax;
 
 /**
@@ -23,7 +24,9 @@ public abstract class DBComponent {
 	protected final String name;
 	/** Component type */
 	protected final String type;
-
+	
+	/** Database component type - DATABASE */
+	public static final String DATABASE_TYPE = "DATABASE";
 	/** Database component type - TABLE */
 	public static final String TABLE_COMPONENT_TYPE = "TABLE";
 	/** Database component type - COLUMN */
@@ -120,6 +123,15 @@ public abstract class DBComponent {
 	 * @return syntax-class Class
 	 */
 	abstract public Class<?> getDDLSQLSyntaxClass();
+	
+	/**
+   * Driver specific properties
+   * Support for a hierarchic structure of components
+   * 
+   * @param driver DriverDescription
+   */
+  abstract public void useDriverDescription(IDriverDescription driver) throws Exception;
+
 
 	/**
 	 * Set DDL SQL Syntax to DbComponent

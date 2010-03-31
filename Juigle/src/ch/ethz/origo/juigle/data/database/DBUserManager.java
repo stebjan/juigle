@@ -7,7 +7,7 @@ package ch.ethz.origo.juigle.data.database;
  * @since 0.1.0 (1/24/2010)
  * 
  */
-public class UserManager {
+public class DBUserManager {
 	
 	
 	public void createUser(String username, String password) {
