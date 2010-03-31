@@ -28,11 +28,11 @@ import ch.ethz.origo.juigle.data.xml.JUIGLEDomParser;
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.1 (3/02/2010)
  * @since 0.1.0 (2/28/2010)
- * @see DriverDescription
+ * @see IDriverDescription
  * @see XMLSerializable
  * 
  */
-public abstract class AbstractDriverDescription implements DriverDescription,
+public abstract class AbstractDriverDescription implements IDriverDescription,
 		XMLSerializable {
 
 	/** All DDL SQL syntaxes for specific driver **/

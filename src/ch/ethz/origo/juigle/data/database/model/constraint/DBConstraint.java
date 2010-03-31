@@ -3,6 +3,7 @@ package ch.ethz.origo.juigle.data.database.model.constraint;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.ethz.origo.juigle.data.database.driver.IDriverDescription;
 import ch.ethz.origo.juigle.data.database.model.DBColumn;
 import ch.ethz.origo.juigle.data.database.model.DBComponent;
 import ch.ethz.origo.juigle.data.database.model.DBTable;
@@ -118,5 +119,10 @@ public class DBConstraint extends DBComponent {
   protected static String autoNameGenerator(String constraint, String tableName) {
     return tableName + "_" + constraint + "_" + seed++;
   }
+
+	@Override
+	public void useDriverDescription(IDriverDescription driver) throws Exception {
+		driver.assignDriverFeatures(this);
+	}
 
 }

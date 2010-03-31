@@ -3,7 +3,7 @@ package ch.ethz.origo.juigle.data.database.model.types;
 /**
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.0 (3/03/2010)
+ * @version 0.1.1 (3/31/2010)
  * @since 0.1.0 (3/03/2010)
  * 
  */
@@ -45,20 +45,45 @@ public abstract class AbstractSQLDataType {
 	}
 	
 	/**
-	 * MSSQL data type syntax
+	 * Return MSSQL data type syntax
 	 * 
 	 * @return MSSQL data type syntax
 	 */
 	abstract protected String getSyntaxMSSQL();
 	
+	/**
+	 * Return ORACLE data type syntax
+	 * 
+	 * @return ORACLE data type syntax
+	 */
 	abstract protected String getSyntaxORACLE();
 	
+	/**
+	 * Return ORACLE data type syntax
+	 * 
+	 * @return ORACLE data type syntax
+	 */
 	abstract protected String getSyntaxFIREBIRD();
 	
+	/**
+	 * Return MYSQL data type syntax
+	 * 
+	 * @return MYSQL data type syntax
+	 */
 	abstract protected String getSyntaxMYSQL();
 	
+	/**
+	 * Return POSTGRESQL data type syntax
+	 * 
+	 * @return POSTGRESQL data type syntax
+	 */
 	abstract protected String getSyntaxPOSTGRESQL();
 	
+	/**
+	 * Return MaxDB data type syntax
+	 * 
+	 * @return MaxDB data type syntax
+	 */
 	abstract protected String getSyntaxMaxDB();
 	
 	/**

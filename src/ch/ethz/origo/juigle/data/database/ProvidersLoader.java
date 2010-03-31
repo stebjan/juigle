@@ -9,7 +9,7 @@ import org.w3c.dom.Element;
 
 import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 
-import ch.ethz.origo.juigle.application.database.DbProvider;
+import ch.ethz.origo.juigle.application.database.DBProvider;
 
 /**
  * 
@@ -21,14 +21,14 @@ import ch.ethz.origo.juigle.application.database.DbProvider;
 public class ProvidersLoader {
 
 	private File file;
-	private List<DbProvider> providers;
+	private List<DBProvider> providers;
 	
 	public ProvidersLoader(File file) {
 		this.file = file;
-		providers = new ArrayList<DbProvider>();
+		providers = new ArrayList<DBProvider>();
 	}
 	
-	public List<DbProvider> getListOfProviders() {
+	public List<DBProvider> getListOfProviders() {
 		if (providers.size() == 0) {
 			//xmlLoad();			
 		}
