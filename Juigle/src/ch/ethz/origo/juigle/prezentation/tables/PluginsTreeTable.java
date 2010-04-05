@@ -2,6 +2,7 @@ package ch.ethz.origo.juigle.prezentation.tables;
 
 import javax.swing.tree.DefaultTreeCellRenderer;
 
+import org.jdesktop.swingx.decorator.HighlighterFactory;
 import org.jdesktop.swingx.treetable.DefaultMutableTreeTableNode;
 
 import ch.ethz.origo.juigle.application.exception.DataStoreException;
@@ -9,12 +10,21 @@ import ch.ethz.origo.juigle.data.tables.PluginRecord;
 import ch.ethz.origo.juigle.data.tables.model.JUIGLETreeTableModel;
 import ch.ethz.origo.juigle.data.tables.model.PluginTreeTableModel;
 
-
+/**
+ * Create instance of <code>JXTreeTable</code>. This instance contains table
+ * model filled by all installed plugins in the application.
+ * 
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
+ * @version 0.1.1 (4/05/2010)
+ * @since 0.1.0 (3/28/2010)
+ * @see JUIGLETreeTableModel
+ * 
+ */
 public class PluginsTreeTable extends JUIGLETreeTable {
 
 	/** Only for serialization */
 	private static final long serialVersionUID = 5816119341806461897L;
-	
+
 	public PluginsTreeTable() throws DataStoreException {
 		super();
 		initTable();
@@ -24,7 +34,6 @@ public class PluginsTreeTable extends JUIGLETreeTable {
 		JUIGLETreeTableModel ttm = new PluginTreeTableModel();
 		ttm.fillByValues();
 		setTreeTableModel(ttm);
-		setEditable(false);
 		setTreeCellRenderer(new DefaultTreeCellRenderer() {
 			/** Only for serialization */
 			private static final long serialVersionUID = 1L;
@@ -40,17 +49,16 @@ public class PluginsTreeTable extends JUIGLETreeTable {
 					if (node.isLeaf()) {
 						setText(plug.getPlugin().getPluginName());
 						if (node.getParent() == tree.getModel().getRoot()) {
-							setIcon(getDefaultClosedIcon());							
+							setIcon(getDefaultClosedIcon());
 						}
-					} else if (!node.isLeaf()) {
+					} else {
 						setText(plug.getCategory());
 					}
 				}
 				return this;
 			};
 		});
-		
+		addHighlighter(HighlighterFactory.createAlternateStriping());
 	}
-
 
 }
