@@ -12,7 +12,7 @@ import ch.ethz.origo.juigle.plugin.PluginEngine;
  * 
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.0 (3/28/2010)
+ * @version 0.1.1 (4/05/2010)
  * @since 0.1.0 (3/28/2010)
  * @see JUIGLETreeTableModel
  * 
@@ -171,6 +171,14 @@ public class PluginTreeTableModel extends JUIGLETreeTableModel {
 					default:
 						break;
 					}
+				} else {
+					switch (column) {
+					case 0:
+						toBeDisplayed = fr.getCategory();
+						break;
+					default:
+						break;
+					}
 				}
 			}
 			return toBeDisplayed;
@@ -181,6 +189,31 @@ public class PluginTreeTableModel extends JUIGLETreeTableModel {
 			return PluginTreeTableModel.NUM_OF_COLUMNS;
 		}
 
+	}
+
+	@Override
+	public boolean isCellEditable(final Object node, final int col) {
+		switch (col) {
+		case 3:
+		case 4:
+		case 5:
+			return true;
+		default:
+			return false;
+		}
+	}
+
+	@Override
+	public Class<?> getColumnClass(final int col) {
+		switch (col) {
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+			return Boolean.class;
+		default:
+			return String.class;
+		}
 	}
 
 }
