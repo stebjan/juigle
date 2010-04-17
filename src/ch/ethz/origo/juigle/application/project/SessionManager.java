@@ -14,7 +14,7 @@ import ch.ethz.origo.juigle.prezentation.perspective.PerspectiveObservable;
  * 
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.3 (2/21/2010)
+ * @version 0.1.4 (4/17/2010)
  * @since 0.1.0 (11/18/09)
  * 
  */
@@ -231,7 +231,8 @@ public abstract class SessionManager {
 	}
 
 	/**
-	 * Undo v aktu�ln� otev�en�m projektu a roze�le provider�m zpr�vu
+	 * Undo operation for current project.
+	 * NOT IMPLEMENTED IN THE CURRENT SOFTWARE VERSION
 	 * <code>MSG_UNDOABLE_COMMAND_INVOKED</code>.
 	 */
 	public void undo() {
@@ -246,6 +247,7 @@ public abstract class SessionManager {
 
 		if (project.canUndo()) {
 			getCurrentProject().lockCommand();
+			// FIXME project.undo() need implement
 			project.undo();
 			perspObservable.setState(PerspectiveObservable.MSG_CURRENT_PROJECT_CHANGED);
 			perspObservable.setState(PerspectiveObservable.MSG_UNDOABLE_COMMAND_INVOKED);
@@ -258,7 +260,8 @@ public abstract class SessionManager {
 	}
 
 	/**
-	 * Vyvol� redo v aktu�ln� otev�en�m projektu a roze�le provider�m zpr�vu
+	 * REDO operation for current project.
+	 * NOT IMPLEMENTED IN THE CURRENT SOFTWARE VERSION
 	 * <code>MSG_UNDOABLE_COMMAND_INVOKED</code>.
 	 */
 	public void redo() {
