@@ -15,7 +15,6 @@ public class JUIGLEErrorParser {
 
 	
 	public static String getJUIGLEErrorMessage(String errorCode) {
-		System.out.println(System.getProperty("user.dir"));
 		return JUIGLEErrorParser.parseMessage(errorCode, "ch.ethz.origo.juigle.data.errors");
 	}
 	
@@ -26,7 +25,7 @@ public class JUIGLEErrorParser {
 	private static String parseMessage(String errorCode, String filePath) {
 		String[] args = errorCode.split(":");
 		String pattern = ResourceBundle.getBundle(filePath).getString(args[0]);
-
+		
 		if (args.length > 1) {
 			MessageFormat formatter = new MessageFormat(pattern);
 			Object[] arguments = new Object[args.length - 1]; // ignore first position
