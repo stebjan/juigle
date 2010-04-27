@@ -1,4 +1,4 @@
-package ch.ethz.origo.juigle.data.tables.model;
+package ch.ethz.origo.juigle.prezentation.tables.model;
 
 import org.jdesktop.swingx.treetable.DefaultTreeTableModel;
 

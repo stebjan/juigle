@@ -7,8 +7,8 @@ import org.jdesktop.swingx.treetable.DefaultMutableTreeTableNode;
 
 import ch.ethz.origo.juigle.application.exception.DataStoreException;
 import ch.ethz.origo.juigle.data.tables.PluginRecord;
-import ch.ethz.origo.juigle.data.tables.model.JUIGLETreeTableModel;
-import ch.ethz.origo.juigle.data.tables.model.PluginTreeTableModel;
+import ch.ethz.origo.juigle.prezentation.tables.model.JUIGLETreeTableModel;
+import ch.ethz.origo.juigle.prezentation.tables.model.PluginTreeTableModel;
 
 /**
  * Create instance of <code>JXTreeTable</code>. This instance contains table

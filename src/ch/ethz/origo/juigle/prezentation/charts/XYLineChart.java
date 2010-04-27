@@ -16,7 +16,6 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import ch.ethz.origo.juigle.data.charts.ChartUtils;
-import ch.ethz.origo.juigle.data.charts.XYLineChartRecord;
 
 /**
  * 
@@ -105,7 +104,7 @@ public class XYLineChart {
 	}
 	
 	public static void main(String[] args) {
-		XYLineChart chart = new XYLineChart("Result of FastICA", "X", "Y", ChartPlotOrientation.VERTICAL, true, false, false);
+		XYLineChart chart = new XYLineChart("Result of method", "X", "Y", ChartPlotOrientation.VERTICAL, true, false, false);
 		chart.addXYLineChartRecord(new XYLineChartRecord("noname", ChartUtils.getSampleSinus()));
 		JFrame frame = chart.getXYLineChartAsFrame("Result FastICA", true);
 		frame.setSize(800, 600);
