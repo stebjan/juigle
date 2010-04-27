@@ -64,6 +64,7 @@ import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 import ch.ethz.origo.juigle.application.observers.JUIGLEObservable;
 import ch.ethz.origo.juigle.data.EmailErrorReporter;
 import ch.ethz.origo.juigle.data.JUIGLEErrorParser;
+import ch.ethz.origo.juigle.prezentation.menu.JUIGLEMainMenu;
 import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
 import ch.ethz.origo.juigle.prezentation.perspective.PerspectivePanel;
 

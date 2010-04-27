@@ -1,4 +1,4 @@
-package ch.ethz.origo.juigle.prezentation;
+package ch.ethz.origo.juigle.prezentation.menu;
 
 import java.awt.event.ActionEvent;
 import java.util.Date;
@@ -16,6 +16,8 @@ import ch.ethz.origo.juigle.application.BrowserLaunch;
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 import ch.ethz.origo.juigle.data.EmailErrorReporter;
 import ch.ethz.origo.juigle.data.JUIGLEErrorParser;
+import ch.ethz.origo.juigle.prezentation.JUIGLEGraphicsUtils;
+import ch.ethz.origo.juigle.prezentation.JUIGLErrorInfoUtils;
 import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
 import ch.ethz.origo.juigle.prezentation.perspective.PerspectivePanel;
 

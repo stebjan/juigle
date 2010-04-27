@@ -1,4 +1,4 @@
-package ch.ethz.origo.juigle.prezentation;
+package ch.ethz.origo.juigle.prezentation.menu;
 
 import java.awt.Color;
 import java.awt.Transparency;

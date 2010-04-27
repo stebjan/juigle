@@ -21,7 +21,7 @@
  *                       Pilsen, Czech Republic
  */
 
-package ch.ethz.origo.juigle.prezentation;
+package ch.ethz.origo.juigle.prezentation.menu;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
@@ -52,6 +52,10 @@ import ch.ethz.origo.juigle.application.exception.JUIGLEMenuException;
 import ch.ethz.origo.juigle.application.observers.LanguageObservable;
 import ch.ethz.origo.juigle.data.EmailErrorReporter;
 import ch.ethz.origo.juigle.data.JUIGLEErrorParser;
+import ch.ethz.origo.juigle.prezentation.ImageSeparator;
+import ch.ethz.origo.juigle.prezentation.JUIGLEButton;
+import ch.ethz.origo.juigle.prezentation.JUIGLEGraphicsUtils;
+import ch.ethz.origo.juigle.prezentation.JUIGLErrorInfoUtils;
 
 import com.jhlabs.image.GlowFilter;
 
