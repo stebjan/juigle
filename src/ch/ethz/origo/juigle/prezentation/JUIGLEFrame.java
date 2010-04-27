@@ -50,7 +50,6 @@ import javax.swing.JLabel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import nezarazeno.IPerspectiveLoader;
 
 import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXButton;
@@ -60,6 +59,7 @@ import org.jdesktop.swingx.JXLabel;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.painter.Painter;
 
+import ch.ethz.origo.juigle.application.IPerspectiveLoader;
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 import ch.ethz.origo.juigle.application.observers.JUIGLEObservable;
 import ch.ethz.origo.juigle.data.EmailErrorReporter;
