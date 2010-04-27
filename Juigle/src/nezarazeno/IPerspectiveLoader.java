@@ -8,8 +8,8 @@ import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
 /**
  * Interface for loader of perspective.
  * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.1.1 (2/7/2010)
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
+ * @version 0.1.2 (4/24/2010)
  * @since 0.1.0 (7/20/09)
  */
 public interface IPerspectiveLoader {

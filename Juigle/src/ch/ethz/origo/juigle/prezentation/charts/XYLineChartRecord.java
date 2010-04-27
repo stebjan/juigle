@@ -1,7 +1,8 @@
-package ch.ethz.origo.juigle.data.charts;
+package ch.ethz.origo.juigle.prezentation.charts;
 
 import org.jfree.data.xy.XYDataItem;
 import org.jfree.data.xy.XYSeries;
+
 
 
 /**

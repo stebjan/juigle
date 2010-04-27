@@ -1,4 +1,4 @@
-package notUsedYet;
+package ch.ethz.origo.juigle.prezentation.database;
 
 import java.awt.Color;
 import java.awt.Font;
