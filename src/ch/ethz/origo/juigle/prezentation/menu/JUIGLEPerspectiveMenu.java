@@ -1,4 +1,4 @@
-package ch.ethz.origo.juigle.prezentation;
+package ch.ethz.origo.juigle.prezentation.menu;
 
 import java.awt.image.BufferedImage;
 
@@ -8,6 +8,7 @@ import javax.swing.UIManager;
 import org.jdesktop.swingx.JXCollapsiblePane;
 
 import ch.ethz.origo.juigle.application.exception.JUIGLEMenuException;
+import ch.ethz.origo.juigle.prezentation.JUIGLEFrame;
 
 /**
  * 

@@ -1,6 +1,6 @@
 package notUsedYet;
 
-import ch.ethz.origo.juigle.prezentation.JUIGLEMenu;
+import ch.ethz.origo.juigle.prezentation.menu.JUIGLEMenu;
 
 /**
  * 
