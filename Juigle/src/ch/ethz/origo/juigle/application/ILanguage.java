@@ -7,9 +7,9 @@ import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 /**
  * 
  * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.1.1 09/15/09
- * @since 0.1.0 / (08/11/09)
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
+ * @version 0.1.1 (09/15/09}
+ * @since 0.1.0 (08/11/09)
  */
 public interface ILanguage {
 	

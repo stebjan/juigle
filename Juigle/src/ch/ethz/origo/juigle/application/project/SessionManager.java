@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 import ch.ethz.origo.juigle.application.exception.ProjectOperationException;
 import ch.ethz.origo.juigle.application.exception.ProjectWriterException;
-import ch.ethz.origo.juigle.prezentation.perspective.PerspectiveObservable;
+import ch.ethz.origo.juigle.application.observers.PerspectiveObservable;
 
 /**
  * 
