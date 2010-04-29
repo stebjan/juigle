@@ -1,6 +1,5 @@
-package ch.ethz.origo.juigle.prezentation.perspective;
+package ch.ethz.origo.juigle.application.observers;
 
-import ch.ethz.origo.juigle.application.observers.JUIGLEObservable;
 
 /**
  * 

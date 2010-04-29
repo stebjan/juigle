@@ -395,7 +395,7 @@ public class JUIGLEFrame extends JXFrame {
 	 * @version 1.0.0
 	 * @since 0.1.0
 	 */
-	public void addMainMenu(JUIGLEMainMenu mainMenu) throws PerspectiveException {
+	public void setMainMenu(JUIGLEMainMenu mainMenu) throws PerspectiveException {
 		mainToolBar = mainMenu;
 		mainToolBar.setFloatable(false);
 		mainToolBar.setRollover(true);

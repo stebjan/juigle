@@ -32,6 +32,7 @@ import org.jdesktop.swingx.JXTitledPanel;
 
 import ch.ethz.origo.juigle.application.ILanguage;
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
+import ch.ethz.origo.juigle.application.observers.PerspectiveObservable;
 import ch.ethz.origo.juigle.prezentation.menu.JUIGLEMenu;
 import ch.ethz.origo.juigle.prezentation.menu.JUIGLEPerspectiveMenu;
 
