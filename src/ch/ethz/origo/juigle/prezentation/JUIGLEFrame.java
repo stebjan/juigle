@@ -546,13 +546,12 @@ public class JUIGLEFrame extends JXFrame {
 	 * @param logo
 	 * @since 0.1.0
 	 */
-	public void setLogo(InputStream logo) {
+	public void setLogo(InputStream logo) throws PerspectiveException {
 		try {
 			this.logoImg = ImageIO.read(logo);
-		} catch (IOException e) {
-			// TODO osetrit vyjimku
-			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			throw new PerspectiveException("JG014", e);
+		} 
 	}
 
 	public void setAppTitle(String title) {
