@@ -1,6 +1,6 @@
 package ch.ethz.origo.juigle.data.tables;
 
-import ch.ethz.origo.juigle.plugin.Pluggable;
+import ch.ethz.origo.juigle.plugin.IPluggable;
 
 /**
  * 
@@ -15,13 +15,13 @@ import ch.ethz.origo.juigle.plugin.Pluggable;
 public class PluginRecord extends Record implements Comparable<PluginRecord> {
 
 	private String category;
-	private Pluggable plugin;
+	private IPluggable plugin;
 
 	public PluginRecord() {
 
 	}
 
-	public PluginRecord(Pluggable plugin) {
+	public PluginRecord(IPluggable plugin) {
 		setPlugin(plugin);
 		setCategory(plugin.getCategory());
 	}
@@ -51,7 +51,7 @@ public class PluginRecord extends Record implements Comparable<PluginRecord> {
 	 * @param algorithmClass
 	 *          class
 	 */
-	public void setPlugin(Pluggable algorithmClass) {
+	public void setPlugin(IPluggable algorithmClass) {
 		this.plugin = algorithmClass;
 	}
 
@@ -60,7 +60,7 @@ public class PluginRecord extends Record implements Comparable<PluginRecord> {
 	 * 
 	 * @return class of algorithm
 	 */
-	public Pluggable getPlugin() {
+	public IPluggable getPlugin() {
 		return plugin;
 	}
 
@@ -78,7 +78,7 @@ public class PluginRecord extends Record implements Comparable<PluginRecord> {
 	@Override
 	public int compareTo(PluginRecord fr) {
 		int res = 1;
-		Pluggable plug = fr.getPlugin();
+		IPluggable plug = fr.getPlugin();
 		if (plug != null && getPlugin() != null) {
 			int author = plug.getAuthorName().compareTo(getPlugin().getAuthorName());
 			int version = plug.getPluginVersion().compareTo(

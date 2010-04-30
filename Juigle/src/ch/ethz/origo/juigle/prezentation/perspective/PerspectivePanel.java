@@ -14,8 +14,8 @@ import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 /**
  * 
  * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
- * @version 0.1.1 09/13/09
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
+ * @version 0.1.2 (4/29/2010
  * @since 0.1.0 (07/19/09)
  * @see JXPanel
  * @see Perspective
@@ -127,13 +127,5 @@ public class PerspectivePanel extends JXPanel {
 		this.repaint();
 		this.validate();
 	}
-
-	/*
-	 * @Override public void fireLanguageChanged(LanguageEvent e) { // TODO tato
-	 * metoda mozna nepouzita if (e.getId() == LanguageEvent.LANGUAGE_CHANGED) {
-	 * this.setTitle(currentPerspective.getTitle()); // tento kod nefunguje
-	 * System.out.println("....Zmena titulku v Perspective Panelu....."); }
-	 * 
-	 * }
-	 */
+	
 }

@@ -5,7 +5,7 @@ import org.jdesktop.swingx.treetable.DefaultMutableTreeTableNode;
 import ch.ethz.origo.juigle.application.exception.DataStoreException;
 import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 import ch.ethz.origo.juigle.data.tables.PluginRecord;
-import ch.ethz.origo.juigle.plugin.Pluggable;
+import ch.ethz.origo.juigle.plugin.IPluggable;
 import ch.ethz.origo.juigle.plugin.PluginEngine;
 
 /**
@@ -36,7 +36,7 @@ public class PluginTreeTableModel extends JUIGLETreeTableModel {
 		DefaultMutableTreeTableNode root = new PluginTreeTableNode(
 				new PluginRecord());
 
-		for (Pluggable plugin : pluginEngine.getAllPluggables()) {
+		for (IPluggable plugin : pluginEngine.getAllPluggables()) {
 			PluginRecord pr = new PluginRecord(plugin);
 			currentLast = pr.getCategory();
 			if (currentLast.equals(prevLast)) {

@@ -63,17 +63,19 @@ import com.jhlabs.image.GlowFilter;
  * 
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.4 (3/29/2010)
+ * @version 0.1.5 (3/29/2010)
  * @since 0.1.0 (07/16/09)
+ * @see JToolBar
+ * @see ILanguage
  */
 public class JUIGLEMenu extends JToolBar implements ILanguage {
 
 	/** Only for serialization */
 	private static final long serialVersionUID = 744283918627175663L;
 
-	/** Menu location on top of panel */
+	/** Menu location on top of the panel */
 	public static final String MENU_LOCATION_TOP = BorderLayout.NORTH;
-	/** Menu location on left side of panel */
+	/** Menu location on left side of the panel */
 	public static final String MENU_LOCATION_LEFT = BorderLayout.WEST;
 	/**  */
 	public static final String MENU_LOCATION_BOTTOM = BorderLayout.SOUTH;
@@ -314,7 +316,7 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 	}
 
 	protected void createHideButton(boolean showText, Action action) {
-
+   //FIXME not implemented yet - why?
 	}
 
 	private void createSeparator(BufferedImage image) {
