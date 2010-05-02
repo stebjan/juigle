@@ -13,9 +13,9 @@ import javax.swing.JDialog;
 import org.jdesktop.swingx.JXDatePicker;
 
 import ch.ethz.origo.juigle.application.BrowserLaunch;
+import ch.ethz.origo.juigle.application.JUIGLEErrorParser;
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 import ch.ethz.origo.juigle.data.EmailErrorReporter;
-import ch.ethz.origo.juigle.data.JUIGLEErrorParser;
 import ch.ethz.origo.juigle.prezentation.JUIGLEGraphicsUtils;
 import ch.ethz.origo.juigle.prezentation.JUIGLErrorInfoUtils;
 import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
@@ -91,7 +91,7 @@ public class JUIGLEMainMenu extends JUIGLEMenu {
 		this.revalidate();
 	}
 
-	public void addSettingsItem(Icon icon) {
+	public void addSettingsItem(Icon icon, String resourceBundleKey) {
 
 	}
 
@@ -118,10 +118,10 @@ public class JUIGLEMainMenu extends JUIGLEMenu {
 		this.revalidate();
 	}
 
-	public void addAboutItem(Icon icon, JDialog dialog) {
+	public void addAboutItem(Icon icon, JDialog dialog, String resourceBundleKey) {
 	}
 
-	public void addCalendarItem(Icon icon) throws PerspectiveException {
+	public void addCalendarItem(Icon icon, String resourceBundleKey) throws PerspectiveException {
 		datePicker = new JXDatePicker();
 		datePicker.setDate(new Date());
 		datePicker.setVisible(true);

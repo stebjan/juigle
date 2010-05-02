@@ -60,9 +60,9 @@ public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
 	 * 
 	 * @param label
 	 */
-	public JUIGLEMenuItem(String text) {
-		setText(text);
-		setResourceBundleKey(text);
+	public JUIGLEMenuItem(String resourceKey) {
+		setText(resourceKey);
+		setResourceBundleKey(resourceKey);
 	}
 	
 	/**
@@ -71,8 +71,8 @@ public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
 	 * @param label
 	 * @param action
 	 */
-	public JUIGLEMenuItem(String text, Action action) {
-		this(text);
+	public JUIGLEMenuItem(String resourceKey, Action action) {
+		this(resourceKey);
 		setAction(action);
 	}
 		
@@ -83,8 +83,8 @@ public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
 	 * @param action
 	 * @param icon
 	 */
-	public JUIGLEMenuItem(String text, Action action, BufferedImage icon) {
-		this(text, action);
+	public JUIGLEMenuItem(String resourceKey, Action action, BufferedImage icon) {
+		this(resourceKey, action);
 	//	setIcon(icon);
 	}
 
