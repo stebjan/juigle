@@ -47,11 +47,11 @@ import javax.swing.border.EmptyBorder;
 import org.apache.log4j.Logger;
 
 import ch.ethz.origo.juigle.application.ILanguage;
+import ch.ethz.origo.juigle.application.JUIGLEErrorParser;
 import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 import ch.ethz.origo.juigle.application.exception.JUIGLEMenuException;
 import ch.ethz.origo.juigle.application.observers.LanguageObservable;
 import ch.ethz.origo.juigle.data.EmailErrorReporter;
-import ch.ethz.origo.juigle.data.JUIGLEErrorParser;
 import ch.ethz.origo.juigle.prezentation.ImageSeparator;
 import ch.ethz.origo.juigle.prezentation.JUIGLEButton;
 import ch.ethz.origo.juigle.prezentation.JUIGLEGraphicsUtils;

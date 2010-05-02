@@ -1,4 +1,4 @@
-package ch.ethz.origo.juigle.data;
+package ch.ethz.origo.juigle.application;
 
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
