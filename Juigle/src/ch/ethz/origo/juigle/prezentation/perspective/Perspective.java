@@ -41,7 +41,8 @@ import ch.ethz.origo.juigle.prezentation.JUIGLEFrame;
 import ch.ethz.origo.juigle.prezentation.JUIGLEGraphicsUtils;
 
 /**
- * 
+ * Main class for construct perspective. This class have to extend all 
+ * perspective classes.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.1 (3/28/2010)
@@ -52,6 +53,7 @@ public class Perspective extends AbstractPerspective {
 	/** Only for serialization */
 	private static final long serialVersionUID = 1111614707483173796L;
 	
+	/** Resource bundle path */
 	protected String resourcePath;
 	
 	protected static final Logger logger = Logger.getLogger(Perspective.class);
@@ -109,7 +111,7 @@ public class Perspective extends AbstractPerspective {
 	}
 
 	/**
-	 * NOT USED FOR THI CLASS
+	 * NOT USED FOR THIS CLASS
 	 */
 	@Override
 	public void setResourceBundleKey(String key) {

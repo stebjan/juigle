@@ -24,6 +24,7 @@
 package ch.ethz.origo.juigle.data.database;
 
 /**
+ * USER MANAGER - Incomplete - need to finish in the future
  * 
  * @author Vaclav Souhrada
  * @version 0.1.0 (1/24/2010)

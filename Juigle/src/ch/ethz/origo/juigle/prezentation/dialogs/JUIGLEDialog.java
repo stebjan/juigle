@@ -40,9 +40,9 @@ import org.jdesktop.swingx.JXDialog;
 import org.jdesktop.swingx.action.BoundAction;
 
 /**
+ * Modified <code>JXDialog</code> for needs of library JUIGLE.
  * 
- * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0 09/06/09
  * @since 0.1.0 (05/18/09)
  * @see JXDialog
@@ -54,7 +54,7 @@ public abstract class JUIGLEDialog extends JXDialog {
 	private static final long serialVersionUID = 8514794546509775244L;
 
 	/**
-	 * 
+	 * Default constructor
 	 */
 	public JUIGLEDialog() {
 		super(null);
@@ -101,7 +101,12 @@ public abstract class JUIGLEDialog extends JXDialog {
 		super(dialog, content);
 	}
 
-	
+	/**
+	 * Set content component of dialog
+	 * 
+	 * @param content
+	 *          component
+	 */
 	protected void setContent(JComponent content) {
 		if (this.content != null) {
 			throw new IllegalStateException("content must not be set more than once");
@@ -122,6 +127,9 @@ public abstract class JUIGLEDialog extends JXDialog {
 		setTitleFromContent();
 	}
 
+	/**
+	 * Build content of dialog
+	 */
 	private void build() {
 		JComponent contentBox = new Box(BoxLayout.PAGE_AXIS);
 		contentBox.add(content);
@@ -136,33 +144,48 @@ public abstract class JUIGLEDialog extends JXDialog {
 
 	}
 
+	/**
+	 * Initialize default dialog actions
+	 */
 	private void initActions() {
 		Action defaultAction = createCloseAction();
 		putAction(CLOSE_ACTION_COMMAND, defaultAction);
 		putAction(EXECUTE_ACTION_COMMAND, defaultAction);
 	}
 
+	/**
+	 * Initialize and return close action for dialog
+	 * 
+	 * @return close action for dialog
+	 */
 	private Action createCloseAction() {
 		String actionName = getUIString(CLOSE_ACTION_COMMAND);
 		BoundAction action = new BoundAction(actionName, CLOSE_ACTION_COMMAND);
 		action.registerCallback(this, "doClose");
 		return action;
 	}
-	
+
 	/**
-   * Convenience wrapper to access rootPane's actionMap.
-   * 
-   * @param key
-   * @param action
-   */
-  private void putAction(Object key, Action action) {
-      getRootPane().getActionMap().put(key, action);
-  }
-  
-  protected Point getCenterPosition(Dimension component) {
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();   
-		//Calculate the frame location  
-		int x = (screenSize.width - component.width) / 2;  
+	 * Convenience wrapper to access rootPane's actionMap.
+	 * 
+	 * @param key
+	 * @param action
+	 */
+	private void putAction(Object key, Action action) {
+		getRootPane().getActionMap().put(key, action);
+	}
+
+	/**
+	 * Return center position
+	 * 
+	 * @param component
+	 *          instance of component from which will be ceter position counted
+	 * @return center position fo dialog
+	 */
+	protected Point getCenterPosition(Dimension component) {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		// Calculate the frame location
+		int x = (screenSize.width - component.width) / 2;
 		int y = (screenSize.height - component.height) / 2;
 		return new Point(x, y);
 	}

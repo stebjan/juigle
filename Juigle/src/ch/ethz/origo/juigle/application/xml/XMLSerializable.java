@@ -46,7 +46,7 @@ public interface XMLSerializable {
 
     /**
      * Initialization of class with DOM node
-     * Note: usege in constructor this(Element element)
+     * Note: usage in constructor this(Element element)
      *
      * @param node Node - is highest node of this dom-structure
      */

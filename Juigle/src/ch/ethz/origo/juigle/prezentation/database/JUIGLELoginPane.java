@@ -182,7 +182,7 @@ public class JUIGLELoginPane extends JXPanel {
     public final static String uiClassID = "LoginPaneUI";
     /**
      * Action key for an Action in the ActionMap that initiates the Login
-     * procedure
+     * procedure.
      */
     public static final String LOGIN_ACTION_COMMAND = "login";
     /**

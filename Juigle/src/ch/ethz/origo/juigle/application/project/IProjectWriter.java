@@ -26,7 +26,7 @@ package ch.ethz.origo.juigle.application.project;
 import ch.ethz.origo.juigle.application.exception.ProjectWriterException;
 
 /**
- * 
+ * Project writer
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0 (2/21/2010)

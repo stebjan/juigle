@@ -32,33 +32,47 @@ import java.util.ResourceBundle;
  * @author Vaclav Souhrada
  * @version 0.1.2 (3/20/2010)
  * @since 0.1.0 (1/30/2010)
- *
+ * 
  */
 public class JUIGLEErrorParser {
 
-	
+	/**
+	 * Parse and return errors messages from JUIGLE default file.
+	 * 
+	 * @param errorCode
+	 *          error key
+	 * @return errors messages from JUIGLE default file
+	 */
 	public static String getJUIGLEErrorMessage(String errorCode) {
-		return JUIGLEErrorParser.parseMessage(errorCode, "ch.ethz.origo.juigle.data.errors");
+		return JUIGLEErrorParser.parseMessage(errorCode,
+				"ch.ethz.origo.juigle.data.errors");
 	}
-	
+
+	/**
+	 * Parse and return errors messages from given path.
+	 * 
+	 * @param errorCode code/key of the error
+	 * @param filePath path of file where are errors messages
+	 * @return errors messages from given path.
+	 */
 	public static String getErrorMessage(String errorCode, String filePath) {
 		return JUIGLEErrorParser.parseMessage(errorCode, filePath);
 	}
-	
+
 	private static String parseMessage(String errorCode, String filePath) {
 		String[] args = errorCode.split(":");
 		String pattern = ResourceBundle.getBundle(filePath).getString(args[0]);
-		
+
 		if (args.length > 1) {
 			MessageFormat formatter = new MessageFormat(pattern);
 			Object[] arguments = new Object[args.length - 1]; // ignore first position
 			for (int i = 1; i < args.length; i++) {
-				arguments[i-1] = args[i];
+				arguments[i - 1] = args[i];
 			}
 			return formatter.format(arguments);
 		} else {
 			return pattern;
 		}
 	}
-	
+
 }

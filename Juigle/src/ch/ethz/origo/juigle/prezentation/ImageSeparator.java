@@ -33,7 +33,7 @@ import javax.swing.plaf.basic.BasicToolBarSeparatorUI;
 /**
  * This class provide painting of separator from image.
  * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0 07/23/09
  * @since 0.1.0 (05/18/09)
  * @see BasicToolBarSeparatorUI

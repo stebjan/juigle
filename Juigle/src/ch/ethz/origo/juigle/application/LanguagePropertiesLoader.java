@@ -33,7 +33,7 @@ import org.apache.log4j.PropertyConfigurator;
 import ch.ethz.origo.juigle.application.exception.PropertiesException;
 
 /**
- * 
+ * Loade property of languages
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0 (3/24/2010)

@@ -27,7 +27,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- * 
+ * Basic XML Dom Parser
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0 (3/02/2010)

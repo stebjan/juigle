@@ -29,7 +29,7 @@ import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
- * 
+ * Class for invoking browser
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0 10/28/09

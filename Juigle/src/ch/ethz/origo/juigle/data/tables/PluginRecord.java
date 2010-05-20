@@ -24,16 +24,17 @@
 package ch.ethz.origo.juigle.data.tables;
 
 import ch.ethz.origo.juigle.plugin.IPluggable;
+import ch.ethz.origo.juigle.prezentation.tables.PluginsTreeTable;
 
 /**
- * 
+ * Class which represents plug-in for PluginsTreeTable.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.0 (3/28/2010)
+ * @version 0.1.1 (5/19/2010)
  * @since 0.1.0 (3/28/2010)
  * @see Record
  * @see Comparable
- * 
+ * @see PluginsTreeTable
  */
 public class PluginRecord extends Record implements Comparable<PluginRecord> {
 

@@ -29,7 +29,7 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 /**
- * 
+ * Properties loader
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.1 (05/15/2010)
@@ -46,6 +46,7 @@ public class PropertiesLoader {
 	private static final long serialVersionUID = 6089368520199982242L;
 
 	/**
+	 * Return property
 	 * 
 	 * @param key
 	 * @param type
@@ -60,7 +61,7 @@ public class PropertiesLoader {
 	}
 	
 	/**
-	 * 
+	 * Return property
 	 * @param key
 	 * @param file
 	 * @return
@@ -73,7 +74,7 @@ public class PropertiesLoader {
 	}
 	
 	/**
-	 * 
+	 * Load property from file path - name
 	 * @param name
 	 * @return
 	 * @version 0.1.0 (10/18/09)
@@ -90,7 +91,7 @@ public class PropertiesLoader {
 	}
 	
 	/**
-	 * 
+	 * Return property which contains file name by type
 	 * @param type
 	 * @return
 	 * @version 0.1.0 (10/18/09)

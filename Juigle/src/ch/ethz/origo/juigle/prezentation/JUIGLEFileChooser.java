@@ -26,9 +26,9 @@ package ch.ethz.origo.juigle.prezentation;
 import javax.swing.JFileChooser;
 
 /**
+ * Extends classic java <code>JFileChooser</code> for JUIGLE graphics.
  * 
- * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0 10/14/09
  * @since 0.1.0 (05/18/09)
  * @see JFileChooser

@@ -58,17 +58,27 @@ import com.jhlabs.image.NoiseFilter;
  * <code>JUIGLE</code> Library and user applications.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.3 (3/17/2010)
+ * @version 0.1.4 (5/19/2010)
  * @since 0.1.0 (05/18/09)
  */
 public class JUIGLEGraphicsUtils {
 
+	/** Transparent color */
 	public static final Color TRANSPARENT_COLOR = new Color(0, 0, 0, 0);
 
 	private static final GraphicsConfiguration configuration = GraphicsEnvironment
 			.getLocalGraphicsEnvironment().getDefaultScreenDevice()
 			.getDefaultConfiguration();
 
+	/**
+	 * Create and return translucent image
+	 * 
+	 * @param width
+	 *          of image
+	 * @param height
+	 *          of image
+	 * @return translucent image
+	 */
 	public static BufferedImage createTranslucentCompatibleImage(int width,
 			int height) {
 		return configuration.createCompatibleImage(width, height,
@@ -141,13 +151,28 @@ public class JUIGLEGraphicsUtils {
 			return null;
 		}
 	}
-
+	
+	/**
+	 * Create and return image icon from images specified by 
+	 * path.
+	 * @param path of image
+	 * @param width image width
+	 * @param height image height
+	 * @return image icon from images specified by path
+	 * @throws PerspectiveException
+	 */
 	public static Icon createImageIcon(String path, int width, int height)
 			throws PerspectiveException {
 		return new ImageIcon(GraphicsUtilities.createThumbnail(JUIGLEGraphicsUtils
 				.getImage(path), width, height));
 	}
 
+	/**
+	 * Return image specified by path as instance of <code>BufferedImage</code>.
+	 * @param path image
+	 * @return image specified by path as instance of <code>BufferedImage</code>
+	 * @throws PerspectiveException
+	 */
 	public static BufferedImage getImage(String path) throws PerspectiveException {
 		try {
 			return ImageIO.read(ClassLoader.getSystemResourceAsStream(path));
@@ -157,8 +182,9 @@ public class JUIGLEGraphicsUtils {
 	}
 
 	/**
+	 * Create instance of highlighter for JXTable instances
 	 * 
-	 * @return
+	 * @return nstance of highlighter for JXTable instances
 	 * @version 0.1.0
 	 * @since 0.1.1
 	 */
@@ -193,6 +219,23 @@ public class JUIGLEGraphicsUtils {
 		Point p = new Point((dimScreen.width - dimJFV.width) / 2,
 				(dimScreen.height - dimJFV.height) / 2);
 		return p;
+	}
+	
+	/**
+	 * Return center position
+	 * 
+	 * @param dimension
+	 *          instance of dimension from which will be create position counted
+	 * @return center position for dialog
+	 * @version 0.1.0 (5/19/2010)
+	 * @since 0.1.4 (5/19/2010)
+	 */
+	public static Point getCenterPosition(Dimension dimension) {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		// Calculate the frame location
+		int x = (screenSize.width - dimension.width) / 2;
+		int y = (screenSize.height - dimension.height) / 2;
+		return new Point(x, y);
 	}
 
 }

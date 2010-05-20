@@ -55,6 +55,4 @@ public class ComponentProperties {
 		this.wrappedCommands = wrappedCommands;
 	}
 
-	// add next Extended Properties here...
-
 }

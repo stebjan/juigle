@@ -26,7 +26,7 @@ package ch.ethz.origo.juigle.application.listener;
 import java.util.EventObject;
 
 /**
- * 
+ * Button event
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0 08/12/09
  * @since 0.1.0 (05/18/09)

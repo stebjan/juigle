@@ -29,7 +29,7 @@ import ch.ethz.origo.juigle.application.exception.DataStoreException;
 import ch.ethz.origo.juigle.data.tables.Record;
 
 /**
- * 
+ * Database store - Incomplete - need to be finish to the next version
  * 
  * @author Vaclav Souhrada
  * @version 0.1.0 (11/29/09)

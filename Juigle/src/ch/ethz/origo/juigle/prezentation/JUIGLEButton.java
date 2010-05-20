@@ -103,8 +103,9 @@ public class JUIGLEButton extends JXButton implements ILanguage {
 	}
 
 	/**
+	 * Set if text of button will be showed
 	 * 
-	 * @param show
+	 * @param show boolean value - true means thats text will be showed
 	 * @version 0.1.0
 	 * @since 0.1.0
 	 */
@@ -113,8 +114,9 @@ public class JUIGLEButton extends JXButton implements ILanguage {
 	}
 
 	/**
+	 * Return true if text of button will be showed
 	 * 
-	 * @return
+	 * @return true if text of button will be showed
 	 * @version 0.1.0
 	 * @since 0.1.0
 	 */

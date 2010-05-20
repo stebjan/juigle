@@ -26,7 +26,7 @@ package ch.ethz.origo.juigle.application.project;
 import ch.ethz.origo.juigle.application.exception.ProjectOperationException;
 
 /**
- * 
+ * Project loader
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0 (3/21/2010)

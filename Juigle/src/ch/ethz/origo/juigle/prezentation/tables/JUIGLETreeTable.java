@@ -29,8 +29,10 @@ import org.jdesktop.swingx.JXTreeTable;
 import org.jdesktop.swingx.treetable.TreeTableModel;
 
 /**
+ * Create instance of <code>JXTreeTable</code>. All tree table should be created
+ * as instance of this class or should extended it.
  * 
- * @author Vaclav Souhrada 
+ * @author Vaclav Souhrada
  * @version 0.1.0 (11/25/09)
  * @since 0.1.0 (11/25/09)
  * @see JXTreeTable
@@ -39,23 +41,47 @@ public class JUIGLETreeTable extends JXTreeTable {
 
 	/** Only for serialization */
 	private static final long serialVersionUID = -5420004135021438115L;
-	
+
+	/**
+	 * Default constructor
+	 */
 	public JUIGLETreeTable() {
 		super();
 	}
-	
+
+	/**
+	 * Construct table with specified model
+	 * 
+	 * @param treeModel
+	 *          table model
+	 */
 	public JUIGLETreeTable(TreeTableModel treeModel) {
 		super(treeModel);
 	}
-	
+
+	/**
+	 * Create table with specified own user interface
+	 * 
+	 * @param ui
+	 *          own user interface
+	 */
 	public JUIGLETreeTable(TableUI ui) {
 		this();
 		setUI(ui);
 	}
-	
+
+	/**
+	 * Construct table with specified model and user interface
+	 * 
+	 * @param model
+	 *          table model
+	 * @param ui
+	 *          own user interface
+	 * 
+	 */
 	public JUIGLETreeTable(TreeTableModel model, TableUI ui) {
 		this(model);
 		setUI(ui);
 	}
-	
+
 }

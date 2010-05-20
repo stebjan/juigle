@@ -29,7 +29,8 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * 
+ * Default Observable from library JUIGLE. It is basic implementation of
+ * Observer pattern.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.2.3 (4/05/2010)

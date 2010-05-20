@@ -26,7 +26,7 @@ import java.util.EventListener;
 
 
 /**
- * 
+ * Button listner
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0 08/12/09
  * @since 0.1.0 (05/18/09)
@@ -35,19 +35,19 @@ import java.util.EventListener;
 public interface AppButtonsListener extends EventListener {
 	
 	/**
-	 * 
+	 * Application is minimalizing
 	 * @param e
 	 */
 	public void minimalizelizeAppButton(AppButtonsEvent e);
 
 	/**
-	 * 
+	 * Application is maximalizing
 	 * @param e
 	 */
 	public void maximalizeAppButton(AppButtonsEvent e);
 	
 	/**
-	 * 
+	 * Application is closing
 	 * @param e
 	 */
 	public void closeAppButton(AppButtonsEvent e);

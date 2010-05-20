@@ -50,7 +50,6 @@ import javax.swing.JLabel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-
 import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXButton;
 import org.jdesktop.swingx.JXCollapsiblePane;
@@ -118,6 +117,9 @@ public class JUIGLEFrame extends JXFrame {
 
 	private static int frameExtendState;
 
+	/**
+	 * Construct default frame
+	 */
 	public JUIGLEFrame() {
 		try {
 			initialize();
@@ -136,6 +138,7 @@ public class JUIGLEFrame extends JXFrame {
 	}
 
 	/**
+	 * Construct frame with specific title and application logo.
 	 * 
 	 * @param title
 	 *          Frame title
@@ -162,7 +165,8 @@ public class JUIGLEFrame extends JXFrame {
 	}
 
 	/**
-	 * 
+	 * Construct frame with specific title and logo. Next set up perspective
+	 * loader and resource bundle key for localized text.
 	 * 
 	 * @param title
 	 * @param logoImg
@@ -180,9 +184,12 @@ public class JUIGLEFrame extends JXFrame {
 	}
 
 	/**
+	 * Initialize all graphic components
 	 * 
 	 * @throws IOException
+	 *           I/O operations
 	 * @throws PerspectiveException
+	 *           problem with current showed perspective
 	 * @since 0.1.0
 	 */
 	private void initialize() throws IOException, PerspectiveException {
@@ -275,9 +282,11 @@ public class JUIGLEFrame extends JXFrame {
 	}
 
 	/**
+	 * Return main container
 	 * 
-	 * @return
+	 * @return main container as instance of JXPanel
 	 * @throws PerspectiveException
+	 *           problem with perspective
 	 * @since 0.1.0
 	 */
 	private JXPanel getContetPane() throws PerspectiveException {
@@ -351,7 +360,8 @@ public class JUIGLEFrame extends JXFrame {
 		closeApp.setContentAreaFilled(false);
 		closeApp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JUIGLEObservable.getInstance().setState(JUIGLEObservable.MSG_APPLICATION_CLOSING);
+				JUIGLEObservable.getInstance().setState(
+						JUIGLEObservable.MSG_APPLICATION_CLOSING);
 			}
 		});
 		headerPanel.setLayout(new GridBagLayout());
@@ -390,8 +400,10 @@ public class JUIGLEFrame extends JXFrame {
 	}
 
 	/**
+	 * Set main application menu
 	 * 
 	 * @throws PerspectiveException
+	 *           - problem with perspective
 	 * @version 1.0.0
 	 * @since 0.1.0
 	 */
@@ -405,8 +417,9 @@ public class JUIGLEFrame extends JXFrame {
 	}
 
 	/**
+	 * Return panel with current displayed perspective
 	 * 
-	 * @return
+	 * @return panel with current displayed perspective
 	 * @throws PerspectiveException
 	 * @since 0.1.0
 	 */
@@ -422,8 +435,9 @@ public class JUIGLEFrame extends JXFrame {
 	}
 
 	/**
+	 * Return FOOTER container
 	 * 
-	 * @return
+	 * @return FOOTER container
 	 * @since 0.1.0
 	 */
 	private JXCollapsiblePane getFooterPanel() {
@@ -477,9 +491,10 @@ public class JUIGLEFrame extends JXFrame {
 	}
 
 	/**
-	 * 
+	 * Set icons for minimalize buttons.
 	 * 
 	 * @param minimizeImg
+	 *          image of minimalize button
 	 * @param minimizeOverImg
 	 * @version 0.1.0
 	 * @since 0.1.0
@@ -496,7 +511,7 @@ public class JUIGLEFrame extends JXFrame {
 	}
 
 	/**
-	 * 
+	 * Set icons for maximalize buttons.
 	 * 
 	 * @param maximizeImg
 	 * @param maximizeOverImg
@@ -519,7 +534,7 @@ public class JUIGLEFrame extends JXFrame {
 	}
 
 	/**
-	 * 
+	 * Set icons for close buttons.
 	 * 
 	 * @param closeImg
 	 * @param closeOverImg
@@ -535,15 +550,19 @@ public class JUIGLEFrame extends JXFrame {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setVisible(boolean visible) {
 		super.setVisible(visible);
 	}
 
 	/**
-	 * 
+	 * Set application logo
 	 * 
 	 * @param logo
+	 *          of application
 	 * @since 0.1.0
 	 */
 	public void setLogo(InputStream logo) throws PerspectiveException {
@@ -551,23 +570,46 @@ public class JUIGLEFrame extends JXFrame {
 			this.logoImg = ImageIO.read(logo);
 		} catch (Exception e) {
 			throw new PerspectiveException("JG014", e);
-		} 
+		}
 	}
 
+	/**
+	 * Set title of application
+	 * 
+	 * @param title
+	 *          of application
+	 */
 	public void setAppTitle(String title) {
 		this.title = title;
 	}
 
+	/**
+	 * Set copyright text
+	 * 
+	 * @param copyright
+	 *          text
+	 */
 	public void setCopyrightTitle(String copyright) {
 		this.copyright = copyright;
 		footerPanel.add(new JXLabel(copyright), gbcCopyright1);
 	}
 
+	/**
+	 * Add perspective to the perspective list
+	 * 
+	 * @param perspective
+	 *          instance of a new perspective which will be added to the persp.
+	 *          list
+	 * @throws PerspectiveException
+	 */
 	public void setAndInitPerspective(Perspective perspective)
 			throws PerspectiveException {
 		perspectivePanel.add(perspective);
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public synchronized void setExtendedState(int state) {
 		super.setExtendedState(state);
@@ -581,12 +623,25 @@ public class JUIGLEFrame extends JXFrame {
 		}
 	}
 
-	public void setPerspectives(IPerspectiveLoader perspectiveLoader, String perspResourceBundleKey)
-			throws PerspectiveException {
+	/**
+	 * This method set all available perspective. It is provided via instance of
+	 * the interface <code>IPerspectiveLoader</code> and resource key for
+	 * localized text.
+	 * 
+	 * @param perspectiveLoader
+	 *          instance of the interface <code>IPerspectiveLoader</code>
+	 * @param perspResourceBundleKey
+	 *          resource key for localized text
+	 * @throws PerspectiveException
+	 *           problem with perspective
+	 */
+	public void setPerspectives(IPerspectiveLoader perspectiveLoader,
+			String perspResourceBundleKey) throws PerspectiveException {
 		this.perspectiveLoader = perspectiveLoader;
 		mainToolBar.addPerspectiveItems(JUIGLEGraphicsUtils.createImageIcon(
 				"ch/ethz/origo/juigle/data/images/tabs_48.png", 32, 32),
-				perspectivePanel, perspectiveLoader.getListOfPerspectives(), perspResourceBundleKey);
+				perspectivePanel, perspectiveLoader.getListOfPerspectives(),
+				perspResourceBundleKey);
 		perspectivePanel.add(perspectiveLoader.getDefaultPerspective());
 	}
 
@@ -600,7 +655,7 @@ public class JUIGLEFrame extends JXFrame {
 	}
 
 	/**
-	 * 
+	 * Set frame to the full screen mode
 	 * 
 	 * @param fullScreen
 	 * @version 0.1.0
@@ -614,7 +669,8 @@ public class JUIGLEFrame extends JXFrame {
 	}
 
 	/**
-	 * 
+	 * Listener for handling with mouse - resize frame and 
+	 * set yo fykk screen mode.
 	 * 
 	 * @author Vaclav Souhrada
 	 * @version 0.1.0 07/12/2009

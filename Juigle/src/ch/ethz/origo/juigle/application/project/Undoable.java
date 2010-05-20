@@ -26,6 +26,7 @@ package ch.ethz.origo.juigle.application.project;
 import java.util.Stack;
 
 /**
+ * Memento Pattern for undo/redo mechanism in projects.
  * 
  * @author Vaclav Souhrada (v.souhrada@gmail.com)
  * @author Jiri Kucera

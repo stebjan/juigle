@@ -24,7 +24,8 @@
 package ch.ethz.origo.juigle.application.observers;
 
 /**
- *
+ * Implementation of Observer patter. This interface is implemented by all 
+ * Observable.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0 (08/16/09)

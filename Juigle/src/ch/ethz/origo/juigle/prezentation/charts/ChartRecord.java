@@ -24,7 +24,7 @@
 package ch.ethz.origo.juigle.prezentation.charts;
 
 /**
- * 
+ * Object represents chart record
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0 (3/27/2010)

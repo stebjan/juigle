@@ -24,7 +24,7 @@
 package ch.ethz.origo.juigle.application.exception;
 
 /**
- * 
+ * Exception for data stores
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0 (11/25/09)

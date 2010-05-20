@@ -23,6 +23,15 @@
  */
 package ch.ethz.origo.juigle.application.exception;
 
+
+/**
+ * Problem with language
+ * 
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
+ * @version 0.2.0 (2/21/2010)
+ * @since 0.1.0 (08/15/09)
+ * @see Exception
+ */
 public class JUIGLELangException extends Exception {
 
 	/** Only for serialization */

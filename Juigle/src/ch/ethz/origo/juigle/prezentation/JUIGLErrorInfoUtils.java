@@ -40,7 +40,7 @@ import org.jdesktop.swingx.error.ErrorReporter;
 public class JUIGLErrorInfoUtils {
 
 	/**
-	 * Constructs and shows the error dialog
+	 * Constructs and shows the error dialog.
 	 * 
 	 * @param title
 	 *          used as a quick reference for the error (for example, it might be
@@ -64,10 +64,10 @@ public class JUIGLErrorInfoUtils {
 	/**
 	 * Constructs and shows the error dialog
 	 * 
-	 * @param title
-	 * @param basicInfo
-	 * @param e
-	 * @param level
+	 * @param title of dialog
+	 * @param basicInfo basic error info
+	 * @param e exception
+	 * @param level of error
 	 * 
 	 * @version 0.1.0 (1/29/2010)
 	 * @since 0.1.0 (1/29/2010)
@@ -81,11 +81,11 @@ public class JUIGLErrorInfoUtils {
 	/**
 	 * Constructs and shows the error dialog
 	 * 
-	 * @param title
-	 * @param basicInfo
-	 * @param e
-	 * @param level
-	 * @param reporter
+	 * @param title of dialog
+	 * @param basicInfo basic error info
+	 * @param e exception
+	 * @param level of error
+	 * @param reporter instance on reporter
 	 * 
 	 * @version 0.1.0 (1/29/2010)
 	 * @since 0.1.0 (1/29/2010)

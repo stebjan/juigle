@@ -23,20 +23,37 @@
  */
 package ch.ethz.origo.juigle.application.observers;
 
-
 /**
+ * Implementation of Observer Pattern. This interface is implemented by each of
+ * listeners.
  * 
- * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.1 (1/30/2010)
  * @since 0.1.0 (08/16/09)
  */
 public interface IObserver {
 
+	/**
+	 * This method is calling from the Observable when he points on state change
+	 */
 	public void update();
-	
+
+	/**
+	 * This method is calling from the Observable when he points on state change
+	 * 
+	 * @param state
+	 *          object
+	 */
 	public void update(Object state);
-	
-	public void update(IObservable o, Object state);	
-	
+
+	/**
+	 * This method is calling from the Observable when he points on state change
+	 * 
+	 * @param o
+	 *          observable, which we observe
+	 * @param state
+	 *          object
+	 */
+	public void update(IObservable o, Object state);
+
 }

@@ -29,12 +29,13 @@ import ch.ethz.origo.juigle.application.ILanguage;
 import ch.ethz.origo.juigle.application.exception.DataStoreException;
 
 /**
- * 
+ * Construct localized table model for Tree tables.
  * 
  * @author Vaclav Souhrada
  * @version 0.2.1 (2/08/2010)
  * @since 0.1.0 (11/25/09)
  * @see DefaultTreeTableModel
+ * @see ILanguage
  * 
  */
 public abstract class JUIGLETreeTableModel extends DefaultTreeTableModel implements ILanguage {

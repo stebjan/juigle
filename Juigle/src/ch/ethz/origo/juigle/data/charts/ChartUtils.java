@@ -28,7 +28,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import ch.ethz.origo.juigle.prezentation.charts.ChartPlotOrientation;
 
 /**
- * 
+ * Class provides some methods which returns sample signals. 
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0 (3/27/2010)
@@ -58,6 +58,42 @@ public class ChartUtils {
 			cosinus[i] = Math.cos(Math.PI / 180 * i);
 		}
 		return cosinus;
+	}
+	
+	public static double[] getSampleSinus3() {
+		double[] sinus = new double[360];
+		for (int i = 0; i < 360; i++) {
+			sinus[i] = Math.sin(10*(Math.PI / 180 * i));
+		}
+		return sinus;
+	}
+	
+	public static double[] getSample3() {
+		double[] sinus = new double[360];
+		for (int i = 0; i < 360; i++) {
+			sinus[i] = 0;
+		}
+		sinus[468] = 0.6;
+		sinus[472] = 0.6;
+		sinus[469] = 0.8;
+		sinus[471] = 0.8;
+		sinus[470] = 1.0;
+		
+		return sinus;
+	}
+	
+	public static double[] getSample4() {
+		double[] sinus = new double[360];
+		for (int i = 0; i < 360; i++) {
+			sinus[i] = 0;
+		}
+		sinus[50] = -0.6;
+		sinus[54] = -0.6;
+		sinus[51] = -0.8;
+		sinus[53] = -0.8;
+		sinus[52] = -1.0;
+		
+		return sinus;
 	}
 	
 }

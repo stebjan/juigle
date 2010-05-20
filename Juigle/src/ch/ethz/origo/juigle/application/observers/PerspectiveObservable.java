@@ -23,9 +23,8 @@
  */
 package ch.ethz.origo.juigle.application.observers;
 
-
 /**
- * 
+ * Observer pattern for communication between each of perspectives.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.2.0 (2/21/2010)
@@ -39,10 +38,9 @@ public class PerspectiveObservable extends JUIGLEObservable {
 	public static final int MSG_PROJECT_CLOSED = 2;
 	public static final int MSG_CURRENT_PROJECT_CHANGED = 3;
 	public static final int MSG_UNDOABLE_COMMAND_INVOKED = 4;
-	
-	
+
 	private static PerspectiveObservable instance;
-	
+
 	/**
 	 * 
 	 * @return
@@ -55,5 +53,5 @@ public class PerspectiveObservable extends JUIGLEObservable {
 		}
 		return instance;
 	}
-	
+
 }
