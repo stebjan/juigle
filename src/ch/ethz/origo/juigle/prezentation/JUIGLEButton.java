@@ -34,12 +34,12 @@ import ch.ethz.origo.juigle.application.ILanguage;
 import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 
 /**
- * Create modified <code>J(X)Button</code>.
+ * Create modified <code>J(X)Button</code>. For JUIGLE needs (e.g support
+ * international language i18n)
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * 
- * 
- * @version 0.1.2 (3/20/2010)
+ * @version 0.1.3 (5/20/2010)
  * @since 0.1.0 (05/18/09)
  * @see JXButton
  * @see JButton
@@ -105,7 +105,8 @@ public class JUIGLEButton extends JXButton implements ILanguage {
 	/**
 	 * Set if text of button will be showed
 	 * 
-	 * @param show boolean value - true means thats text will be showed
+	 * @param show
+	 *          boolean value - true means thats text will be showed
 	 * @version 0.1.0
 	 * @since 0.1.0
 	 */
@@ -143,10 +144,10 @@ public class JUIGLEButton extends JXButton implements ILanguage {
 			public void run() {
 				setLocalizedResourceBundle(resourcePath);
 				try {
-					if (resourceBundleKey != null) {
+					if (resourceBundleKey != null && canBeTextShow()) {
 						setText(resource.getString(resourceBundleKey));
 					}
-					if (resourceTooTipBundleKey != null) {
+					if (resourceTooTipBundleKey != null && canBeTextShow()) {
 						setToolTipText(resource.getString(resourceTooTipBundleKey));
 					}
 				} catch (Exception e) {
@@ -175,5 +176,5 @@ public class JUIGLEButton extends JXButton implements ILanguage {
 	public void setToolTipResourceBundleKey(String key) {
 		this.resourceTooTipBundleKey = key;
 	}
-	
+
 }
