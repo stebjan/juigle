@@ -30,32 +30,32 @@ import ch.ethz.origo.juigle.application.ILanguage;
 import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 
 /**
- * 
+ * Observar pattern who points his listeners to switch language.
  * 
  * @author Vaclav Souhrada
  * @version 0.1.2 (3/30/2010)
  * @since 0.1.0 (10/15/2010)
  * @see AbstractJUIGLEObservable
- *
+ * 
  */
 public class LanguageObservable extends AbstractJUIGLEObservable {
-	
+
 	private static final int DEFAULT_STATE = -1;
-	
+
 	public static final int MSG_LANGUAGE_CHANGED = 1;
-	
+
 	private static LanguageObservable instance;
-	
+
 	private int state;
-	
+
 	private List<ILanguage> listOfObservers = new ArrayList<ILanguage>();
-	
+
 	public LanguageObservable() {
 		this.state = LanguageObservable.DEFAULT_STATE;
 	}
 
 	/**
-	 * 
+	 * Return instance of this class. (Singleton)
 	 * 
 	 * @return
 	 * @version 0.1.0
@@ -71,7 +71,7 @@ public class LanguageObservable extends AbstractJUIGLEObservable {
 	@Override
 	protected void clearChanged() {
 		this.state = LanguageObservable.DEFAULT_STATE;
-		
+
 	}
 
 	@Override
@@ -99,15 +99,15 @@ public class LanguageObservable extends AbstractJUIGLEObservable {
 
 	@Override
 	public void setState(int state) {
-		this.state = state;	
+		this.state = state;
 		notifyObservers();
 	}
 
 	@Override
 	public void attach(IObserver observer) {
-		
+
 	}
-	
+
 	public void attach(ILanguage observer) {
 		listOfObservers.add(observer);
 	}
@@ -119,7 +119,7 @@ public class LanguageObservable extends AbstractJUIGLEObservable {
 
 	@Override
 	public void detach(IObserver observer) {
-		listOfObservers.remove(observer);	
+		listOfObservers.remove(observer);
 	}
 
 	/**
@@ -127,8 +127,7 @@ public class LanguageObservable extends AbstractJUIGLEObservable {
 	 */
 	@Override
 	protected void notifyObserver(Object obj) {
-		/* NOT IMPLEMENTED */		
+		/* NOT IMPLEMENTED */
 	}
-	
-	
+
 }

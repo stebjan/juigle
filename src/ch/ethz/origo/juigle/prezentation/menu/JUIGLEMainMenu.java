@@ -45,10 +45,10 @@ import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
 import ch.ethz.origo.juigle.prezentation.perspective.PerspectivePanel;
 
 /**
- * 
+ * Construct main menu of application.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.2.3 (3/29/2010)
+ * @version 0.2.4 (5/19/2010)
  * @since 0.1.0 (c.v. 08/14/09)
  * @see JUIGLEMenu
  */
@@ -56,22 +56,33 @@ public class JUIGLEMainMenu extends JUIGLEMenu {
 
 	/** Only for serialization */
 	private static final long serialVersionUID = 2839975234788319679L;
-	
+
 	private JXDatePicker datePicker;
-	
+
 	private JUIGLEMenuItem perspectivesItem;
 
+	/**
+	 * Construct main application menu with path to the file which contains
+	 * localized text for this menu.
+	 * 
+	 * @param resourceBundlePath
+	 *          path to localized file
+	 */
 	public JUIGLEMainMenu(String resourceBundlePath) {
 		super();
 		setLocalizedResourceBundle(resourceBundlePath);
 	}
 
 	/**
-	 * 
+	 * This method added perspective item to the main menu. This item is list of
+	 * all available perspectives.
 	 * 
 	 * @param icon
+	 *          item icon
 	 * @param container
+	 *          instance of panel which contains displayed perspective
 	 * @param perspectives
+	 *          list of all available perspectives
 	 * @version 0.1.2
 	 * @since 0.1.0
 	 */
@@ -118,6 +129,16 @@ public class JUIGLEMainMenu extends JUIGLEMenu {
 
 	}
 
+	/**
+	 * Add item to the main menu which invoke user's default browser and show home
+	 * page of the application.
+	 * 
+	 * @param icon
+	 *          item icon
+	 * @param url
+	 *          internet address
+	 * @throws PerspectiveException
+	 */
 	public void addHomePageItem(Icon icon, final String url)
 			throws PerspectiveException {
 		JUIGLEMenuItem item = new JUIGLEMenuItem();
@@ -141,10 +162,49 @@ public class JUIGLEMainMenu extends JUIGLEMenu {
 		this.revalidate();
 	}
 
-	public void addAboutItem(Icon icon, JDialog dialog, String resourceBundleKey) {
+	/**
+	 * Add about item to the main menu
+	 * 
+	 * @param icon
+	 *          item icon
+	 * @param dialog
+	 *          instance of about dialog
+	 * @param resourceBundleKey
+	 *          key for resource bundle
+	 * @throws PerspectiveException 
+	 */
+	public void addAboutItem(Icon icon, final JDialog dialog, String resourceBundleKey) throws PerspectiveException {
+		JUIGLEMenuItem item = new JUIGLEMenuItem();
+		Action action = new AbstractAction() {
+			private static final long serialVersionUID = 1796718465304187844L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dialog.setVisible(true);
+			}
+		};
+		item.setAction(action);
+		if (icon == null) {
+			item.setIcon(JUIGLEGraphicsUtils.createImageIcon(
+					"ch/ethz/origo/juigle/data/images/info-48.png", 32, 32));
+		} else {
+			item.setIcon(icon);
+		}
+		this.addItem(item);
+		this.revalidate();
 	}
 
-	public void addCalendarItem(Icon icon, String resourceBundleKey) throws PerspectiveException {
+	/**
+	 * This method add calendar item to the main application menu. Calendar is
+	 * instance from library <code>SwingX</code>.
+	 * 
+	 * @param icon
+	 *          item icon
+	 * @param resourceBundleKey
+	 *          key for resource bundle
+	 * 
+	 */
+	public void addCalendarItem(Icon icon, String resourceBundleKey) {
 		datePicker = new JXDatePicker();
 		datePicker.setDate(new Date());
 		datePicker.setVisible(true);

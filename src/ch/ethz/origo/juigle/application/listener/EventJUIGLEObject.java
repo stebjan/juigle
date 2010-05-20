@@ -26,7 +26,7 @@ package ch.ethz.origo.juigle.application.listener;
 import java.util.EventObject;
 
 /**
- * 
+ * Event object
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0 08/12/09

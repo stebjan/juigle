@@ -35,7 +35,8 @@ import org.jdesktop.swingx.JXTitledPanel;
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 
 /**
- * 
+ * Construct main panel which contains always current dispalyed 
+ * perspective. 
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.2 (4/29/2010
@@ -60,8 +61,9 @@ public class PerspectivePanel extends JXPanel {
 	}
 
 	/**
+	 * Create perspective panel and added perspective to this panel
 	 * 
-	 * @param perspective
+	 * @param perspective instance of perspective which will be added to the panel.
 	 * @throws PerspectiveException
 	 */
 	public PerspectivePanel(Perspective perspective) throws PerspectiveException {

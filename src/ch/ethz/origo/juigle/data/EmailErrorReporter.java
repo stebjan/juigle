@@ -39,16 +39,17 @@ import org.jdesktop.swingx.error.ErrorInfo;
 import org.jdesktop.swingx.error.ErrorReporter;
 
 /**
- * 
+ * Email reporter. Via this class can users and developers sending error report
+ * to JUIGLE developers.
  * 
  * @author Vaclav Souhrada
  * @version 0.1.0 (1/29/2010)
  * @since 0.1.0 (1/29/2010)
  * @see ErrorReporter
- *
+ * 
  */
 public class EmailErrorReporter implements ErrorReporter {
-	
+
 	private String mailhost = "smtp.gmail.com";
 	private String recipients = "juigle.errors@gmail.com";
 	private String sender = "juigle.errors@gmail.com";
@@ -78,18 +79,18 @@ public class EmailErrorReporter implements ErrorReporter {
 		MimeMessage message = new MimeMessage(session);
 		try {
 			message.setSender(new InternetAddress(sender));
-		message.setSubject(info.getTitle());
-		message.setContent(info.getErrorException().toString(), "text/plain");
-		message.setRecipients(Message.RecipientType.TO, InternetAddress
-				.parse(recipients));
-		if (recipients.indexOf(',') > 0)
+			message.setSubject(info.getTitle());
+			message.setContent(info.getErrorException().toString(), "text/plain");
 			message.setRecipients(Message.RecipientType.TO, InternetAddress
 					.parse(recipients));
-		else
-			message.setRecipient(Message.RecipientType.TO, new InternetAddress(
-					recipients));
+			if (recipients.indexOf(',') > 0)
+				message.setRecipients(Message.RecipientType.TO, InternetAddress
+						.parse(recipients));
+			else
+				message.setRecipient(Message.RecipientType.TO, new InternetAddress(
+						recipients));
 
-		Transport.send(message);
+			Transport.send(message);
 		} catch (AddressException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

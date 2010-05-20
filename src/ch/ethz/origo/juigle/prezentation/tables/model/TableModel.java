@@ -29,8 +29,9 @@ import ch.ethz.origo.juigle.application.exception.DataStoreException;
 import ch.ethz.origo.juigle.data.tables.Record;
 
 /**
+ * Create table model for classic type of java table (JTable)
  * 
- * @author Vaclav Souhrada 
+ * @author Vaclav Souhrada
  * @version 0.1.0 (11/25/09)
  * @since 0.1.0 (11/25/09)
  * @see AbstractTableModel
@@ -40,8 +41,14 @@ public abstract class TableModel extends AbstractTableModel {
 	/** Only for serialization */
 	private static final long serialVersionUID = 3518887611530241715L;
 
+	/**
+	 * This method fill table model by values.
+	 * 
+	 * @throws DataStoreException
+	 *           problem with data loading
+	 */
 	public abstract void fillByValues() throws DataStoreException;
-	
+
 	@Override
 	public abstract int getColumnCount();
 
@@ -50,26 +57,80 @@ public abstract class TableModel extends AbstractTableModel {
 
 	@Override
 	public abstract Object getValueAt(int row, int column);
-	
-	public abstract Record getRecord(int row);
-	
-	public abstract String getColumnName(int column);
-	
+
 	/**
-   * {@inheritDoc}
-   */
-  public abstract boolean isCellEditable(int rowIndex, int columnIndex);
-  
-  public abstract void clearResources() throws DataStoreException;
-  
-  public abstract void addRecord(Record record) throws DataStoreException;
-  
-  public abstract void updateRecord(Record record, int tableRow) throws DataStoreException;
-  
-  public abstract void deleteRecord(Record record, int tableRow) throws DataStoreException;
-  
-  public abstract void deleteAllRecords() throws DataStoreException;
-  
-  public abstract int getStoreLastInsertId() throws DataStoreException;
+	 * Return object as table <code>Record</code> from specified row.
+	 * 
+	 * @param row
+	 *          record
+	 * @return table <code>Record</code> from specified row.
+	 */
+	public abstract Record getRecord(int row);
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public abstract String getColumnName(int column);
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public abstract boolean isCellEditable(int rowIndex, int columnIndex);
+
+	/**
+	 * Method for clear resources and clear memory.
+	 * @throws DataStoreException
+	 *           problem with data operations
+	 */
+	public abstract void clearResources() throws DataStoreException;
+
+	/**
+	 * Add record to the table model
+	 * 
+	 * @param record
+	 * @throws DataStoreException
+	 *           problem with data operations
+	 */
+	public abstract void addRecord(Record record) throws DataStoreException;
+
+	/**
+	 * Update table record on specified row
+	 *  
+	 * @param record
+	 * @param tableRow num. of table row where will be record updated
+	 * @throws DataStoreException
+	 *           problem with data operations
+	 */
+	public abstract void updateRecord(Record record, int tableRow)
+			throws DataStoreException;
+
+	/**
+	 * Delete specified row
+	 * 
+	 * @param record of table
+	 * @param tableRow num. of table row from which will be record deleted
+	 * @throws DataStoreException
+	 *           problem with data operations
+	 */
+	public abstract void deleteRecord(Record record, int tableRow)
+			throws DataStoreException;
+
+	/**
+	 * Delete all records from table model
+	 * @throws DataStoreException
+	 *           problem with data operations
+	 */
+	public abstract void deleteAllRecords() throws DataStoreException;
+
+	/**
+	 * This method should be used when we working with database. Usually we need
+	 * last inserted id. This method return it.
+	 * 
+	 * @return last inserted id of record
+	 * @throws DataStoreException
+	 *           problem with data operations
+	 */
+	public abstract int getStoreLastInsertId() throws DataStoreException;
 
 }

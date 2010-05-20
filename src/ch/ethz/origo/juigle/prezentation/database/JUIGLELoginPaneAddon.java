@@ -40,7 +40,7 @@ import org.jdesktop.swingx.plaf.LookAndFeelAddons;
 import org.jdesktop.swingx.plaf.UIManagerExt;
 
 /**
-*
+* Pane addon for login dialog
 * @author rbair
 */
 public class JUIGLELoginPaneAddon extends AbstractComponentAddon {

@@ -34,11 +34,12 @@ import ch.ethz.origo.juigle.application.exception.JUIGLEMenuException;
 import ch.ethz.origo.juigle.prezentation.JUIGLEFrame;
 
 /**
- * 
+ * Menu which is added to perspectives (If programmer want).
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.1 (3/21/2010)
  * @since 0.1.0 (05/18/09)
+ * @see JUIGLEMenu
  *
  */
 public class JUIGLEPerspectiveMenu extends JUIGLEMenu {
@@ -69,6 +70,10 @@ public class JUIGLEPerspectiveMenu extends JUIGLEMenu {
 		super(position, resourcePath);
 	}
 	
+	/**
+	 * Add hide button which hide Header of application.
+	 * @param showText true - if button have to show text
+	 */
 	public void addHeaderHideButton(boolean showText) {
 			headerCollapseItem = new JUIGLEMenuItem();
 			headerCollapseItem.showText(false);
@@ -87,11 +92,20 @@ public class JUIGLEPerspectiveMenu extends JUIGLEMenu {
 		this.addItem(headerCollapseItem);
 	}
 
+	/**
+	 * Add Header hide button with specified image
+	 * @param image of button
+	 * @throws JUIGLEMenuException
+	 */
 	public void addHeaderHideButton(BufferedImage image)
 			throws JUIGLEMenuException {
 
 	}
 
+	/**
+	 *  Add button to persp. menu which hidden FOOTER panel
+	 * @param showText true - if button have to show text
+	 */
 	public void addFooterHideButton(boolean showText) {
 			footerrCollapseItem = new JUIGLEMenuItem();
 			footerrCollapseItem.showText(false);
@@ -109,6 +123,11 @@ public class JUIGLEPerspectiveMenu extends JUIGLEMenu {
 		this.addItem(footerrCollapseItem);
 	}
 
+	/**
+	 * Add Footer hide button with specified image
+	 * @param image
+	 * @throws JUIGLEMenuException
+	 */
 	public void addFooterHideButton(BufferedImage image)
 			throws JUIGLEMenuException {
 

@@ -24,9 +24,9 @@
 package ch.ethz.origo.juigle.application.exception;
 
 /**
+ * Problem with properties when are loading
  * 
- * 
- * @author Vaclav Souhrada (v.souhrada@gmail.com)
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0 07/18/09
  * @since 0.1.0 (05/18/09)
  * @see Exception

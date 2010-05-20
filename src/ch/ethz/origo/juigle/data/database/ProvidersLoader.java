@@ -35,32 +35,34 @@ import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 import ch.ethz.origo.juigle.application.database.DBProvider;
 
 /**
+ * Properties loader for database infomations. Incomplete - need to finish in
+ * the future
  * 
  * @author Vaclav Souhrada
  * @version 0.1.0 (1/29/2010)
  * @since 0.1.0 (1/29/2010)
- *
+ * 
  */
 public class ProvidersLoader {
 
 	private File file;
 	private List<DBProvider> providers;
-	
+
 	public ProvidersLoader(File file) {
 		this.file = file;
 		providers = new ArrayList<DBProvider>();
 	}
-	
+
 	public List<DBProvider> getListOfProviders() {
 		if (providers.size() == 0) {
-			//xmlLoad();			
+			// xmlLoad();
 		}
 		return providers;
 	}
-	
+
 	private void xmlLoad(String filename) {
-		 DOMParser parser = new DOMParser();
-     Document document = parser.getDocument();
-     Element root = document.getDocumentElement(); // root element
+		DOMParser parser = new DOMParser();
+		Document document = parser.getDocument();
+		Element root = document.getDocumentElement(); // root element
 	}
 }

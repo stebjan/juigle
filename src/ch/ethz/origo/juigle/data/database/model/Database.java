@@ -31,6 +31,8 @@ import ch.ethz.origo.juigle.data.database.driver.IDriverDescription;
 import ch.ethz.origo.juigle.data.database.model.ddl.DatabaseDDLSQLSyntax;
 
 /**
+ * Class representing database. 
+ * Incomplete - need to finish in the future
  * 
  * @author Vaclav Souhrada
  * @version 0.1.1 (3/31/2010)

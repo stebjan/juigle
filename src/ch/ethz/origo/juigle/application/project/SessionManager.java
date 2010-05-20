@@ -34,7 +34,7 @@ import ch.ethz.origo.juigle.application.exception.ProjectWriterException;
 import ch.ethz.origo.juigle.application.observers.PerspectiveObservable;
 
 /**
- * 
+ * Abstract class for all classes which are used as sessions managers
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.4 (4/17/2010)

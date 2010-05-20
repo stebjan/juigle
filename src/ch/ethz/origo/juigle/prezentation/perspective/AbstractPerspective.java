@@ -46,28 +46,29 @@ import ch.ethz.origo.juigle.prezentation.menu.JUIGLEPerspectiveMenu;
  * 
  */
 public abstract class AbstractPerspective implements IPerspective, ILanguage {
-	
-	//FIXME ILanguage a LangListener - zjisti jestli je to nutne
+
 	/** Only for serialization */
 	private static final long serialVersionUID = 894536627512039840L;
 
 	protected boolean isDefault;
-	
+
 	protected static String resourcePath;
 	protected String resourceBundleKey;
-	
+
 	protected JXTitledPanel menuTitledPanel;
-	
+
 	protected JXTaskPane menuTaskPane;
 
 	protected JUIGLEPerspectiveMenu menu;
 
 	protected JXPanel mainPanel;
-	
+
 	protected ResourceBundle resource;
-	
-	protected static PerspectiveObservable perspectiveObservable = PerspectiveObservable.getInstance();
-	
+
+	/** Global perspective observable */
+	protected static PerspectiveObservable perspectiveObservable = PerspectiveObservable
+			.getInstance();
+
 	/**
 	 * Initialize perspective panel
 	 * 
@@ -85,16 +86,17 @@ public abstract class AbstractPerspective implements IPerspective, ILanguage {
 	 * @since 0.1.0 (07/12/09)
 	 */
 	public abstract void initPerspectiveMenuPanel() throws PerspectiveException;
-	
+
 	/**
+	 * Return localized text as String instance
 	 * 
-	 * 
-   * @param string the String to be localized
-   * @return the localized String
-   */
-  public abstract String getLocalizedString(String string);
-  
-  /**
+	 * @param string
+	 *          the String to be localized
+	 * @return the localized String
+	 */
+	public abstract String getLocalizedString(String string);
+
+	/**
 	 * Return boolean variable if perspective is default
 	 * 
 	 * @return true - if perspective is default, else return false
@@ -105,6 +107,12 @@ public abstract class AbstractPerspective implements IPerspective, ILanguage {
 		return isDefault;
 	}
 
+	/**
+	 * Set current perspective as default.
+	 * 
+	 * @param value
+	 *          true - perspective will be default
+	 */
 	public void setPerspectiveAsDefault(boolean value) {
 		isDefault = value;
 	}
@@ -117,13 +125,18 @@ public abstract class AbstractPerspective implements IPerspective, ILanguage {
 	public JUIGLEMenu getMenu() {
 		return menu;
 	}
-	
+
+	/**
+	 * Return key of perspective title for the <code>ResourceBundle</code>
+	 * 
+	 * @return key of perspective title for the <code>ResourceBundle</code>
+	 */
 	public abstract String getRBPerspectiveTitleKey();
 
 	/**
 	 * Initialize and return panel which contains main menu of perspective.
 	 * 
-	 * @return
+	 * @return panel which contains main menu of perspective.
 	 */
 	public JPanel getMenuPanel() {
 		if (menuTaskPane != null) {
@@ -133,9 +146,13 @@ public abstract class AbstractPerspective implements IPerspective, ILanguage {
 		}
 	}
 
+	/**
+	 * Return main perspective panel
+	 * 
+	 * @return main perspective panel
+	 */
 	public JXPanel getMainPerspectivePanel() {
 		return mainPanel;
 	}
-	
-	
+
 }

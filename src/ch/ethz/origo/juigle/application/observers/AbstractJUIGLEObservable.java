@@ -24,7 +24,8 @@
 package ch.ethz.origo.juigle.application.observers;
 
 /**
- * 
+ * Abstract class for all Observable. Implements interface IObservable and add 
+ * some a new methods.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.2 (3/14/2010)
@@ -62,7 +63,8 @@ public abstract class AbstractJUIGLEObservable implements IObservable {
 	protected abstract void clearChanged();
 	
 	/**
-	 * 
+	 * If this object has changed, as indicated by the setState method, then notify specific observer and then 
+	 * should call the clearChanged method to indicate that this object has no longer changed. 
 	 * @param observer
 	 * @version 0.1.0
 	 * @since 0.1.0
@@ -70,8 +72,9 @@ public abstract class AbstractJUIGLEObservable implements IObservable {
 	protected abstract void notifyObserver(IObserver observer);
 	
 	/**
-	 * 
-	 * 
+	 * If this object has changed, as indicated by the setState method, then notify all observers and then 
+	 * should call the clearChanged method to indicate that this object has no longer changed. Send specific 
+	 * object to observers 
 	 * @param obj
 	 * @version 0.1.0
 	 * @since 0.1.2
@@ -79,7 +82,8 @@ public abstract class AbstractJUIGLEObservable implements IObservable {
 	protected abstract void notifyObserver(Object obj);
 	
 	/**
-	 * 
+	 * If this object has changed, as indicated by the setState method, then notify all observers and then 
+	 * should call the clearChanged method to indicate that this object has no longer changed. 
 	 * 
 	 * @version 0.1.0
 	 * @since 0.1.0

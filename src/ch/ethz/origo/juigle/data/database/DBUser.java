@@ -24,6 +24,7 @@
 package ch.ethz.origo.juigle.data.database;
 
 /**
+ * Class represents database user
  * 
  * @author Vaclav Souhrada
  * @version 0.1.0 (3/31/2010)

@@ -28,6 +28,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
+ * Connection to the database
  * 
  * @author Vaclav Souhrada
  * @version 0.1.1 (3/31/2010)

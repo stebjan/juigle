@@ -28,7 +28,7 @@ import java.util.ResourceBundle;
 import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 
 /**
- * 
+ * Interface for all class, which want to use international language support.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.1 (09/15/09}
@@ -37,7 +37,8 @@ import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 public interface ILanguage {
 	
 	/**
-	 * 
+	 * Set localized resource bundle and add them path to file, 
+	 * which contains localized text.
 	 * 
 	 * @param path
 	 * @version 0.1.1
@@ -46,8 +47,9 @@ public interface ILanguage {
 	public void setLocalizedResourceBundle(String path);
 	
 	/**
+	 * Return path of localized file
 	 * 
-	 * @return
+	 * @return path of localized file
 	 * @version 0.1.0
 	 * @since 0.1.1
 	 */
@@ -65,7 +67,8 @@ public interface ILanguage {
 	public void setResourceBundleKey(String key);
 	
 	/**
-	 * 
+	 * This method is calling by LanguageObservable. Text of all components has to be 
+	 * changed here.
 	 * 
 	 * @throws JUIGLELangException
 	 */

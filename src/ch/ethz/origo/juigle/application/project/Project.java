@@ -25,38 +25,58 @@ package ch.ethz.origo.juigle.application.project;
 
 import java.io.File;
 
-
 /**
+ * Abstract class representing project
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.2.1 (2/21/2010)
  * @since 0.1.0 (10/21/09)
- * @see Undoable    
+ * @see Undoable
  */
 public abstract class Project extends Undoable {
-	
+
 	protected File projectFile; // neukladat
-	
+
 	@Override
 	public abstract ProjectMementoCaretaker createMemento();
-	
+
 	@Override
 	public abstract void setMemento(ProjectMementoCaretaker memento);
-	
+
+	/**
+	 * Open file
+	 */
 	public abstract void openFile();
-	
+
+	/**
+	 * Save file
+	 */
 	public abstract void saveFile();
-	
+
+	/**
+	 * Return project name
+	 * 
+	 * @return project name
+	 */
 	public abstract String getName();
-	
+
+	/**
+	 * Set project name
+	 * 
+	 * @param name
+	 *          of project
+	 */
 	public abstract void setName(String name);
-	
+
+	/**
+	 * Close all buffers
+	 */
 	public abstract void closeBuffers();
-	
+
 	public void setProjectFile(File file) {
 		this.projectFile = file;
 	}
-	
+
 	public File getProjectFile() {
 		return projectFile;
 	}

@@ -23,7 +23,7 @@
  */
 package ch.ethz.origo.juigle.application.project;
 /**
- * 
+ * Memento Pattern for undo/redo mechanism in projects.
  * 
  * @author Vaclav Souhrada (v.souhrada@gmail.com)
  * @version 0.1.0 10/21/2009 

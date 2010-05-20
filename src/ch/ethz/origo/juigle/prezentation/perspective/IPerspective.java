@@ -26,9 +26,8 @@ import javax.swing.Icon;
 
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 
-
 /**
- * 
+ * Interface which have to be implemented by all perspective.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.1 (3/28/2010)
@@ -37,16 +36,16 @@ import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 public interface IPerspective {
 
 	/**
-	 * This method return name of perspective. 
+	 * This method return name of perspective.
 	 * 
 	 * @return name of perspective
 	 * @version 0.1.0
 	 * @since 0.1.0
 	 */
-	public String getTitle(); 
-	
+	public String getTitle();
+
 	/**
-	 * Return perspective image icon 
+	 * Return perspective image icon
 	 * 
 	 * @return icon of perspective
 	 * @throws PerspectiveException
@@ -54,5 +53,5 @@ public interface IPerspective {
 	 * @since 0.1.0 (07/12/09)
 	 */
 	public Icon getPerspectiveIcon() throws PerspectiveException;
-		
+
 }

@@ -34,7 +34,7 @@ import ch.ethz.origo.juigle.prezentation.tables.model.JUIGLETreeTableModel;
 import ch.ethz.origo.juigle.prezentation.tables.model.PluginTreeTableModel;
 
 /**
- * Create instance of <code>JXTreeTable</code>. This instance contains table
+ * Create instance of <code>JXTreeTable</code>.This instance contains table
  * model filled by all installed plugins in the application.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
@@ -68,7 +68,10 @@ public class PluginsTreeTable extends JUIGLETreeTable {
 						row, hasFocus);
 				if (value instanceof DefaultMutableTreeTableNode) {
 					DefaultMutableTreeTableNode node = (DefaultMutableTreeTableNode) value;
-					PluginRecord plug = (PluginRecord) node.getUserObject();
+					PluginRecord plug = null;
+					if (node.getUserObject() instanceof PluginRecord) {
+						plug = (PluginRecord) node.getUserObject();
+					}
 					if (node.isLeaf()) {
 						setText(plug.getPlugin().getPluginName());
 						if (node.getParent() == tree.getModel().getRoot()) {

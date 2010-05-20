@@ -60,7 +60,8 @@ import ch.ethz.origo.juigle.prezentation.JUIGLErrorInfoUtils;
 import com.jhlabs.image.GlowFilter;
 
 /**
- * 
+ * Construct basic menu which library JUIGLE offers. This class should be
+ * extended by all new classes constructed menu.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.5 (3/29/2010)
@@ -316,7 +317,7 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 	}
 
 	protected void createHideButton(boolean showText, Action action) {
-   //FIXME not implemented yet - why?
+		// FIXME not implemented yet - why?
 	}
 
 	private void createSeparator(BufferedImage image) {
@@ -329,48 +330,50 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 
 	@Override
 	public void updateText() {
-	/*	SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {*/
-				setLocalizedResourceBundle(resourcePath);
-				for (JUIGLEMenuItem item : listOfitems) {
-					try {
-						updateItemText(item);
-						if (item.hasSubMenu()) {
-							for (JUIGLEMenuItem subItem : item.getSubMenu()) {
-								updateItemText(subItem);
-							}
-						}
-					} catch (MissingResourceException e) {
-						// parsing error message
-						String errorMSG = JUIGLEErrorParser.getJUIGLEErrorMessage("JG003:"
-								+ item.getResourceBundleKey()
-								+ ":"
-								+ (resourcePath != null ? resourcePath : item
-										.getResourceBundlePath()));
-						// display error GUI
-						JUIGLErrorInfoUtils.showErrorDialog("JUIGLE Error", errorMSG, e,
-								Level.WARNING, new EmailErrorReporter());
-						// write message to logger
-						JUIGLEMenu.logger.error(errorMSG, e);
-						// print error to stack trace
-						e.printStackTrace();
-					} catch (JUIGLELangException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+		/*
+		 * SwingUtilities.invokeLater(new Runnable() {
+		 * 
+		 * @Override public void run() {
+		 */
+		setLocalizedResourceBundle(resourcePath);
+		for (JUIGLEMenuItem item : listOfitems) {
+			try {
+				updateItemText(item);
+				if (item.hasSubMenu()) {
+					for (JUIGLEMenuItem subItem : item.getSubMenu()) {
+						updateItemText(subItem);
 					}
 				}
+			} catch (MissingResourceException e) {
+				// parsing error message
+				String errorMSG = JUIGLEErrorParser.getJUIGLEErrorMessage("JG003:"
+						+ item.getResourceBundleKey()
+						+ ":"
+						+ (resourcePath != null ? resourcePath : item
+								.getResourceBundlePath()));
+				// display error GUI
+				JUIGLErrorInfoUtils.showErrorDialog("JUIGLE Error", errorMSG, e,
+						Level.WARNING, new EmailErrorReporter());
+				// write message to logger
+				JUIGLEMenu.logger.error(errorMSG, e);
+				// print error to stack trace
+				e.printStackTrace();
+			} catch (JUIGLELangException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
-				for (JUIGLEButton butt : listOfButtons) {
-					try {
-						butt.updateText();
-					} catch (JUIGLELangException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			//}
-	//	});
+		for (JUIGLEButton butt : listOfButtons) {
+			try {
+				butt.updateText();
+			} catch (JUIGLELangException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		// }
+		// });
 	}
 
 	/**
@@ -385,7 +388,7 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 		if (!item.isOwnResourceBundleSets()) {
 			if (item.canBeTextShow()) {
 				if (item.getResourceBundleKey() != null)
-				item.updateText(resource.getString(item.getResourceBundleKey()));
+					item.updateText(resource.getString(item.getResourceBundleKey()));
 			}
 			if (item.isToolTipTextExist()) {
 				item.updateToolTipText(resource.getString(item

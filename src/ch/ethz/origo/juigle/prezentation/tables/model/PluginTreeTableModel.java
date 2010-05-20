@@ -32,7 +32,8 @@ import ch.ethz.origo.juigle.plugin.IPluggable;
 import ch.ethz.origo.juigle.plugin.PluginEngine;
 
 /**
- * 
+ * Create localized tree table model which contains list of all 
+ * plugins.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.1 (4/05/2010)
