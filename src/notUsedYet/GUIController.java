@@ -5,7 +5,7 @@ import ch.ethz.origo.juigle.application.observers.IObserver;
 import ch.ethz.origo.juigle.application.observers.JUIGLEObservable;
 
 /**
- * 
+ * NOT USED
  * 
  * @author Vaclav Souhrada (v.souhrada@gmail.com)
  * @version 0.2.0 10/25/09
