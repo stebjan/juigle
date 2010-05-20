@@ -31,10 +31,17 @@ import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
  * Interface for all class, which want to use international language support.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.1 (09/15/09}
+ * @version 0.1.2 (5/20/2010}
  * @since 0.1.0 (08/11/09)
  */
 public interface ILanguage {
+	
+	/**
+	 * ENGLISH language is used to as default language
+	 */
+	public static final String ENGLISH = "eng";
+	/** ENGLISH language is used to as default language */
+	public static final String CZECH = "cze";
 	
 	/**
 	 * Set localized resource bundle and add them path to file, 

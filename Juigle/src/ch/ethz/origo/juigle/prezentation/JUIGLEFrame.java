@@ -74,7 +74,7 @@ import com.nilo.plaf.nimrod.NimRODTheme;
  * Main <code>JUIGLE<code> software java frame.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.2.6 (3/28/2010)
+ * @version 0.2.7 (5/20/2010)
  * @since 0.1.0 (05/18/09)
  * @see JXFrame
  */
@@ -102,6 +102,7 @@ public class JUIGLEFrame extends JXFrame {
 	private JUIGLEMainMenu mainToolBar;
 
 	private JXButton maximalizeApp;
+	private JXLabel copyrightLabel;
 
 	private BufferedImage logoImg, testImg;
 	private BufferedImage minimizeImg, closeImg, minimizeOverImg;
@@ -591,7 +592,11 @@ public class JUIGLEFrame extends JXFrame {
 	 */
 	public void setCopyrightTitle(String copyright) {
 		this.copyright = copyright;
-		footerPanel.add(new JXLabel(copyright), gbcCopyright1);
+		if (copyrightLabel == null) {
+			copyrightLabel = new JXLabel();
+			footerPanel.add(copyrightLabel, gbcCopyright1);
+		}
+		copyrightLabel.setText(copyright);
 	}
 
 	/**
