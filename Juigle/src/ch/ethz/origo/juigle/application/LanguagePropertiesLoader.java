@@ -35,10 +35,10 @@ import org.apache.log4j.PropertyConfigurator;
 import ch.ethz.origo.juigle.application.exception.PropertiesException;
 
 /**
- * Loade property of languages
+ * Loade property of languages.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.0 (3/24/2010)
+ * @version 0.1.1 (5/20/2010)
  * @since 0.1.0 (3/24/2010)
  *
  */
@@ -71,24 +71,27 @@ public class LanguagePropertiesLoader {
 	}
 
 	/**
+	 * Return default locale of the application
 	 * 
-	 * 
-	 * @return
+	 * @return default locale of the application
 	 */
 	public static String getApplicationLocale() {
 		return properties.getProperty("default.lang");
 	}
 	
-	public static void writePropertyLang(String lang) {
+	/**
+	 * Write current language to property file. This language will be now defaulted for 
+	 * application
+	 * @param lang language name which will be written to property file
+	 */
+	public static void writeLangProperty(String lang) {
 		try {
 			FileOutputStream out = new FileOutputStream(new File(PROPERTY_FILE));
 			properties.setProperty("default.lang", lang);
-			LanguagePropertiesLoader.properties.store(out, "---No Comment---");
+			LanguagePropertiesLoader.properties.store(out, "---Language changed---");
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

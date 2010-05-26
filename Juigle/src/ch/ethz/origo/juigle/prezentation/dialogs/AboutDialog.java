@@ -57,8 +57,8 @@ public class AboutDialog extends JDialog implements ILanguage {
 	public static String DIALOG_RB_KEY_TITLE = "about.dialog.title";
 	public static String DIALOG_RB_KEY_APP_NAME = "about.dialog.app.name";
 	public static String DIALOG_RB_KEY_APP_VERSION = "about.dialog.version";
-	public static String DIALOG_RB_KEY_COPYRIGHT= "about.dialog.copyright";
-	public static String DIALOG_RB_KEY_HOMEPAGE= "about.dialog.homepage";
+	public static String DIALOG_RB_KEY_COPYRIGHT = "about.dialog.copyright";
+	public static String DIALOG_RB_KEY_HOMEPAGE = "about.dialog.homepage";
 	public static String DIALOG_RB_KEY_CONTRIBUTION = "about.dialog.contribution";
 
 	private JXPanel jAboutPanel;
@@ -79,7 +79,7 @@ public class AboutDialog extends JDialog implements ILanguage {
 
 	private ResourceBundle resource;
 	private String path;
-	
+
 	private AboutRecord aboutRecord;
 
 	/**
@@ -105,7 +105,7 @@ public class AboutDialog extends JDialog implements ILanguage {
 		initComponents();
 		initContentPanel();
 		this.setAlwaysOnTop(true);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.pack();
 		this.setVisible(false);
 		this.setLocation(JUIGLEGraphicsUtils.getCenterPosition(this.getSize()));
@@ -115,13 +115,8 @@ public class AboutDialog extends JDialog implements ILanguage {
 	 * Initialize content panel
 	 */
 	private void initContentPanel() {
-		jTabbedPane1.addTab("",
-				jAboutPanel);
+		jTabbedPane1.addTab("", jAboutPanel);
 		jTabbedPane1.addTab("", jCreditPanel);
-		/*
-		 * contentPanel = (JXPanel)content; contentPanel.setBackgroundPainter(new
-		 * PinstripePainter());
-		 */
 	}
 
 	private void initComponents() {
@@ -145,14 +140,14 @@ public class AboutDialog extends JDialog implements ILanguage {
 		setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 		setFont(new java.awt.Font("A.D. MONO", 0, 10));
 		setForeground(java.awt.Color.white);
-		setModal(true);
 		setName("AboutDialog");
 		setResizable(false);
 		jLogoPanel.setLayout(new java.awt.BorderLayout());
 
 		jLogoPanel.setBorder(new javax.swing.border.EtchedBorder(
 				javax.swing.border.EtchedBorder.RAISED));
-		jLogoPanel.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
+		jLogoPanel.setPreferredSize(new Dimension(icon.getIconWidth(), icon
+				.getIconHeight()));
 		jLogoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		jLogoLabel.setIcon(icon);
 		jLogoPanel.add(jLogoLabel, java.awt.BorderLayout.CENTER);
@@ -190,7 +185,7 @@ public class AboutDialog extends JDialog implements ILanguage {
 		jAboutPanel.add(jLabel1, gridBagConstraints);
 
 		jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		
+
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 3;
@@ -199,7 +194,7 @@ public class AboutDialog extends JDialog implements ILanguage {
 		jAboutPanel.add(jLabel2, gridBagConstraints);
 
 		jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		
+
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
@@ -223,11 +218,12 @@ public class AboutDialog extends JDialog implements ILanguage {
 
 		getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 	}
-	
+
 	/**
 	 * Set list of authors and contributions
 	 * 
-	 * @param record list of authors and contributions
+	 * @param record
+	 *          list of authors and contributions
 	 */
 	public void setAboutRecord(AboutRecord record) {
 		this.aboutRecord = record;
@@ -239,11 +235,11 @@ public class AboutDialog extends JDialog implements ILanguage {
 			}
 			jLabel3.setText(sbAuthor.toString());
 		}
-		
+
 		StringBuffer sbContr = new StringBuffer();
 		for (String contri : aboutRecord.getContribution()) {
 			sbContr.append(contri);
-	    sbContr.append("\n");
+			sbContr.append("\n");
 		}
 		jTextArea1.setText(sbContr.toString());
 	}
@@ -271,14 +267,18 @@ public class AboutDialog extends JDialog implements ILanguage {
 			@Override
 			public void run() {
 				setLocalizedResourceBundle(getResourceBundlePath());
-				setTitle("v " + resource.getString(AboutDialog.DIALOG_RB_KEY_APP_NAME) + " "
+				setTitle(resource.getString(AboutDialog.DIALOG_RB_KEY_APP_NAME) + " "
 						+ resource.getString(AboutDialog.DIALOG_RB_KEY_APP_VERSION));
-				jLabel1.setText(resource.getString(AboutDialog.DIALOG_RB_KEY_APP_VERSION));
-				jLabel4.setText(resource.getString(AboutDialog.DIALOG_RB_KEY_COPYRIGHT));
+				jLabel1.setText("v "
+						+ resource.getString(AboutDialog.DIALOG_RB_KEY_APP_VERSION));
+				jLabel4
+						.setText(resource.getString(AboutDialog.DIALOG_RB_KEY_COPYRIGHT));
 				jLabel2.setText(resource.getString(AboutDialog.DIALOG_RB_KEY_HOMEPAGE));
-				
-			jTabbedPane1.setTitleAt(0, resource.getString(AboutDialog.DIALOG_RB_KEY_TITLE));
-			jTabbedPane1.setTitleAt(1, resource.getString(AboutDialog.DIALOG_RB_KEY_CONTRIBUTION));
+
+				jTabbedPane1.setTitleAt(0, resource
+						.getString(AboutDialog.DIALOG_RB_KEY_TITLE));
+				jTabbedPane1.setTitleAt(1, resource
+						.getString(AboutDialog.DIALOG_RB_KEY_CONTRIBUTION));
 
 			}
 

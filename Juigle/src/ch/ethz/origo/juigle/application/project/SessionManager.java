@@ -136,7 +136,7 @@ public abstract class SessionManager {
 	}
 
 	public void closeFile() {
-		getCurrentProject().lockCommand();
+		//getCurrentProject().lockCommand();
 		try {
 			int projectIndex = closeCurrentProject();
 
