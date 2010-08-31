@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="JUIGLE" default="makejar" basedir=".">
 		
-	<!-- domovský adresář bundelu -->
+	<!--project home directory -->
 	<property name="projecthome" value="." />
 	
-	<!-- verze bundle -->
-	<property name="version" value="0.1.0" />
+	<!-- jar version -->
+	<property name="version" value="2.0.0" />
 
-	<!-- symbolický název bundelu -->
+	<!-- symbolický název jaru -->
 	<property name="jarname" value="${ant.project.name}" />
 	
 	<property name="jerpahome" value="../JERPA"/>
 
-	<!-- autor -->
+	<!-- author -->
 	<property name="author" value="Vaclav Souhrada" />
 		
 	<property name="src" location="${projecthome}/src" />
@@ -64,7 +64,7 @@
 		<antcall target="autoclean" />
 	</target>
 	
-	<!-- automatický úklid po kompilaci a vytvoření bundelu-->
+	<!-- automatický úklid po kompilaci a vytvoření jaru-->
 	<target name="autoclean">
 		<delete dir="${build}" />
 	</target>
@@ -77,8 +77,8 @@
 	</target>
 
 	
-	<!-- volitelný target, který umožní vytvořený bundle nakopírovat
-		na libovolné místo na disku, např. do složky Felixu. Před použitím
+	<!-- volitelný target, který umožní vytvořený jar nakopírovat
+		na libovolné místo na disku, např. do složky deploy. Před použitím
 		je nutné změnit cestu deployloc  -->
 	<target name="deploy" depends="makejar">
 		<delete file="${deployloc}/${buildfilename}" />
@@ -90,9 +90,7 @@
 	</target>	
 	
 	<target name="run">
-		<echo message="Starting..." />	
-			<java jar="${runloc}/bin/felix.jar" fork="true" dir="${runloc}">
-			</java>
-			<echo message="Shutting down Felix framework" />	
+		<echo message="JUIGLE can not be runned alone" />	
+		<echo message="Shutting down JUIGLE" />	
 		</target>
 </project>
