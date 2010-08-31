@@ -38,15 +38,15 @@ import ch.ethz.origo.juigle.application.exception.PropertiesException;
  * Loade property of languages.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.1 (5/20/2010)
+ * @version 0.2.0 (8/29/2010)
  * @since 0.1.0 (3/24/2010)
- *
+ * 
  */
 public class LanguagePropertiesLoader {
-	
+
 	/** Configuration file */
 	private static final String PROPERTY_FILE = "config/lang.properties";
-	
+
 	private static boolean isLoaded = false;
 
 	/** Contains the properties */
@@ -55,6 +55,7 @@ public class LanguagePropertiesLoader {
 	/**
 	 * Load properties
 	 * 
+	 * @since 0.1.0
 	 * @throws PropertiesException
 	 */
 	public static void loadProperties() throws PropertiesException {
@@ -64,7 +65,7 @@ public class LanguagePropertiesLoader {
 				PropertyConfigurator.configure(properties);
 			} catch (IOException e) {
 				throw new PropertiesException(LanguagePropertiesLoader.class.getName()
-						+ " - cannot read config properties", e);
+				    + " - cannot read config properties", e);
 			}
 			isLoaded = true;
 		}
@@ -73,16 +74,20 @@ public class LanguagePropertiesLoader {
 	/**
 	 * Return default locale of the application
 	 * 
+	 * @since 0.1.0
 	 * @return default locale of the application
 	 */
 	public static String getApplicationLocale() {
 		return properties.getProperty("default.lang");
 	}
-	
+
 	/**
-	 * Write current language to property file. This language will be now defaulted for 
-	 * application
-	 * @param lang language name which will be written to property file
+	 * Write current language to property file. This language will be now
+	 * defaulted for application
+	 * 
+	 * @param lang
+	 *          language name which will be written to property file
+	 * @since 0.1.0
 	 */
 	public static void writeLangProperty(String lang) {
 		try {
@@ -94,6 +99,20 @@ public class LanguagePropertiesLoader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Method return <i>true</i>, if properties was loaded, else return
+	 * <i>false</i>.
+	 * 
+	 * @version 0.1.0 (8/29/2010)
+	 * @since 0.2.0 (8/29/2010)
+	 * 
+	 * @return true if language properties was loaded
+	 * 
+	 */
+	public static boolean isLoad() {
+		return LanguagePropertiesLoader.isLoaded;
 	}
 
 }

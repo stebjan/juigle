@@ -8,13 +8,14 @@ import org.jdesktop.swingx.JXImagePanel;
 import org.jdesktop.swingx.JXFrame.StartPosition;
 
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
+import ch.ethz.origo.juigle.application.exception.SplashScreenException;
 import ch.ethz.origo.juigle.prezentation.JUIGLEGraphicsUtils;
 
 /**
  * Class which create SplashScreen as instance of JXFrame.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.0 (5/19/2010)
+ * @version 0.2.0 (8/29/2010)
  * @since 0.1.0 (5/19/2010)
  * 
  */
@@ -25,25 +26,47 @@ public class SplashScreen {
 	/** SplashScreen's image */
 	private Image image;
 
+	private static SplashScreen splash;
+
 	/**
 	 * Construct splash screen with image by given path
 	 * 
 	 * @param path
 	 *          image path
-	 * @throws PerspectiveException
+	 * @throws SplashScreenException
 	 *           image can not be created
 	 */
-	public SplashScreen(String path) throws PerspectiveException {
-		this.image = JUIGLEGraphicsUtils.getImage(path);
+	private SplashScreen(String path) throws SplashScreenException {
+		try {
+			this.image = JUIGLEGraphicsUtils.getImage(path);
+		} catch (PerspectiveException e) {
+			new SplashScreenException(e);
+		}
 	}
 
 	/**
 	 * Construct splash screen with specified image.
 	 * 
-	 * @param image specified image
+	 * @param image
+	 *          specified image
 	 */
-	public SplashScreen(Image image) {
+	private SplashScreen(Image image) {
 		this.image = image;
+	}
+
+	public static SplashScreen getInstance(Image image) {
+		if (splash == null) {
+			splash = new SplashScreen(image);
+		}
+		return splash;
+	}
+
+	public static SplashScreen getInstance(String path)
+	    throws SplashScreenException {
+		if (splash == null) {
+			splash = new SplashScreen(path);
+		}
+		return splash;
 	}
 
 	/**
@@ -67,11 +90,15 @@ public class SplashScreen {
 
 	/**
 	 * Method close splash screen (if is showed).
+	 * 
+	 * @version 0.2.0 (8/29/2010)
+	 * @since 0.1.0 (5/19/2010)
 	 */
 	public void close() {
 		if (frame != null) {
 			frame.setVisible(false);
 			frame = null;
+			splash = null;
 		}
 	}
 
