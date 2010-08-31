@@ -1,0 +1,10 @@
+*********************************************************************************************
+*                                  CHANGE LOG 1.0.0 - > 2.0.0                               *
+*********************************************************************************************
+  * revision #109  (08/31/2010)
+	
+   + Created class JUIGLEApplication
+   + Added to the LangugePropertiesLoader class method which return true, if lang. properties was be loaded.
+   + Now is SplashScreen singleton java class. Now can be configured from the JUIGLEApplication class.
+   + Added class SplashScreenException
+   
