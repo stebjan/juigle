@@ -37,6 +37,7 @@ import org.jdesktop.swingx.JXLabel;
 import org.jdesktop.swingx.JXPanel;
 
 import ch.ethz.origo.juigle.application.ILanguage;
+import ch.ethz.origo.juigle.application.JUIGLEApplication;
 import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 import ch.ethz.origo.juigle.application.observers.LanguageObservable;
 import ch.ethz.origo.juigle.prezentation.JUIGLEGraphicsUtils;
@@ -45,7 +46,7 @@ import ch.ethz.origo.juigle.prezentation.JUIGLEGraphicsUtils;
  * Construct instance of dialog called About dialog.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.0 09/06/09
+ * @version 0.2.1.00 (9/12/2010)
  * @since 0.1.0 (05/18/09)
  * @see JUIGLEDialog
  */
@@ -88,7 +89,7 @@ public class AboutDialog extends JDialog implements ILanguage {
 	 * @throws JUIGLELangException
 	 */
 	public AboutDialog(String resourceBundlePath, Icon icon, boolean modal)
-			throws JUIGLELangException {
+	    throws JUIGLELangException {
 		super();
 		setLocalizedResourceBundle(resourceBundlePath);
 		this.icon = icon;
@@ -145,9 +146,9 @@ public class AboutDialog extends JDialog implements ILanguage {
 		jLogoPanel.setLayout(new java.awt.BorderLayout());
 
 		jLogoPanel.setBorder(new javax.swing.border.EtchedBorder(
-				javax.swing.border.EtchedBorder.RAISED));
+		    javax.swing.border.EtchedBorder.RAISED));
 		jLogoPanel.setPreferredSize(new Dimension(icon.getIconWidth(), icon
-				.getIconHeight()));
+		    .getIconHeight()));
 		jLogoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		jLogoLabel.setIcon(icon);
 		jLogoPanel.add(jLogoLabel, java.awt.BorderLayout.CENTER);
@@ -155,7 +156,7 @@ public class AboutDialog extends JDialog implements ILanguage {
 		getContentPane().add(jLogoPanel, java.awt.BorderLayout.WEST);
 
 		jBtnOKPanel.setBorder(new javax.swing.border.EtchedBorder(
-				javax.swing.border.EtchedBorder.RAISED));
+		    javax.swing.border.EtchedBorder.RAISED));
 		jBtnOKPanel.setPreferredSize(new java.awt.Dimension(350, 35));
 		jButton1.setText("Ok");
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -267,18 +268,23 @@ public class AboutDialog extends JDialog implements ILanguage {
 			@Override
 			public void run() {
 				setLocalizedResourceBundle(getResourceBundlePath());
-				setTitle(resource.getString(AboutDialog.DIALOG_RB_KEY_APP_NAME) + " "
-						+ resource.getString(AboutDialog.DIALOG_RB_KEY_APP_VERSION));
+				setTitle(resource.getString(AboutDialog.DIALOG_RB_KEY_APP_NAME)
+				    + " "
+				    + (JUIGLEApplication.getVersion() != null ? JUIGLEApplication
+				        .getVersion() : resource
+				        .getString(AboutDialog.DIALOG_RB_KEY_APP_VERSION)));
 				jLabel1.setText("v "
-						+ resource.getString(AboutDialog.DIALOG_RB_KEY_APP_VERSION));
+				    + (JUIGLEApplication.getVersion() != null ? JUIGLEApplication
+				        .getVersion() : resource
+				        .getString(AboutDialog.DIALOG_RB_KEY_APP_VERSION)));
 				jLabel4
-						.setText(resource.getString(AboutDialog.DIALOG_RB_KEY_COPYRIGHT));
+				    .setText(resource.getString(AboutDialog.DIALOG_RB_KEY_COPYRIGHT));
 				jLabel2.setText(resource.getString(AboutDialog.DIALOG_RB_KEY_HOMEPAGE));
 
 				jTabbedPane1.setTitleAt(0, resource
-						.getString(AboutDialog.DIALOG_RB_KEY_TITLE));
+				    .getString(AboutDialog.DIALOG_RB_KEY_TITLE));
 				jTabbedPane1.setTitleAt(1, resource
-						.getString(AboutDialog.DIALOG_RB_KEY_CONTRIBUTION));
+				    .getString(AboutDialog.DIALOG_RB_KEY_CONTRIBUTION));
 
 			}
 

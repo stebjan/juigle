@@ -5,22 +5,62 @@ import java.util.Locale;
 
 import org.apache.log4j.Logger;
 
+import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
+import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 import ch.ethz.origo.juigle.application.exception.PropertiesException;
 import ch.ethz.origo.juigle.application.exception.SplashScreenException;
+import ch.ethz.origo.juigle.application.observers.IObservable;
+import ch.ethz.origo.juigle.application.observers.IObserver;
+import ch.ethz.origo.juigle.application.observers.JUIGLEObservable;
+import ch.ethz.origo.juigle.plugin.PluginEngine;
+import ch.ethz.origo.juigle.plugin.exception.PluginEngineException;
+import ch.ethz.origo.juigle.prezentation.IMainFrame;
+import ch.ethz.origo.juigle.prezentation.JUIGLEFrame;
 import ch.ethz.origo.juigle.prezentation.splashscreen.SplashScreen;
 
 /**
  * A new class for the application global settings
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail dot com)
- * @version 0.1.0 (8/29/2010)
+ * @version 0.2.1.00 (9/12/2010)
  * @since 2.0.0 (8/29/2010)
  */
-public class JUIGLEApplication {
+public class JUIGLEApplication implements IObserver, ILanguage {
 
 	private static Logger logg = Logger.getLogger(JUIGLEApplication.class);
 
-	private static SplashScreen splash;
+	private static JUIGLEApplication app;
+	private IMainFrame frame;
+	private SplashScreen splash;
+	private PluginEngine pluginEng;
+	private JUIGLEFrame jgFrame;
+
+	private static String appVersion;
+
+	/**
+	 * Default constructor
+	 * 
+	 * @version 0.1.0 (9/04/2010)
+	 * @since 0.2.0 (9/04/2010)
+	 */
+	private JUIGLEApplication() {
+		JUIGLEObservable.getInstance().attach(this);
+	}
+
+	/**
+	 * Return instance on JUIGLEApplication class. This is based on pattern called
+	 * Singleton.
+	 * 
+	 * @return instance on JUIGLEApplication class
+	 * @version 0.1.0 (9/04/2010)
+	 * @since 0.2.0 (9/04/2010)
+	 */
+	public static JUIGLEApplication getInstance() {
+		if (app == null) {
+			app = new JUIGLEApplication();
+		}
+		return app;
+	}
 
 	/**
 	 * Set application locale.
@@ -80,7 +120,7 @@ public class JUIGLEApplication {
 	 */
 	public static void setLocale() throws PropertiesException {
 		if (!LanguagePropertiesLoader.isLoad()) {
-			JUIGLEApplication.loadLanguageProps();
+			loadLanguageProps();
 		}
 		setLocale(LanguagePropertiesLoader.getApplicationLocale());
 	}
@@ -105,10 +145,9 @@ public class JUIGLEApplication {
 	 * @version 0.1.0 (8/29/2010)
 	 * @since 0.1.0 (8/29/2010)
 	 */
-	public static void startSplashScreen(String path)
-	    throws SplashScreenException {
-		JUIGLEApplication.splash = SplashScreen.getInstance(path);
-		JUIGLEApplication.splash.show();
+	public void startSplashScreen(String path) throws SplashScreenException {
+		splash = SplashScreen.getInstance(path);
+		splash.show();
 	}
 
 	/**
@@ -120,20 +159,148 @@ public class JUIGLEApplication {
 	 * @version 0.1.0 (8/29/2010)
 	 * @since 0.1.0 (8/29/2010)
 	 */
-	public static void startSplashScreen(Image image) {
-		JUIGLEApplication.splash = SplashScreen.getInstance(image);
-		JUIGLEApplication.splash.show();
+	public void startSplashScreen(Image image) {
+		splash = SplashScreen.getInstance(image);
+		splash.show();
 	}
 
 	/**
 	 * Method close and destroy splash screen
+	 * 
 	 * @version 0.1.0 (8/29/2010)
 	 * @since 0.1.0 (8/29/2010)
 	 */
-	public static void stopSplashScreen() {
-		if (JUIGLEApplication.splash != null) {
-			JUIGLEApplication.splash.close();
+	public void stopSplashScreen() {
+		if (splash != null) {
+			splash.close();
 		}
+	}
+
+	/**
+	 * 
+	 * @param frame
+	 * @version 0.1.0 (9/04/2010)
+	 * @since 0.2.0 (9/04/2010)
+	 */
+	public void setMainFrame(IMainFrame frame) {
+		this.frame = frame;
+	}
+
+	/**
+	 * 
+	 * @param major
+	 * @param minor
+	 * @param revision
+	 * @throws PluginEngineException
+	 * @version 0.1.0 (9/04/2010)
+	 * @since 0.2.0 (9/04/2010)
+	 */
+	public void initPluginEngine(int major, int minor, int revision)
+	    throws PluginEngineException {
+		pluginEng = PluginEngine.getInstance();
+		pluginEng.setCurrentVersion(major, minor, revision);
+	}
+
+	/**
+	 * 
+	 * @version 0.1.0 (9/04/2010)
+	 * @since 0.2.0 (9/04/2010)
+	 */
+	public void loadPlugins() {
+		// pluginEng.loadPluginsFromDirectory();
+	}
+
+	/**
+	 * 
+	 * @version 0.1.0 (9/04/2010)
+	 * @throws PerspectiveException
+	 * @since 0.2.0 (9/04/2010)
+	 */
+	public void startApplication(boolean fullScreen) throws PerspectiveException {
+		if (jgFrame == null) {
+			jgFrame = new JUIGLEFrame(appVersion, ClassLoader
+			    .getSystemResourceAsStream(frame.getLogoPath()));
+			jgFrame.setMainMenu(frame.getMainMenu());
+			// jgFrame.setPerspectives(perspectiveLoader, perspResourceBundleKey)
+			jgFrame.setFullScreen(fullScreen);
+			jgFrame.setVisible(true);
+
+		}
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void update(Object state) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void update(IObservable o, Object state) {
+		if ((o instanceof JUIGLEObservable) && (state instanceof Integer)) {
+			int msg = (Integer) state;
+
+			switch (msg) {
+			case JUIGLEObservable.MSG_APPLICATION_CLOSING:
+				frame.applicationClose();
+				frame = null;
+				jgFrame = null;
+				pluginEng = null;
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+
+	@Override
+	public String getResourceBundlePath() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setLocalizedResourceBundle(String path) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setResourceBundleKey(String key) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void updateText() throws JUIGLELangException {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 
+	 * @param appVersion
+	 * @version 0.1.0 (9/04/2010)
+	 * @since 2.0.0 (9/04/2010)
+	 */
+	public void setVersion(String appVersion) {
+		JUIGLEApplication.appVersion = appVersion;
+	}
+
+	/**
+	 * 
+	 * @return
+	 * @version 0.1.0 (9/12/2010)
+	 * @since 2.0.0 (9/12/2010)
+	 */
+	public static String getVersion() {
+		return appVersion;
 	}
 
 }
