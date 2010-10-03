@@ -45,7 +45,7 @@ import ch.ethz.origo.juigle.application.exception.PropertiesException;
 public class LanguagePropertiesLoader {
 
 	/** Configuration file */
-	private static final String PROPERTY_FILE = "config/lng.properties";
+	private static final String PROPERTY_FILE = "config/lang.properties";
 
 	private static boolean isLoaded = false;
 

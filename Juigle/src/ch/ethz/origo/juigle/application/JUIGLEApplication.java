@@ -13,6 +13,7 @@ import ch.ethz.origo.juigle.application.observers.IObservable;
 import ch.ethz.origo.juigle.application.observers.IObserver;
 import ch.ethz.origo.juigle.application.observers.JUIGLEObservable;
 import ch.ethz.origo.juigle.context.LanguageUtils;
+import ch.ethz.origo.juigle.data.EmailErrorReporter;
 import ch.ethz.origo.juigle.plugin.PluginEngine;
 import ch.ethz.origo.juigle.plugin.exception.PluginEngineException;
 import ch.ethz.origo.juigle.prezentation.IMainFrame;
