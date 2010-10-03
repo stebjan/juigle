@@ -1,7 +1,7 @@
 package ch.ethz.origo.juigle.application;
 
 import java.awt.Image;
-import java.util.Locale;
+import java.util.logging.Level;
 
 import org.apache.log4j.Logger;
 
@@ -12,28 +12,33 @@ import ch.ethz.origo.juigle.application.exception.SplashScreenException;
 import ch.ethz.origo.juigle.application.observers.IObservable;
 import ch.ethz.origo.juigle.application.observers.IObserver;
 import ch.ethz.origo.juigle.application.observers.JUIGLEObservable;
+import ch.ethz.origo.juigle.context.LanguageUtils;
 import ch.ethz.origo.juigle.plugin.PluginEngine;
 import ch.ethz.origo.juigle.plugin.exception.PluginEngineException;
 import ch.ethz.origo.juigle.prezentation.IMainFrame;
 import ch.ethz.origo.juigle.prezentation.JUIGLEFrame;
+import ch.ethz.origo.juigle.prezentation.JUIGLErrorInfoUtils;
+import ch.ethz.origo.juigle.prezentation.menu.JUIGLEMainMenu;
 import ch.ethz.origo.juigle.prezentation.splashscreen.SplashScreen;
 
 /**
- * A new class for the application global settings
+ * A class for the application global settings and starting.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail dot com)
- * @version 0.2.1.00 (9/12/2010)
+ * @version 0.2.2.01 (10/03/2010)
  * @since 2.0.0 (8/29/2010)
+ * @see {@link IObserver}
+ * @see {@link ILanguage}
  */
 public class JUIGLEApplication implements IObserver, ILanguage {
 
-	private static Logger logg = Logger.getLogger(JUIGLEApplication.class);
+	private static Logger logger = Logger.getLogger(JUIGLEApplication.class);
 
 	private static JUIGLEApplication app;
 	private IMainFrame frame;
 	private SplashScreen splash;
 	private PluginEngine pluginEng;
-	private JUIGLEFrame jgFrame;
+	private JUIGLEFrame juigleFrame;
 
 	private static String appVersion;
 
@@ -41,10 +46,13 @@ public class JUIGLEApplication implements IObserver, ILanguage {
 	 * Default constructor
 	 * 
 	 * @version 0.1.0 (9/04/2010)
+	 * @throws PropertiesException 
 	 * @since 0.2.0 (9/04/2010)
 	 */
-	private JUIGLEApplication() {
+	private JUIGLEApplication() throws PropertiesException {
 		JUIGLEObservable.getInstance().attach(this);
+		LanguageUtils.loadLanguageProps();
+		LanguageUtils.setLocale();
 	}
 
 	/**
@@ -57,83 +65,18 @@ public class JUIGLEApplication implements IObserver, ILanguage {
 	 */
 	public static JUIGLEApplication getInstance() {
 		if (app == null) {
-			app = new JUIGLEApplication();
+			try {
+				app = new JUIGLEApplication();
+			} catch (PropertiesException e) {
+				// parsing error message
+				String errorMSG = JUIGLEErrorParser.getJUIGLEErrorMessage(e.getMessage());
+				// display error GUI
+				JUIGLErrorInfoUtils.showErrorDialog("Error dialog", errorMSG, e,
+						Level.WARNING);
+				logger.warn(errorMSG, e);
+			}
 		}
 		return app;
-	}
-
-	/**
-	 * Set application locale.
-	 * 
-	 * Current supported languages are: <br>
-	 * <ul>
-	 * <li>English - param eng - use <code>ILanguage.ENGLISH</code></li>
-	 * <li>Czech - param cze - use <code>ILanguage.CZECH</code></li>
-	 * </ul>
-	 * 
-	 * @param applicationLocale
-	 *          name of locale
-	 * @version 0.1.0 (8/29/2010)
-	 * @since 0.1.0 (8/29/2010)
-	 */
-	public static void setLocale(String applicationLocale) {
-		Locale locale = null;
-		if (applicationLocale.equals(ILanguage.ENGLISH)) {
-			locale = new Locale("en");
-		} else if (applicationLocale.equals(ILanguage.CZECH)) {
-			locale = new Locale("cs", "CZ");
-		}
-		Locale.setDefault(locale);
-	}
-
-	/**
-	 * Set application locale
-	 * 
-	 * @param locale
-	 *          locale which will be set up as default application locale
-	 * @version 0.1.0 (8/29/2010)
-	 * @since 0.1.0 (8/29/2010)
-	 */
-	public static void setLocale(Locale locale) {
-		if (locale != null) {
-			Locale.setDefault(locale);
-		} else {
-			logg.warn("Locale is null. will be set up default locale...");
-		}
-	}
-
-	/**
-	 * Set application locale by JUIGLE language properties loader. This method
-	 * read locale parameter from the <strong>lang.properties</strong> file.
-	 * 
-	 * Current supported languages are: <br>
-	 * <ul>
-	 * <li>English</li>
-	 * <li>Czech</li>
-	 * </ul>
-	 * 
-	 * @throws PropertiesException
-	 * 
-	 * @version 0.1.0 (8/29/2010)
-	 * @since 0.1.0 (8/29/2010)
-	 * @see LanguagePropertiesLoader#getApplicationLocale()
-	 */
-	public static void setLocale() throws PropertiesException {
-		if (!LanguagePropertiesLoader.isLoad()) {
-			loadLanguageProps();
-		}
-		setLocale(LanguagePropertiesLoader.getApplicationLocale());
-	}
-
-	/**
-	 * Method load language properties from
-	 * 
-	 * @version 0.1.0 (8/29/2010)
-	 * @since 0.1.0 (8/29/2010)
-	 * @throws PropertiesException
-	 */
-	public static void loadLanguageProps() throws PropertiesException {
-		LanguagePropertiesLoader.loadProperties();
 	}
 
 	/**
@@ -212,19 +155,25 @@ public class JUIGLEApplication implements IObserver, ILanguage {
 
 	/**
 	 * 
-	 * @version 0.1.0 (9/04/2010)
+	 * 
+	 * @version 0.2.0.01 (10/03/2010)
 	 * @throws PerspectiveException
 	 * @since 0.2.0 (9/04/2010)
 	 */
-	public void startApplication(boolean fullScreen) throws PerspectiveException {
-		if (jgFrame == null) {
-			jgFrame = new JUIGLEFrame(appVersion, ClassLoader
+	public void startApplication(boolean fullScreen, String perspectivePath)
+	    throws PerspectiveException {
+		if (juigleFrame == null) {
+			logger.info("Application starting...");
+			PerspectiveLoader loader = PerspectiveLoader.getInstance();
+			loader.loadPerspectives(perspectivePath);
+			juigleFrame = new JUIGLEFrame(appVersion, ClassLoader
 			    .getSystemResourceAsStream(frame.getLogoPath()));
-			jgFrame.setMainMenu(frame.getMainMenu());
-			// jgFrame.setPerspectives(perspectiveLoader, perspResourceBundleKey)
-			jgFrame.setFullScreen(fullScreen);
-			jgFrame.setVisible(true);
-
+			juigleFrame.setMainMenu(frame.getMainMenu());
+			juigleFrame.setPerspectives(loader,
+			    JUIGLEMainMenu.KEY_PERSPECTIVE_MAIN_MENU);
+			juigleFrame.setFullScreen(fullScreen);
+			juigleFrame.setVisible(true);
+			logger.info("Application started successfully...");
 		}
 	}
 
@@ -247,9 +196,11 @@ public class JUIGLEApplication implements IObserver, ILanguage {
 
 			switch (msg) {
 			case JUIGLEObservable.MSG_APPLICATION_CLOSING:
+				logger.info("Application closing...");
 				frame.applicationClose();
 				frame = null;
-				jgFrame = null;
+				juigleFrame.dispose();
+				juigleFrame = null;
 				pluginEng = null;
 				break;
 
@@ -286,8 +237,8 @@ public class JUIGLEApplication implements IObserver, ILanguage {
 	/**
 	 * 
 	 * @param appVersion
-	 * @version 0.1.0 (9/04/2010)
-	 * @since 2.0.0 (9/04/2010)
+	 * @version 0.1.0.00 (9/04/2010)
+	 * @since 0.2.1.00 (9/04/2010)
 	 */
 	public void setVersion(String appVersion) {
 		JUIGLEApplication.appVersion = appVersion;
@@ -296,8 +247,8 @@ public class JUIGLEApplication implements IObserver, ILanguage {
 	/**
 	 * 
 	 * @return
-	 * @version 0.1.0 (9/12/2010)
-	 * @since 2.0.0 (9/12/2010)
+	 * @version 0.1.0.00 (9/12/2010)
+	 * @since 0.2.1.00 (9/12/2010)
 	 */
 	public static String getVersion() {
 		return appVersion;

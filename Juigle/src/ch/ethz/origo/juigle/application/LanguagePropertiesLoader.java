@@ -35,17 +35,17 @@ import org.apache.log4j.PropertyConfigurator;
 import ch.ethz.origo.juigle.application.exception.PropertiesException;
 
 /**
- * Loade property of languages.
+ * Load property of languages.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.2.0 (8/29/2010)
+ * @version 0.2.0.01 (10/03/2010)
  * @since 0.1.0 (3/24/2010)
  * 
  */
 public class LanguagePropertiesLoader {
 
 	/** Configuration file */
-	private static final String PROPERTY_FILE = "config/lang.properties";
+	private static final String PROPERTY_FILE = "config/lng.properties";
 
 	private static boolean isLoaded = false;
 
@@ -64,8 +64,7 @@ public class LanguagePropertiesLoader {
 				properties.load(new FileInputStream(new File(PROPERTY_FILE)));
 				PropertyConfigurator.configure(properties);
 			} catch (IOException e) {
-				throw new PropertiesException(LanguagePropertiesLoader.class.getName()
-				    + " - cannot read config properties", e);
+				throw new PropertiesException("JG002:" + PROPERTY_FILE, e);
 			}
 			isLoaded = true;
 		}

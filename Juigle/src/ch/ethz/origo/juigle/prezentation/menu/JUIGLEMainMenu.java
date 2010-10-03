@@ -48,14 +48,16 @@ import ch.ethz.origo.juigle.prezentation.perspective.PerspectivePanel;
  * Construct main menu of application.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.2.4 (5/19/2010)
- * @since 0.1.0 (c.v. 08/14/09)
+ * @version 0.2.4.01 (10/03/2010)
+ * @since 0.1.0 (08/14/09)
  * @see JUIGLEMenu
  */
 public class JUIGLEMainMenu extends JUIGLEMenu {
 
 	/** Only for serialization */
 	private static final long serialVersionUID = 2839975234788319679L;
+	
+	public static final String KEY_PERSPECTIVE_MAIN_MENU = "menu.main.perspectives";
 
 	private JXDatePicker datePicker;
 
@@ -126,7 +128,7 @@ public class JUIGLEMainMenu extends JUIGLEMenu {
 	}
 
 	public void addSettingsItem(Icon icon, String resourceBundleKey) {
-
+		throw new UnsupportedOperationException("Method not implemented yet...");
 	}
 
 	/**
