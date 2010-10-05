@@ -14,7 +14,7 @@
  *    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/*
+/*    EmailErrorReporter.java
  *  
  *    Copyright (C) 2009 - 2010 
  *    							University of West Bohemia, 
@@ -28,12 +28,15 @@ import java.util.Properties;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import org.jdesktop.swingx.error.ErrorInfo;
 import org.jdesktop.swingx.error.ErrorReporter;
@@ -43,7 +46,7 @@ import org.jdesktop.swingx.error.ErrorReporter;
  * to JUIGLE developers.
  * 
  * @author Vaclav Souhrada
- * @version 0.1.0 (1/29/2010)
+ * @version 0.1.1.00 (10/05/2010)
  * @since 0.1.0 (1/29/2010)
  * @see ErrorReporter
  * 
@@ -80,7 +83,18 @@ public class EmailErrorReporter implements ErrorReporter {
 		try {
 			message.setSender(new InternetAddress(sender));
 			message.setSubject(info.getTitle());
-			message.setContent(info.getErrorException().toString(), "text/plain");
+			
+			MimeBodyPart mbp1 = new MimeBodyPart();
+			mbp1.setText(info.getBasicErrorMessage());
+			
+			MimeBodyPart mbp2 = new MimeBodyPart();
+			mbp2.setText(JUIGLEUtils.getErrorStackTraceAsText(info.getErrorException()));
+			
+			Multipart mp = new MimeMultipart();
+			mp.addBodyPart(mbp1);
+			mp.addBodyPart(mbp2);
+			message.setContent(mp);
+			
 			message.setRecipients(Message.RecipientType.TO, InternetAddress
 					.parse(recipients));
 			if (recipients.indexOf(',') > 0)
@@ -89,7 +103,6 @@ public class EmailErrorReporter implements ErrorReporter {
 			else
 				message.setRecipient(Message.RecipientType.TO, new InternetAddress(
 						recipients));
-
 			Transport.send(message);
 		} catch (AddressException e) {
 			// TODO Auto-generated catch block
@@ -99,4 +112,5 @@ public class EmailErrorReporter implements ErrorReporter {
 			e.printStackTrace();
 		}
 	}
+
 }

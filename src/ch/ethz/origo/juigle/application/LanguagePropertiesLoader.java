@@ -38,15 +38,15 @@ import ch.ethz.origo.juigle.application.exception.PropertiesException;
  * Loade property of languages
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.0 (3/24/2010)
+ * @version 0.2.0.00 (10/05/2010)
  * @since 0.1.0 (3/24/2010)
- *
+ * 
  */
 public class LanguagePropertiesLoader {
-	
+
 	/** Configuration file */
 	private static final String PROPERTY_FILE = "config/lang.properties";
-	
+
 	private static boolean isLoaded = false;
 
 	/** Contains the properties */
@@ -71,26 +71,39 @@ public class LanguagePropertiesLoader {
 	}
 
 	/**
+	 * Return default locale of the application
 	 * 
-	 * 
-	 * @return
+	 * @since 0.1.0
+	 * @return default locale of the application
 	 */
 	public static String getApplicationLocale() {
 		return properties.getProperty("default.lang");
 	}
-	
-	public static void writePropertyLang(String lang) {
+
+	public static void writeLangProperty(String lang) {
 		try {
 			FileOutputStream out = new FileOutputStream(new File(PROPERTY_FILE));
 			properties.setProperty("default.lang", lang);
-			LanguagePropertiesLoader.properties.store(out, "---No Comment---");
+			LanguagePropertiesLoader.properties.store(out, "---Language changed---");
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Method return <i>true</i>, if properties was loaded, else return
+	 * <i>false</i>.
+	 * 
+	 * @version 0.1.0 (8/29/2010)
+	 * @since 0.2.0 (8/29/2010)
+	 * 
+	 * @return true if language properties was loaded
+	 * 
+	 */
+	public static boolean isLoad() {
+		return LanguagePropertiesLoader.isLoaded;
 	}
 
 }

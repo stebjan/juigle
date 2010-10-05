@@ -1,0 +1,8 @@
+*********************************************************************************************
+*                                  CHANGE LOG 1.0.0 - > 1.0.1                               *
+*********************************************************************************************
+  * (10/05/2010)
+  	 # 120
+  	 	+ Added a new code in LanguagePropertiesLoader class. Method writePropertyLang renamed on writeLangProperty
+  	 	+ #ISSUE 10: More informations from EMail Reporter - http://juigle.origo.ethz.ch/issues/10
+  	 	+ Added class JUIGLEFileUtils
