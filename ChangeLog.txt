@@ -1,8 +1,12 @@
 *********************************************************************************************
 *                                  CHANGE LOG 1.0.0 - > 1.0.1                               *
 *********************************************************************************************
+  * (10/06/2010)
+  	 #125
+  	 	CHANGED : #ISSUE 19: automatic filling of error code to the error text - http://juigle.origo.ethz.ch/issues/19
   * (10/05/2010)
   	 # 120
-  	 	+ Added a new code in LanguagePropertiesLoader class. Method writePropertyLang renamed on writeLangProperty
-  	 	+ #ISSUE 10: More informations from EMail Reporter - http://juigle.origo.ethz.ch/issues/10
-  	 	+ Added class JUIGLEFileUtils
+  	 	ADDED   : a new code in LanguagePropertiesLoader class. 
+  	 	CHANGED : Method LanguagePropertiesLoader.writePropertyLang renamed on writeLangProperty
+  	 	FIXED   : #ISSUE 10: More informations from EMail Reporter - http://juigle.origo.ethz.ch/issues/10
+  	 	ADDED   : Added class JUIGLEFileUtils

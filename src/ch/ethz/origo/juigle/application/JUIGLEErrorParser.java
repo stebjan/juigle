@@ -62,6 +62,7 @@ public class JUIGLEErrorParser {
 	private static String parseMessage(String errorCode, String filePath) {
 		String[] args = errorCode.split(":");
 		String pattern = ResourceBundle.getBundle(filePath).getString(args[0]);
+		String key = "[" + args[0] + "] ";
 
 		if (args.length > 1) {
 			MessageFormat formatter = new MessageFormat(pattern);
@@ -69,9 +70,9 @@ public class JUIGLEErrorParser {
 			for (int i = 1; i < args.length; i++) {
 				arguments[i - 1] = args[i];
 			}
-			return formatter.format(arguments);
+			return key + formatter.format(arguments);
 		} else {
-			return pattern;
+			return key + pattern;
 		}
 	}
 
