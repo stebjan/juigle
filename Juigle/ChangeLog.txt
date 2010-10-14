@@ -1,10 +1,34 @@
 *********************************************************************************************
 *                                  CHANGE LOG 1.0.0 - > 2.0.0                               *
 *********************************************************************************************
-  * revision #109  (08/31/2010)
-	
-   + Created class JUIGLEApplication
-   + Added to the LangugePropertiesLoader class method which return true, if lang. properties was be loaded.
-   + Now is SplashScreen singleton java class. Now can be configured from the JUIGLEApplication class.
-   + Added class SplashScreenException
-   
+ * (10/14/2010)
+  	 #131
+  	 	 ADDED  : Added target for generating Javadoc by ANT build.xml 
+  	 	
+  * (10/06/2010)
+  	 #124
+  	 	CHANGED : #ISSUE 19: automatic filling of error code to the error text - http://juigle.origo.ethz.ch/issues/19
+  
+  * (10/03/2010)
+  	 #119, 116
+  	    FIXED   : #ISSUE 10: More informations from EMail Reporter - http://juigle.origo.ethz.ch/issues/10
+  	    ADDED   : Added classes: ApplicationException, DBException, BasicPropertiesReader, LanguageUtils
+  	 	ADDED   : A new properties Loader and BasicPropertiesReader class
+  	 	ADDED   : Added context classes
+  	 	CHANGED : New JUIGLE package structure
+  	 	CHANGED : New JUIGLE loading perspectives from properties file. XML is not supported yet.
+  * (9/12/2010) 
+  	 #112
+  	 	CHANGED : Class AboutDialog now read as first version from JUIGLEApplication. If is null then read version from AboutDialog.properties file defined by user.
+  	 	ADDED   : Added a new class JUIGLEUtils + new image configure-48.png
+  	 	CHANGED : Class JUIGLEApplication changed from static class to normal singleton class.
+  	 	ADDED   : Added interface IMainFrame.
+  	 	
+  * (8/31/2010)
+  	 #111 - 110
+  		CHANGED : JUIGLE properties and builds files.
+  	 #109
+   		ADDED   : Class JUIGLEApplication
+   		CHANGED : Added to the LangugePropertiesLoader class method which return true, if lang. properties was be loaded.
+   		CHANGED : Now is SplashScreen singleton java class. Now can be configured from the JUIGLEApplication class.
+   		ADDED   : Added class SplashScreenException.
