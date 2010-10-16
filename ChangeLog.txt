@@ -1,6 +1,12 @@
 *********************************************************************************************
 *                                  CHANGE LOG 1.0.0 - > 1.0.1                               *
 *********************************************************************************************
+  * (10/12/2010)
+  	 #132
+  	 	ADDED   : Added target for generating Javadoc by ANT build.xml 
+  * (10/12/2010)
+  	 #128 - 130
+  	 	CHANGED : #ISSUE 19: automatic filling of error code to the error text - http://juigle.origo.ethz.ch/issues/19
   * (10/06/2010)
   	 #125
   	 	CHANGED : #ISSUE 19: automatic filling of error code to the error text - http://juigle.origo.ethz.ch/issues/19
