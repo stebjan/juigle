@@ -8,7 +8,7 @@ package ch.ethz.origo.juigle.data;
  * 
  * @author Vaclav Souhrada (v dot souhrada at gmail dot com)
  * @version 0.1.1.00 (10/03/2010)
- * @since 2.0.0 (9/05/2010)
+ * @since 1.0.1 (9/05/2010)
  * 
  */
 public class JUIGLEUtils {

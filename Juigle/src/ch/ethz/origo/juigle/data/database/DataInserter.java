@@ -25,7 +25,7 @@ package ch.ethz.origo.juigle.data.database;
 
 import java.util.List;
 
-import ch.ethz.origo.juigle.application.database.IDatabaseAction;
+import ch.ethz.origo.juigle.db_prepare.IDatabaseAction;
 
 /**
  * 

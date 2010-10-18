@@ -21,7 +21,7 @@
  *                  Department of Computer Science and Engineering, 
  *                  Pilsen, Czech Republic
  */
-package ch.ethz.origo.juigle.application.database;
+package ch.ethz.origo.juigle.db_prepare;
 
 /**
  * 

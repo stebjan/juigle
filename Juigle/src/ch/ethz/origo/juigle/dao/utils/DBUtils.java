@@ -21,39 +21,32 @@
  *                  Department of Computer Science and Engineering, 
  *                  Pilsen, Czech Republic
  */
-package ch.ethz.origo.juigle.application.database;
-
-import ch.ethz.origo.juigle.data.database.DBConnection;
+package ch.ethz.origo.juigle.dao.utils;
 
 /**
+ * Utils for database framework
  * 
- * 
- * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.1 (3/31/2010)
+ * @author Vaclav Souhrada
+ * @version 0.1.0 (1/24/2010)
  * @since 0.1.0 (1/24/2010)
  * 
  */
-public interface IDBConnection {
-	
-	/**
-	 * Return database connection from connection pool
-	 * 
-	 * @return database connection form connection pool
-	 * @version 0.1.0 (1/24/2010)
-	 * @since 0.1.0 (1/24/2010)
-	 */
-	public DBConnection getConnection();
+public class DBUtils {
+
+	private static int CONSTRAINT;
 
 	/**
-	 * Connect to database given by database URL
+	 * Return name of constraint. Returned name is consist from name of constraint
+	 * and name of table. As suffix is constraint number.
 	 * 
-	 * @param databaseURL database url
-	 * @param username user's nickname
-	 * @param password database user's password
-	 * @return current connection from connection pool
-	 * @version 0.1.0 (1/24/2010)
-	 * @since 0.1.0 (1/24/2010)
+	 * @param name
+	 *          of constraint
+	 * @param tableName
+	 *          of table (constraint owner)
+	 * @return constraint name
 	 */
-	public DBConnection connect(String databaseURL, String username, String password);
+	public static String getAutoConstraintName(String name, String tableName) {
+		return tableName + "_" + name + "_" + (DBUtils.CONSTRAINT++);
+	}
 
 }

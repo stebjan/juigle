@@ -1,6 +1,7 @@
 package ch.ethz.origo.juigle.application;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 
 import org.apache.log4j.Logger;
@@ -73,7 +74,7 @@ public class JUIGLEApplication implements IObserver, ILanguage {
 				String errorMSG = JUIGLEErrorParser.getJUIGLEErrorMessage(e.getMessage());
 				// display error GUI
 				JUIGLErrorInfoUtils.showErrorDialog("Error dialog", errorMSG, e,
-						Level.WARNING);
+						Level.WARNING, new EmailErrorReporter());
 				logger.warn(errorMSG, e);
 			}
 		}
@@ -104,7 +105,7 @@ public class JUIGLEApplication implements IObserver, ILanguage {
 	 * @since 0.1.0 (8/29/2010)
 	 */
 	public void startSplashScreen(Image image) {
-		splash = SplashScreen.getInstance(image);
+		splash = SplashScreen.getInstance((BufferedImage)image);
 		splash.show();
 	}
 

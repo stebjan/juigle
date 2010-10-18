@@ -23,7 +23,10 @@
  */
 package ch.ethz.origo.juigle.prezentation;
 
+import java.beans.PropertyChangeListener;
 import java.util.logging.Level;
+
+import javax.swing.Action;
 
 import org.jdesktop.swingx.JXErrorPane;
 import org.jdesktop.swingx.error.ErrorInfo;
@@ -64,10 +67,14 @@ public class JUIGLErrorInfoUtils {
 	/**
 	 * Constructs and shows the error dialog
 	 * 
-	 * @param title of dialog
-	 * @param basicInfo basic error info
-	 * @param e exception
-	 * @param level of error
+	 * @param title
+	 *          of dialog
+	 * @param basicInfo
+	 *          basic error info
+	 * @param e
+	 *          exception
+	 * @param level
+	 *          of error
 	 * 
 	 * @version 0.1.0 (1/29/2010)
 	 * @since 0.1.0 (1/29/2010)
@@ -81,23 +88,28 @@ public class JUIGLErrorInfoUtils {
 	/**
 	 * Constructs and shows the error dialog
 	 * 
-	 * @param title of dialog
-	 * @param basicInfo basic error info
-	 * @param e exception
-	 * @param level of error
-	 * @param reporter instance on reporter
+	 * @param title
+	 *          of dialog
+	 * @param basicInfo
+	 *          basic error info
+	 * @param e
+	 *          exception
+	 * @param level
+	 *          of error
+	 * @param reporter
+	 *          instance on reporter
 	 * 
 	 * @version 0.1.0 (1/29/2010)
 	 * @since 0.1.0 (1/29/2010)
 	 */
 	public static void showErrorDialog(String title, String basicInfo,
 			Throwable e, Level level, ErrorReporter reporter) {
-		JXErrorPane ep = new JXErrorPane();
-		ep
-				.setErrorInfo(new ErrorInfo(title, basicInfo, null, null, e, level,
-						null));
-		ep.setErrorReporter(reporter);
-		JXErrorPane.showDialog(null, ep);
+//		final JXErrorPane ep = new JXErrorPane();
+//		ep.setErrorInfo(new ErrorInfo(title, basicInfo, null, null, e, level, null));
+//		ep.setErrorReporter(reporter);		
+////		Action reportAction = ep.getActionMap().get(JXErrorPane.REPORT_ACTION_KEY);
+//		JXErrorPane.showDialog(null, ep);
+		
 	}
 
 }

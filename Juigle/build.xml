@@ -95,6 +95,7 @@
 		<echo message="...Shutting down JUIGLE..." />
 	</target>
 	
+	<!-- Javadoc Generator -->
 	<target name="javadoc">
 	    <javadoc
 	        excludepackagenames="ch.ethz.origo.juigle.test"
@@ -105,9 +106,7 @@
 	           use="true"
 	           windowtitle="${jarname}-${version}"
 	    	   doctitle="${jarname}-${version} Javadoc"
-	    	
 	       >
-
 	        <fileset dir="${src}" defaultexcludes="yes">
 	            <include name="**/*.java"/>
 	            <exclude name="ch/ethz/origo/juigle/test/**/*.java" />

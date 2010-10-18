@@ -21,20 +21,37 @@
  *                  Department of Computer Science and Engineering, 
  *                  Pilsen, Czech Republic
  */
-package ch.ethz.origo.juigle.application.database.drivers;
+package ch.ethz.origo.juigle.db_prepare;
 
-import org.apache.log4j.Logger;
+import java.io.File;
+
+import ch.ethz.origo.juigle.application.exception.database.DatabaseException;
 
 /**
- * 
+ * Interface for handling with database
  * 
  * @author Vaclav Souhrada
- * @version 0.1.0 (1/28/2010)
- * @since 0.1.0 (1/28/2010)
- *
+ * @version 0.2.0 (1/31/2010)
+ * @since 0.1.0 (1/24/2010)
+ * 
  */
-public class Driver {
+public interface IDBHandler {
 	
-	public final static Logger logger = Logger.getLogger(Driver.class);
+	/**
+	 * This method create a new database 
+	 * (if not exist) from <code>XML</code> file.
+	 * 
+	 * @param xmlFile file
+	 */
+	public void createDatabaseFromXML(File xmlFile) throws DatabaseException;
+	
+	/**
+	 * This method create a new database by given name.
+	 *  
+	 * @param name of database
+	 * @version 0.1.0 (3/31/2010)
+	 * @since 0.1.0 (1/24/2010)
+	 */
+	public void createDatabase(String name) throws DatabaseException;
 
 }

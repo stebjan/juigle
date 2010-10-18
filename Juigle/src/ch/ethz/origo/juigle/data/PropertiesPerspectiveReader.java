@@ -38,7 +38,7 @@ import ch.ethz.origo.juigle.context.BasicPropertiesReader;
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.0.00 (9/30/2010)
  * @since 2.0.0 (9/30/2010)
- * @see {@link IPerspectiveReader}
+ * @see IPerspectiveReader
  */
 public class PropertiesPerspectiveReader implements IPerspectiveReader {
 

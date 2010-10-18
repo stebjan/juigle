@@ -29,14 +29,15 @@ import java.io.File;
  * Class contains some useful methods for working with files
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.0.01 (09/30/2010)
+ * @version 0.1.1.00 (10/16/2010)
  * @since 1.0.1 (05/22/2010)
  * 
  */
 public class JUIGLEFileUtils {
 
+	/** Extension of the XML file */
 	public static final String XML_FILE_EXTENSION = ".xml";
-
+  /** Extension of the Properties file */
 	public static final String PROPERTIES_FILE_EXTENSION = ".properties";
 
 	/**
@@ -45,12 +46,53 @@ public class JUIGLEFileUtils {
 	 * @param file
 	 *          instance of file from we want to return his absolute file
 	 * @return same absolute path as file which was added as parameter
+	 * @version 0.1.0.00 (05/22/2010)
+	 * @since 1.0.1 (05/22/2010)
 	 */
 	public static String getSameAbsolutePathAsOtherFile(File file) {
 		String fileName = file.getName();
 		String absolutePath = file.getAbsolutePath();
 		return absolutePath.substring(0,
-		    (absolutePath.length() - fileName.length()));
+				(absolutePath.length() - fileName.length()));
+	}
+
+	/**
+	 * Return user directory as String
+	 * 
+	 * @return user directory as String
+	 * @version 0.1.0.00 (10/16/2010)
+	 * @since 0.1.1.00 (10/16/2010)
+	 */
+	public static String getUserDirectory() {
+		return System.getProperty("user.dir");
+	}
+
+	/**
+	 * Return user home directory as String
+	 * 
+	 * @return user home directory as String
+	 * @version 0.1.0.00 (10/16/2010)
+	 * @since 0.1.1.00 (10/16/2010)
+	 */
+	public static String getUserHome() {
+		return System.getProperty("user.home");
+	}
+
+	/**
+	 * Return absolute path of the file
+	 * 
+	 * @param file
+	 *          reference to file
+	 * @return absolute path of the file
+	 * @version 0.1.0.00 (10/16/2010)
+	 * @since 0.1.1.00 (10/16/2010)
+	 */
+	public static String absolute(File file) {
+		if (file.isAbsolute()) {
+			return file.getPath();
+		} else {
+			return getUserDirectory() + File.separator + file.getPath();
+		}
 	}
 
 }

@@ -1,11 +1,16 @@
 package ch.ethz.origo.juigle.prezentation.splashscreen;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 import org.jdesktop.swingx.JXFrame;
 import org.jdesktop.swingx.JXImagePanel;
 import org.jdesktop.swingx.JXFrame.StartPosition;
+import org.jdesktop.swingx.JXPanel;
+import org.jdesktop.swingx.painter.ImagePainter;
+import org.jdesktop.swingx.painter.ImagePainter.ScaleType;
 
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 import ch.ethz.origo.juigle.application.exception.SplashScreenException;
@@ -24,7 +29,7 @@ public class SplashScreen {
 	/** Frame where will be frame displayed */
 	private JXFrame frame;
 	/** SplashScreen's image */
-	private Image image;
+	private BufferedImage image;
 
 	private static SplashScreen splash;
 
@@ -50,11 +55,11 @@ public class SplashScreen {
 	 * @param image
 	 *          specified image
 	 */
-	private SplashScreen(Image image) {
+	private SplashScreen(BufferedImage image) {
 		this.image = image;
 	}
 
-	public static SplashScreen getInstance(Image image) {
+	public static SplashScreen getInstance(BufferedImage image) {
 		if (splash == null) {
 			splash = new SplashScreen(image);
 		}
@@ -62,7 +67,7 @@ public class SplashScreen {
 	}
 
 	public static SplashScreen getInstance(String path)
-	    throws SplashScreenException {
+			throws SplashScreenException {
 		if (splash == null) {
 			splash = new SplashScreen(path);
 		}
@@ -76,11 +81,15 @@ public class SplashScreen {
 		if (frame == null) {
 			frame = new JXFrame();
 			frame.setLayout(new BorderLayout());
-
-			JXImagePanel imagePanel = new JXImagePanel();
-			imagePanel.setImage(image);
-			imagePanel.setEditable(false);
-			frame.add(imagePanel, BorderLayout.CENTER);
+			JXPanel jp = new JXPanel();
+			ImagePainter ip = new ImagePainter();
+			ip.setImage(image);
+			jp.setBackgroundPainter(ip);
+			
+			// JXImagePanel imagePanel = new JXImagePanel();
+			// imagePanel.setImage(image);
+			// imagePanel.setEditable(false);
+			frame.add(jp, BorderLayout.CENTER);
 			frame.setStartPosition(StartPosition.CenterInScreen);
 			frame.setUndecorated(true);
 			frame.pack();

@@ -28,8 +28,8 @@ package ch.ethz.origo.juigle.data.database;
  * components
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.0 (3/31/2010)
- * @since 0.1.0 (3/31/2010)
+ * @version 0.1.0.00 (10/13/2010)
+ * @since 2.0.0 (10/13/2010)
  */
 public class ComponentProperties {
 

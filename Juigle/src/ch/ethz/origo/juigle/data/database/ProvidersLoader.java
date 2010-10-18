@@ -32,7 +32,7 @@ import org.w3c.dom.Element;
 
 import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 
-import ch.ethz.origo.juigle.application.database.DBProvider;
+import ch.ethz.origo.juigle.db_prepare.DBProvider;
 
 /**
  * Properties loader for database infomations. Incomplete - need to finish in

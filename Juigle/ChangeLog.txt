@@ -1,9 +1,10 @@
 *********************************************************************************************
 *                                  CHANGE LOG 1.0.0 - > 2.0.0                               *
 *********************************************************************************************
- * (10/14/2010)
-  	 #131
-  	 	 ADDED  : Added target for generating Javadoc by ANT build.xml 
+ * (10/17/2010)
+  	 #133
+  	 	CHANGED : Switched version of the SwingX library from 1.6.0 to 1.6.2
+  	 	CHANGED : Added a new methods to the class JUIGLEFileUtils. 
   	 	
   * (10/06/2010)
   	 #124

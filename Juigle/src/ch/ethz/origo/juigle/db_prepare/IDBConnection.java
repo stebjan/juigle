@@ -21,37 +21,39 @@
  *                  Department of Computer Science and Engineering, 
  *                  Pilsen, Czech Republic
  */
-package ch.ethz.origo.juigle.application.database;
+package ch.ethz.origo.juigle.db_prepare;
 
-import java.io.File;
-
-import ch.ethz.origo.juigle.application.exception.database.DatabaseException;
+import ch.ethz.origo.juigle.data.database.DBConnection;
 
 /**
- * Interface for handling with database
  * 
- * @author Vaclav Souhrada
- * @version 0.2.0 (1/31/2010)
+ * 
+ * @author Vaclav Souhrada (v.souhrada at gmail.com)
+ * @version 0.1.1 (3/31/2010)
  * @since 0.1.0 (1/24/2010)
  * 
  */
-public interface IDBHandler {
+public interface IDBConnection {
 	
 	/**
-	 * This method create a new database 
-	 * (if not exist) from <code>XML</code> file.
+	 * Return database connection from connection pool
 	 * 
-	 * @param xmlFile file
-	 */
-	public void createDatabaseFromXML(File xmlFile) throws DatabaseException;
-	
-	/**
-	 * This method create a new database by given name.
-	 *  
-	 * @param name of database
-	 * @version 0.1.0 (3/31/2010)
+	 * @return database connection form connection pool
+	 * @version 0.1.0 (1/24/2010)
 	 * @since 0.1.0 (1/24/2010)
 	 */
-	public void createDatabase(String name) throws DatabaseException;
+	public DBConnection getConnection();
+
+	/**
+	 * Connect to database given by database URL
+	 * 
+	 * @param databaseURL database url
+	 * @param username user's nickname
+	 * @param password database user's password
+	 * @return current connection from connection pool
+	 * @version 0.1.0 (1/24/2010)
+	 * @since 0.1.0 (1/24/2010)
+	 */
+	public DBConnection connect(String databaseURL, String username, String password);
 
 }
