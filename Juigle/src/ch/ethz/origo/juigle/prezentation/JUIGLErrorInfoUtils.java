@@ -23,10 +23,7 @@
  */
 package ch.ethz.origo.juigle.prezentation;
 
-import java.beans.PropertyChangeListener;
 import java.util.logging.Level;
-
-import javax.swing.Action;
 
 import org.jdesktop.swingx.JXErrorPane;
 import org.jdesktop.swingx.error.ErrorInfo;
@@ -36,7 +33,7 @@ import org.jdesktop.swingx.error.ErrorReporter;
  * Creates a new ErrorInfo based on the provided data.
  * 
  * @author Vaclav Souhrada
- * @version 0.1.0 (1/29/2010)
+ * @version 0.1.0.01 (10/29/2010)
  * @since 0.1.0 (1/29/2010)
  * 
  */
@@ -104,11 +101,11 @@ public class JUIGLErrorInfoUtils {
 	 */
 	public static void showErrorDialog(String title, String basicInfo,
 			Throwable e, Level level, ErrorReporter reporter) {
-//		final JXErrorPane ep = new JXErrorPane();
-//		ep.setErrorInfo(new ErrorInfo(title, basicInfo, null, null, e, level, null));
-//		ep.setErrorReporter(reporter);		
+		final JXErrorPane ep = new JXErrorPane();
+		ep.setErrorInfo(new ErrorInfo(title, basicInfo, null, null, e, level, null));
+		ep.setErrorReporter(reporter);		
 ////		Action reportAction = ep.getActionMap().get(JXErrorPane.REPORT_ACTION_KEY);
-//		JXErrorPane.showDialog(null, ep);
+		JXErrorPane.showDialog(null, ep);
 		
 	}
 

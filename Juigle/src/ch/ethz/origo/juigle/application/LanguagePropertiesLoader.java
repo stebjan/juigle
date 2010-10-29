@@ -33,6 +33,7 @@ import java.util.Properties;
 import org.apache.log4j.PropertyConfigurator;
 
 import ch.ethz.origo.juigle.application.exception.PropertiesException;
+import ch.ethz.origo.juigle.data.ErrorCodes;
 
 /**
  * Load property of languages.
@@ -64,7 +65,7 @@ public class LanguagePropertiesLoader {
 				properties.load(new FileInputStream(new File(PROPERTY_FILE)));
 				PropertyConfigurator.configure(properties);
 			} catch (IOException e) {
-				throw new PropertiesException("JG002:" + PROPERTY_FILE, e);
+				throw new PropertiesException(ErrorCodes.CANNOT_READ_CFG_FILE_P + PROPERTY_FILE, e);
 			}
 			isLoaded = true;
 		}

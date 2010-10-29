@@ -14,7 +14,9 @@ import ch.ethz.origo.juigle.application.observers.IObservable;
 import ch.ethz.origo.juigle.application.observers.IObserver;
 import ch.ethz.origo.juigle.application.observers.JUIGLEObservable;
 import ch.ethz.origo.juigle.context.LanguageUtils;
+import ch.ethz.origo.juigle.context.exceptions.ApplicationException;
 import ch.ethz.origo.juigle.data.EmailErrorReporter;
+import ch.ethz.origo.juigle.data.ErrorCodes;
 import ch.ethz.origo.juigle.plugin.PluginEngine;
 import ch.ethz.origo.juigle.plugin.exception.PluginEngineException;
 import ch.ethz.origo.juigle.prezentation.IMainFrame;
@@ -27,19 +29,20 @@ import ch.ethz.origo.juigle.prezentation.splashscreen.SplashScreen;
  * A class for the application global settings and starting.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail dot com)
- * @version 0.2.2.01 (10/03/2010)
+ * @version 0.2.2.02 (10/20/2010)
  * @since 2.0.0 (8/29/2010)
- * @see {@link IObserver}
- * @see {@link ILanguage}
+ * @see IObserver
+ * @see ILanguage
  */
 public class JUIGLEApplication implements IObserver, ILanguage {
 
+	/** Logger for this class */
 	private static Logger logger = Logger.getLogger(JUIGLEApplication.class);
 
 	private static JUIGLEApplication app;
 	private IMainFrame frame;
 	private SplashScreen splash;
-	private PluginEngine pluginEng;
+	private PluginEngine pluginEngine;
 	private JUIGLEFrame juigleFrame;
 
 	private static String appVersion;
@@ -47,8 +50,8 @@ public class JUIGLEApplication implements IObserver, ILanguage {
 	/**
 	 * Default constructor
 	 * 
+	 * @throws PropertiesException
 	 * @version 0.1.0 (9/04/2010)
-	 * @throws PropertiesException 
 	 * @since 0.2.0 (9/04/2010)
 	 */
 	private JUIGLEApplication() throws PropertiesException {
@@ -71,7 +74,8 @@ public class JUIGLEApplication implements IObserver, ILanguage {
 				app = new JUIGLEApplication();
 			} catch (PropertiesException e) {
 				// parsing error message
-				String errorMSG = JUIGLEErrorParser.getJUIGLEErrorMessage(e.getMessage());
+				String errorMSG = JUIGLEErrorParser.getJUIGLEErrorMessage(e
+						.getMessage());
 				// display error GUI
 				JUIGLErrorInfoUtils.showErrorDialog("Error dialog", errorMSG, e,
 						Level.WARNING, new EmailErrorReporter());
@@ -105,7 +109,7 @@ public class JUIGLEApplication implements IObserver, ILanguage {
 	 * @since 0.1.0 (8/29/2010)
 	 */
 	public void startSplashScreen(Image image) {
-		splash = SplashScreen.getInstance((BufferedImage)image);
+		splash = SplashScreen.getInstance((BufferedImage) image);
 		splash.show();
 	}
 
@@ -137,22 +141,37 @@ public class JUIGLEApplication implements IObserver, ILanguage {
 	 * @param minor
 	 * @param revision
 	 * @throws PluginEngineException
-	 * @version 0.1.0 (9/04/2010)
+	 * @version 0.1.1.00 (10/20/2010)
 	 * @since 0.2.0 (9/04/2010)
 	 */
 	public void initPluginEngine(int major, int minor, int revision)
-	    throws PluginEngineException {
-		pluginEng = PluginEngine.getInstance();
-		pluginEng.setCurrentVersion(major, minor, revision);
+			throws ApplicationException {
+		pluginEngine = PluginEngine.getInstance();
+		try {
+			pluginEngine.setCurrentVersion(major, minor, revision);
+		} catch (PluginEngineException e) {
+			logger.error(e.getMessage(), e);
+			throw new ApplicationException(e.getMessage(), e);
+		}
 	}
 
 	/**
 	 * 
-	 * @version 0.1.0 (9/04/2010)
+	 * @version 0.2.0.00 (10/20/2010)
 	 * @since 0.2.0 (9/04/2010)
 	 */
-	public void loadPlugins() {
-		// pluginEng.loadPluginsFromDirectory();
+	public void loadPlugins(String filePath) throws ApplicationException {
+		if (pluginEngine != null) {
+			try {
+				pluginEngine.init(filePath);
+			} catch (PluginEngineException e) {
+				logger.error(e.getMessage(), e);
+				throw new ApplicationException(e.getMessage(), e);
+			}
+		} else {
+			logger.warn(JUIGLEErrorParser.getJUIGLEErrorMessage(ErrorCodes.PLUGIN_INSTANCE_IS_NULL));
+			throw new ApplicationException(new PluginEngineException(ErrorCodes.PLUGIN_INSTANCE_IS_NULL));
+		}
 	}
 
 	/**
@@ -163,16 +182,16 @@ public class JUIGLEApplication implements IObserver, ILanguage {
 	 * @since 0.2.0 (9/04/2010)
 	 */
 	public void startApplication(boolean fullScreen, String perspectivePath)
-	    throws PerspectiveException {
+			throws PerspectiveException {
 		if (juigleFrame == null) {
 			logger.info("Application starting...");
 			PerspectiveLoader loader = PerspectiveLoader.getInstance();
 			loader.loadPerspectives(perspectivePath);
-			juigleFrame = new JUIGLEFrame(appVersion, ClassLoader
-			    .getSystemResourceAsStream(frame.getLogoPath()));
+			juigleFrame = new JUIGLEFrame(appVersion,
+					ClassLoader.getSystemResourceAsStream(frame.getLogoPath()));
 			juigleFrame.setMainMenu(frame.getMainMenu());
 			juigleFrame.setPerspectives(loader,
-			    JUIGLEMainMenu.KEY_PERSPECTIVE_MAIN_MENU);
+					JUIGLEMainMenu.KEY_PERSPECTIVE_MAIN_MENU);
 			juigleFrame.setFullScreen(fullScreen);
 			juigleFrame.setVisible(true);
 			logger.info("Application started successfully...");
@@ -203,7 +222,7 @@ public class JUIGLEApplication implements IObserver, ILanguage {
 				frame = null;
 				juigleFrame.dispose();
 				juigleFrame = null;
-				pluginEng = null;
+				pluginEngine = null;
 				break;
 
 			default:

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import ch.ethz.origo.juigle.application.IPerspectiveReader;
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
+import ch.ethz.origo.juigle.data.ErrorCodes;
 
 /**
  * 
@@ -59,7 +60,7 @@ public class XMLPerspectiveReader extends AXMLReader implements
 	@Override
   public void readFile() throws PerspectiveException {
 		if (xmlFile == null) {
-			throw new PerspectiveException("JG025");
+			throw new PerspectiveException(ErrorCodes.FILE_NOT_SPECIFIC);
 		}
 		listOfPerspectiveNames = new ArrayList<String>();
 		mapOfPerspPackages = new HashMap<String, String>();

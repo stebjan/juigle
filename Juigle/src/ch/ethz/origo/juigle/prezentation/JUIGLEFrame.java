@@ -63,6 +63,7 @@ import ch.ethz.origo.juigle.application.JUIGLEErrorParser;
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 import ch.ethz.origo.juigle.application.observers.JUIGLEObservable;
 import ch.ethz.origo.juigle.data.EmailErrorReporter;
+import ch.ethz.origo.juigle.data.ErrorCodes;
 import ch.ethz.origo.juigle.prezentation.menu.JUIGLEMainMenu;
 import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
 import ch.ethz.origo.juigle.prezentation.perspective.PerspectivePanel;
@@ -74,7 +75,7 @@ import com.nilo.plaf.nimrod.NimRODTheme;
  * Main <code>JUIGLE<code> software java frame.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.2.7 (5/20/2010)
+ * @version 0.2.7.02 (10/29/2010)
  * @since 0.1.0 (05/18/09)
  * @see JXFrame
  */
@@ -240,12 +241,12 @@ public class JUIGLEFrame extends JXFrame {
 							.getSystemResourceAsStream("ch/ethz/origo/juigle/data/images/aaa.png"));
 		} catch (IOException e) {
 			JUIGLEFrame.logger.error("Could not read default images...", e);
-			throw new PerspectiveException("JG013");
+			throw new PerspectiveException(ErrorCodes.NOT_READ_JUIGLE_IMAGES);
 		}
 	}
 
 	/**
-	 * Initialize GUI of <code>JERPA</code>> Frame
+	 * Initialize GUI of <code>Application</code> main Frame
 	 * 
 	 * @throws PerspectiveException
 	 * 
@@ -570,7 +571,7 @@ public class JUIGLEFrame extends JXFrame {
 		try {
 			this.logoImg = ImageIO.read(logo);
 		} catch (Exception e) {
-			throw new PerspectiveException("JG014", e);
+			throw new PerspectiveException(ErrorCodes.IMG_NOT_FOUND_IO_ERROR, e);
 		}
 	}
 

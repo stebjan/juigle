@@ -27,8 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
+import ch.ethz.origo.juigle.data.ErrorCodes;
 import ch.ethz.origo.juigle.data.PropertiesPerspectiveReader;
 import ch.ethz.origo.juigle.data.xml.XMLPerspectiveReader;
+import ch.ethz.origo.juigle.plugin.IPluggable;
+import ch.ethz.origo.juigle.plugin.PluginEngine;
 import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
 
 /**
@@ -37,13 +40,13 @@ import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
  * Next loader loading classes (perspectives) as Plug-in Engine.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.1.02 (9/30/2010)
- * @since 2.0.0 (07/17/2010) - from software JERPA
+ * @version 0.1.1.04 (10/29/2010)
+ * @since 2.0.0 (07/17/2010) - from the software JERPA
  * @see IPerspectiveLoader
  */
 public class PerspectiveLoader implements IPerspectiveLoader {
 
-	/** PLUGIN key for perspective */
+	/** PLUGIN key for the perspective */
 	public static final String PLUGIN_PERSPECTIVES_KEY = "Perspective";
 
 	private static PerspectiveLoader loader;
@@ -58,7 +61,6 @@ public class PerspectiveLoader implements IPerspectiveLoader {
 	 * @throws PerspectiveException
 	 */
 	private PerspectiveLoader() {
-
 	}
 
 	public static PerspectiveLoader getInstance() throws PerspectiveException {
@@ -69,53 +71,58 @@ public class PerspectiveLoader implements IPerspectiveLoader {
 	}
 
 	public void loadPerspectives(String perspFilePath)
-	    throws PerspectiveException {
+			throws PerspectiveException {
 		if (perspFilePath == null || perspFilePath.length() == 0) {
-			throw new PerspectiveException("JG024:" + perspFilePath);
+			throw new PerspectiveException(
+					ErrorCodes.CFG_PERSPECTIVE_FILE_NOT_FOUND_P + perspFilePath);
 		}
 
 		if (perspFilePath.endsWith(JUIGLEFileUtils.XML_FILE_EXTENSION)) {
 			perspectiveReader = new XMLPerspectiveReader(perspFilePath);
 		} else if (perspFilePath
-		    .endsWith(JUIGLEFileUtils.PROPERTIES_FILE_EXTENSION)) {
+				.endsWith(JUIGLEFileUtils.PROPERTIES_FILE_EXTENSION)) {
 			perspectiveReader = new PropertiesPerspectiveReader(perspFilePath);
 		} else {
-			throw new PerspectiveException("JG031:" + perspFilePath);
+			throw new PerspectiveException(ErrorCodes.UNSUPPORTED_PERSPECTIVE_FILE_P
+					+ perspFilePath);
 		}
 		perspectiveReader.readFile();
 		ClassLoader loader = PerspectiveLoader.class.getClassLoader();
 
 		perspectives = new ArrayList<Perspective>();
 		List<String> perspectivesName = perspectiveReader
-		    .getListOfInnerPerspectivesNames();
+				.getListOfInnerPerspectivesNames();
 
 		for (String name : perspectivesName) {
 			try {
 				Perspective prsvClass = (Perspective) loader.loadClass(
-				    perspectiveReader.getPerspectivePackagePath(name) + "." + name)
-				    .newInstance();
+						perspectiveReader.getPerspectivePackagePath(name) + "." + name)
+						.newInstance();
 				checkIfPerspectiveIsDefault(prsvClass, name);
 				perspectives.add(prsvClass);
 			} catch (InstantiationException e) {
-				throw new PerspectiveException("JERPA023:" + perspectivesName, e);
+				throw new PerspectiveException(ErrorCodes.PERSPECTIVE_NOT_LOADED_P
+						+ perspectivesName, e);
 			} catch (IllegalAccessException e) {
-				throw new PerspectiveException("JERPA023:" + perspectivesName, e);
+				throw new PerspectiveException(ErrorCodes.PERSPECTIVE_NOT_LOADED_P
+						+ perspectivesName, e);
 			} catch (ClassNotFoundException e) {
-				throw new PerspectiveException("JERPA023:" + perspectivesName, e);
+				throw new PerspectiveException(ErrorCodes.PERSPECTIVE_NOT_LOADED_P
+						+ perspectivesName, e);
 			}
 		}
-	/*	// now load perspectives from plugins
+		// now load perspectives from plug-ins
 		PluginEngine plugEngine = PluginEngine.getInstance();
 		for (IPluggable plugin : plugEngine
-		    .getAllCorrectPluggables(PerspectiveLoader.PLUGIN_PERSPECTIVES_KEY)) {
+				.getAllCorrectPluggables(PerspectiveLoader.PLUGIN_PERSPECTIVES_KEY)) {
 			perspectives.add((Perspective) plugin);
 			plugEngine.startPluggable(plugin);
-		}*/
+		}
 
 	}
 
 	private void checkIfPerspectiveIsDefault(Perspective perspective,
-	    String className) {
+			String className) {
 		if (className.equals(perspectiveReader.getDefaultPerspectiveName())) {
 			perspective.setPerspectiveAsDefault(true);
 		}

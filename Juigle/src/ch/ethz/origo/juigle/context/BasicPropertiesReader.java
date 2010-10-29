@@ -31,12 +31,13 @@ import java.util.Properties;
 import org.apache.log4j.PropertyConfigurator;
 
 import ch.ethz.origo.juigle.application.exception.PropertiesException;
+import ch.ethz.origo.juigle.data.ErrorCodes;
 
 /**
  * Basic reader of the <code>.properties</code> files.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.0.00 (10/03/2010)
+ * @version 0.1.0.01 (10/29/2010)
  * @since 2.0.0 (10/03/2010)
  *
  */
@@ -60,7 +61,7 @@ public class BasicPropertiesReader {
 				properties.load(new FileInputStream(new File(filePath)));
 				PropertyConfigurator.configure(properties);
 			} catch (IOException e) {
-				throw new PropertiesException("JG002:" + filePath, e);
+				throw new PropertiesException(ErrorCodes.CANNOT_READ_CFG_FILE_P + filePath, e);
 			}
 		}
 	}

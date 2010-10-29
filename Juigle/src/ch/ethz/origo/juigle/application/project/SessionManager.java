@@ -32,12 +32,13 @@ import javax.swing.JOptionPane;
 import ch.ethz.origo.juigle.application.exception.ProjectOperationException;
 import ch.ethz.origo.juigle.application.exception.ProjectWriterException;
 import ch.ethz.origo.juigle.application.observers.PerspectiveObservable;
+import ch.ethz.origo.juigle.data.ErrorCodes;
 
 /**
  * Abstract class for all classes which are used as sessions managers
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.4 (4/17/2010)
+ * @version 0.1.4.01 (10/29/2010)
  * @since 0.1.0 (11/18/09)
  * 
  */
@@ -64,7 +65,9 @@ public abstract class SessionManager {
 	public void saveFile(IProjectWriter writer) throws ProjectOperationException {
 		Project project = getCurrentProject();
 		if (project == null) {
-			throw new ProjectOperationException("JG012", new Throwable("UNDEFINED VALUE"));
+			throw new ProjectOperationException(
+					ErrorCodes.CALL_SAVE_METHOD_PRJ_NOT_OPN, new Throwable(
+							"UNDEFINED VALUE"));
 		}
 		if (project.getProjectFile() == null) {
 			saveAsFile();
@@ -84,7 +87,6 @@ public abstract class SessionManager {
 	}
 
 	public abstract void saveAsFile() throws ProjectOperationException;
-
 
 	public abstract void loadFile(File file) throws ProjectOperationException;
 
@@ -108,7 +110,7 @@ public abstract class SessionManager {
 			try {
 				closeProject(0);
 			} catch (IOException e) {
-				throw new ProjectOperationException("JERPA013", e);
+				throw new ProjectOperationException(ErrorCodes.NOT_PROJECT_CLOSED, e);
 			}
 		}
 	}
@@ -136,7 +138,7 @@ public abstract class SessionManager {
 	}
 
 	public void closeFile() {
-		//getCurrentProject().lockCommand();
+		// getCurrentProject().lockCommand();
 		try {
 			int projectIndex = closeCurrentProject();
 
@@ -254,9 +256,8 @@ public abstract class SessionManager {
 	}
 
 	/**
-	 * Undo operation for current project.
-	 * NOT IMPLEMENTED IN THE CURRENT SOFTWARE VERSION
-	 * <code>MSG_UNDOABLE_COMMAND_INVOKED</code>.
+	 * Undo operation for current project. NOT IMPLEMENTED IN THE CURRENT SOFTWARE
+	 * VERSION <code>MSG_UNDOABLE_COMMAND_INVOKED</code>.
 	 */
 	public void undo() {
 		Project project;
@@ -272,8 +273,10 @@ public abstract class SessionManager {
 			getCurrentProject().lockCommand();
 			// FIXME project.undo() need implement
 			project.undo();
-			perspObservable.setState(PerspectiveObservable.MSG_CURRENT_PROJECT_CHANGED);
-			perspObservable.setState(PerspectiveObservable.MSG_UNDOABLE_COMMAND_INVOKED);
+			perspObservable
+					.setState(PerspectiveObservable.MSG_CURRENT_PROJECT_CHANGED);
+			perspObservable
+					.setState(PerspectiveObservable.MSG_UNDOABLE_COMMAND_INVOKED);
 			getCurrentProject().unlockCommand();
 		} else {
 			JOptionPane.showMessageDialog(null,
@@ -283,9 +286,8 @@ public abstract class SessionManager {
 	}
 
 	/**
-	 * REDO operation for current project.
-	 * NOT IMPLEMENTED IN THE CURRENT SOFTWARE VERSION
-	 * <code>MSG_UNDOABLE_COMMAND_INVOKED</code>.
+	 * REDO operation for current project. NOT IMPLEMENTED IN THE CURRENT SOFTWARE
+	 * VERSION <code>MSG_UNDOABLE_COMMAND_INVOKED</code>.
 	 */
 	public void redo() {
 		Project project;
@@ -300,8 +302,10 @@ public abstract class SessionManager {
 		if (project.canRedo()) {
 			getCurrentProject().lockCommand();
 			project.redo();
-			perspObservable.setState(PerspectiveObservable.MSG_CURRENT_PROJECT_CHANGED);
-			perspObservable.setState(PerspectiveObservable.MSG_UNDOABLE_COMMAND_INVOKED);
+			perspObservable
+					.setState(PerspectiveObservable.MSG_CURRENT_PROJECT_CHANGED);
+			perspObservable
+					.setState(PerspectiveObservable.MSG_UNDOABLE_COMMAND_INVOKED);
 			getCurrentProject().unlockCommand();
 		} else {
 			JOptionPane.showMessageDialog(null,
@@ -309,10 +313,10 @@ public abstract class SessionManager {
 					JOptionPane.WARNING_MESSAGE);
 		}
 	}
-	
+
 	/**
-	 * P�epne na projekt zadan� indexem a roze�le zpr�vu provider�m.<br/> Je-li
-	 * index projektu shodn� s aktu�ln� otev�en�m projektem, nestane se nic.
+	 * P�epne na projekt zadan� indexem a roze�le zpr�vu provider�m.<br/>
+	 * Je-li index projektu shodn� s aktu�ln� otev�en�m projektem, nestane se nic.
 	 * 
 	 * @param index
 	 *          Index projektu.
@@ -321,7 +325,7 @@ public abstract class SessionManager {
 		if (index == getCurrentProjectIndex()) {
 			return;
 		}
-		
+
 		int indexSet = getAndSwitchProject(index);
 
 		if (indexSet != index) {
@@ -333,15 +337,17 @@ public abstract class SessionManager {
 		if (indexSet == -1) {
 			perspObservable.setState(PerspectiveObservable.MSG_PROJECT_CLOSED);
 		} else {
-			perspObservable.setState(PerspectiveObservable.MSG_CURRENT_PROJECT_CHANGED);
+			perspObservable
+					.setState(PerspectiveObservable.MSG_CURRENT_PROJECT_CHANGED);
 		}
 	}
-	
+
 	/**
 	 * P�epne aktu�ln� projekt na projekt zadan� indexem a vrac� index tohoto
-	 * projektu.<br/> Je-li index mimo rozsah otev�en�ch projekt�, je jako
-	 * aktu�ln� projekt nastaven projekt s indexem 0. Nen�-li otev�en ��dn�
-	 * projekt, metoda vrac� hodnotu -1.
+	 * projektu.<br/>
+	 * Je-li index mimo rozsah otev�en�ch projekt�, je jako aktu�ln� projekt
+	 * nastaven projekt s indexem 0. Nen�-li otev�en ��dn� projekt, metoda vrac�
+	 * hodnotu -1.
 	 * 
 	 * @param index
 	 *          Index projektu.

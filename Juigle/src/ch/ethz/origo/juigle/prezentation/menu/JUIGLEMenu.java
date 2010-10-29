@@ -52,6 +52,7 @@ import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
 import ch.ethz.origo.juigle.application.exception.JUIGLEMenuException;
 import ch.ethz.origo.juigle.application.observers.LanguageObservable;
 import ch.ethz.origo.juigle.data.EmailErrorReporter;
+import ch.ethz.origo.juigle.data.ErrorCodes;
 import ch.ethz.origo.juigle.prezentation.ImageSeparator;
 import ch.ethz.origo.juigle.prezentation.JUIGLEButton;
 import ch.ethz.origo.juigle.prezentation.JUIGLEGraphicsUtils;
@@ -100,8 +101,8 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 	protected ResourceBundle resource;
 
 	/**
-	 * Create empty <code>JUIGLE Menu</code>> with no specific position.
-	 * You must set position later.
+	 * Create empty <code>JUIGLE Menu</code>> with no specific position. You must
+	 * set position later.
 	 */
 	public JUIGLEMenu() {
 		initialize();
@@ -118,8 +119,8 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 	}
 
 	/**
-	 * Create <code>JUIGLE Menu</code>> on specific position
-	 * and with localized text
+	 * Create <code>JUIGLE Menu</code>> on specific position and with localized
+	 * text
 	 * 
 	 * @param position
 	 * @param resourcePath
@@ -261,8 +262,8 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 		}
 		if (item.getIcon() != null) {
 			button.setIcon(item.getIcon());
-			button.setRolloverIcon(new ImageIcon(glow
-					.filter(item.getItemIcon(), null)));
+			button.setRolloverIcon(new ImageIcon(
+					glow.filter(item.getItemIcon(), null)));
 			button.setForeground(JUIGLEGraphicsUtils.TRANSPARENT_COLOR);
 		}
 		if (resourcePath != null) {
@@ -346,18 +347,17 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 				}
 			} catch (MissingResourceException e) {
 				// parsing error message
-				String errorMSG = JUIGLEErrorParser.getJUIGLEErrorMessage("JG003:"
-						+ item.getResourceBundleKey()
-						+ ":"
-						+ (resourcePath != null ? resourcePath : item
-								.getResourceBundlePath()));
+				String errorMSG = JUIGLEErrorParser
+						.getJUIGLEErrorMessage(ErrorCodes.RESOURCE_BD_KEY_OR_FILE_NOT_FND_P2
+								+ item.getResourceBundleKey()
+								+ ":"
+								+ (resourcePath != null ? resourcePath : item
+										.getResourceBundlePath()));
 				// display error GUI
 				JUIGLErrorInfoUtils.showErrorDialog("JUIGLE Error", errorMSG, e,
 						Level.WARNING, new EmailErrorReporter());
 				// write message to logger
 				JUIGLEMenu.logger.error(errorMSG, e);
-				// print error to stack trace
-				e.printStackTrace();
 			} catch (JUIGLELangException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

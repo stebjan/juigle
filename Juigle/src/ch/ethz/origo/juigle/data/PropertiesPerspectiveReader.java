@@ -36,7 +36,7 @@ import ch.ethz.origo.juigle.context.BasicPropertiesReader;
  * - not a plug-in) from the <code>.properties</code> file.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.0.00 (9/30/2010)
+ * @version 0.1.0.01 (10/29/2010)
  * @since 2.0.0 (9/30/2010)
  * @see IPerspectiveReader
  */
@@ -95,7 +95,7 @@ public class PropertiesPerspectiveReader implements IPerspectiveReader {
 	@Override
 	public void readFile() throws PerspectiveException {
 		if (filePath == null) {
-			throw new PerspectiveException("JG025");
+			throw new PerspectiveException(ErrorCodes.FILE_NOT_SPECIFIC);
 		}
 		listOfPerspectiveNames = new ArrayList<String>();
 

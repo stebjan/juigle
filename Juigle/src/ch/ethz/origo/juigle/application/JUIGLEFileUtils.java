@@ -24,12 +24,14 @@
 package ch.ethz.origo.juigle.application;
 
 import java.io.File;
+import java.net.URL;
+import java.net.URLClassLoader;
 
 /**
  * Class contains some useful methods for working with files
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.1.00 (10/16/2010)
+ * @version 0.1.1.01 (10/20/2010)
  * @since 1.0.1 (05/22/2010)
  * 
  */
@@ -37,7 +39,7 @@ public class JUIGLEFileUtils {
 
 	/** Extension of the XML file */
 	public static final String XML_FILE_EXTENSION = ".xml";
-  /** Extension of the Properties file */
+	/** Extension of the Properties file */
 	public static final String PROPERTIES_FILE_EXTENSION = ".properties";
 
 	/**
@@ -93,6 +95,20 @@ public class JUIGLEFileUtils {
 		} else {
 			return getUserDirectory() + File.separator + file.getPath();
 		}
+	}
+
+	public static void printClasspath() {
+
+		// Get the System Classloader
+		ClassLoader sysClassLoader = ClassLoader.getSystemClassLoader();
+
+		// Get the URLs
+		URL[] urls = ((URLClassLoader) sysClassLoader).getURLs();
+
+		for (int i = 0; i < urls.length; i++) {
+			System.out.println(urls[i].getFile());
+		}
+
 	}
 
 }
