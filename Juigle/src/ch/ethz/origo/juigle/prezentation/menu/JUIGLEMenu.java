@@ -65,7 +65,7 @@ import com.jhlabs.image.GlowFilter;
  * extended by all new classes constructed menu.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.5 (3/29/2010)
+ * @version 0.1.6.00 (10/30/2010)
  * @since 0.1.0 (07/16/09)
  * @see JToolBar
  * @see ILanguage
@@ -222,6 +222,9 @@ public class JUIGLEMenu extends JToolBar implements ILanguage {
 				it.setIcon(it.getIcon());
 			}
 			menu.add(it);
+			if (it.isItemSeparatorRequired()) {
+				menu.addSeparator();
+			}
 			menu.revalidate();
 		}
 
