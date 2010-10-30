@@ -43,7 +43,7 @@ import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * @version 0.1.3.00 (10/30/2010)
- * @since 1.0.1 (10/30/2010)
+ * @since 0.1.0 (05/18/09)
  * @see JMenuItem
  * @see ILanguage
  */
@@ -331,12 +331,12 @@ public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
 
 	/**
 	 * 
-	 * @param isItemSeparatorRequired
+	 * 
 	 * @version 0.1.0.00 (10/30/2010)
 	 * @since 0.1.3.00 (10/30/2010)
 	 */
-	public void setItemSeparatorRequired(boolean isItemSeparatorRequired) {
-		this.isItemSeparatorRequired = isItemSeparatorRequired;
+	public void addSeparator() {
+		this.isItemSeparatorRequired = true;
 	}
 
 }
