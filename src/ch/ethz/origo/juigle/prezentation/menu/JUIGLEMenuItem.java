@@ -42,8 +42,8 @@ import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
  * for International Language Support and other JUIGLE needs.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.2 (3/29/2010)
- * @since 0.1.0 (05/18/09)
+ * @version 0.1.3.00 (10/30/2010)
+ * @since 1.0.1 (10/30/2010)
  * @see JMenuItem
  * @see ILanguage
  */
@@ -69,6 +69,8 @@ public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
 	private boolean showText = true;
 
 	private boolean isToolTipText = false;
+
+	private boolean isItemSeparatorRequired;
 
 	private String toolTipText;
 
@@ -315,6 +317,26 @@ public class JUIGLEMenuItem extends JMenuItem implements ILanguage {
 	@Override
 	public String getResourceBundlePath() {
 		return resourcePath;
+	}
+
+	/**
+	 * 
+	 * @return
+	 * @version 0.1.0.00 (10/30/2010)
+	 * @since 0.1.3.00 (10/30/2010)
+	 */
+	public boolean isItemSeparatorRequired() {
+		return isItemSeparatorRequired;
+	}
+
+	/**
+	 * 
+	 * @param isItemSeparatorRequired
+	 * @version 0.1.0.00 (10/30/2010)
+	 * @since 0.1.3.00 (10/30/2010)
+	 */
+	public void setItemSeparatorRequired(boolean isItemSeparatorRequired) {
+		this.isItemSeparatorRequired = isItemSeparatorRequired;
 	}
 
 }
