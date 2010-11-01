@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="JUIGLE" default="makejar" basedir=".">
+
+	<!-- domovský adresář bundelu -->
+	<property name="projecthome" value="." />
+
+	<!-- verze bundle -->
+	<property name="version" value="1.0.1" />
+
+	<!-- symbolický název bundelu -->
+	<property name="jarname" value="${ant.project.name}" />
+
+	<property name="jerpahome" value="../JERPA" />
+
+	<!-- autor -->
+	<property name="author" value="Vaclav Souhrada" />
+
+	<property name="src" location="${projecthome}/src" />
+	<property name="build" location="${projecthome}/bin" />
+	<property name="jars" location="${projecthome}/jars" />
+	<property name="lib" location="${projecthome}/lib" />
+	<property name="deployloc" location="${jerpahome}/lib" />
+	<property name="dir.javadoc" location="${projecthome}/docs/javadoc" />
+
+	<property name="runloc" location="${jars}" />
+
+	<property name="buildfilename" value="${jarname}-${version}.jar" />
+
+	<path id="compile.class.path">
+		<fileset dir=".">
+			<include name="lib/**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="init">
+		<mkdir dir="${build}" />
+		<mkdir dir="${jars}" />
+		<mkdir dir="${deployloc}" />
+	</target>
+
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${build}" classpathref="compile.class.path" debug="on">
+			<compilerarg value="-Xlint:none" />
+		</javac>
+	</target>
+
+	<target name="copy_img" depends="compile">
+		<copy todir="${build}/ch/ethz/origo/juigle/data/images/">
+			<fileset dir="${src}/ch/ethz/origo/juigle/data/images/" />
+		</copy>
+	</target>
+
+	<target name="copy_props" depends="copy_img">
+		<copy todir="${build}/ch/ethz/origo/juigle/data/">
+			<fileset dir="${src}/ch/ethz/origo/juigle/data/">
+				<include name="**/*.properties" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="makejar" description="generate the distribution" depends="copy_props">
+		<mkdir dir="${jars}" />
+		<jar jarfile="${jars}/${buildfilename}" basedir="${build}">
+		</jar>
+		<antcall target="autoclean" />
+	</target>
+
+	<!-- automatický úklid po kompilaci a vytvoření bundelu-->
+	<target name="autoclean">
+		<delete dir="${build}" />
+	</target>
+
+	<!-- ručně prováděný úklid -->
+	<target name="clean">
+		<antcall target="autoclean" />
+		<delete dir="${jars}" />
+		<delete dir="${deploy}" />
+	</target>
+
+
+	<!-- volitelný target, který umožní vytvořený bundle nakopírovat
+		na libovolné místo na disku, např. do složky JERPA/lib. Před použitím
+		je nutné změnit cestu deployloc  -->
+	<target name="deploy" depends="makejar">
+		<delete file="${deployloc}/${buildfilename}" />
+		<copy file="${jars}/${buildfilename}" todir="${deployloc}" />
+		<copy todir="${deployloc}">
+			<fileset dir="${lib}" />
+		</copy>
+
+	</target>
+
+	<target name="run">
+		<echo message="Starting..." />
+		<!--<java jar="${runloc}/bin/juigle.jar" fork="true" dir="${runloc}">
+		</java>-->
+		<echo message="...JUIGLE can not be runned alone..." />
+		<echo message="...Shutting down JUIGLE..." />
+	</target>
+
+	<!-- Javadoc Generator -->
+	<target name="javadoc">
+		<javadoc excludepackagenames="ch.ethz.origo.juigle.test" access="public" destdir="${dir.javadoc}" 
+			author="true" version="true" use="true" 
+			windowtitle="${jarname}-${version}" doctitle="${jarname}-${version} Javadoc">
+
+			<fileset dir="${src}" defaultexcludes="yes">
+				<include name="**/*.java" />
+				<exclude name="ch/ethz/origo/juigle/test/**/*.java" />
+			</fileset>
+		</javadoc>
+	</target>
+</project>
