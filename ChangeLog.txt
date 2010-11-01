@@ -2,7 +2,7 @@
 *                                  CHANGE LOG 1.0.0 - > 1.0.1                               *
 *********************************************************************************************
  * (10/30/2010)
-  	 #136
+  	 #137 - 136
   	 	ADDED   : Added option for adding a Menu Item separator - http://juigle.origo.ethz.ch/issues/4
   	 	
   * (10/12/2010)
