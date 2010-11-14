@@ -16,7 +16,7 @@ import ch.ethz.origo.juigle.application.exception.database.DatabaseException;
  */
 public class Database {
 
-	private static Connection conn;
+	private Connection conn;
 
 	private static JDBCLoginService service;
 
@@ -32,7 +32,7 @@ public class Database {
 	 * 
 	 * @throws DatabaseException
 	 */
-	public static synchronized void closeConnection() throws DatabaseException {
+	public synchronized void closeConnection() throws DatabaseException {
 		if (conn != null) {
 			try {
 				conn.close();
@@ -51,7 +51,7 @@ public class Database {
 	 * 
 	 * @return actual database connection
 	 */
-	public static Connection getConnection() {
+	public Connection getConnection() {
 		if (conn == null) {
 			conn = service.getConnection();
 		}
