@@ -33,7 +33,7 @@ import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
  * Observar pattern who points his listeners to switch language.
  * 
  * @author Vaclav Souhrada
- * @version 0.1.2 (3/30/2010)
+ * @version 0.1.3 (3/20/2011)
  * @since 0.1.0 (10/15/2010)
  * @see AbstractJUIGLEObservable
  * 
@@ -88,6 +88,7 @@ public class LanguageObservable extends AbstractJUIGLEObservable {
 	protected void notifyObservers() {
 		for (ILanguage observer : listOfObservers) {
 			try {
+				observer.setLocalizedResourceBundle(observer.getResourceBundlePath());
 				observer.updateText();
 			} catch (JUIGLELangException e) {
 				// TODO Auto-generated catch block
