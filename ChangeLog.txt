@@ -1,7 +1,11 @@
 *********************************************************************************************
 *                                  CHANGE LOG 1.0.1 - > 1.0.2                               *
 *********************************************************************************************
-  * (10/30/2010)
+  * (3/20/2011) vsouhrada
+     #148
+        FIXED   : Fixed a bug in LanguageObservable when method updateText is calling - method setLocalizedResourceBundle is now called before the method updateText.
+  
+  * (10/30/2010) vsouhrada
   	 #145
   	 	ADDED   : Class Database which represents database connected object. Allow to you get database connection a connect to database.
   	 	ADDED   : Added a DatabaseDialog class for connect to database. It is not complete yet.
@@ -9,23 +13,23 @@
 *********************************************************************************************
 *                                  CHANGE LOG 1.0.0 - > 1.0.1                               *
 *********************************************************************************************
-  * (10/30/2010)
+  * (10/30/2010) vsouhrada
   	 #137 - 136
   	 	ADDED   : Added option for adding a Menu Item separator - http://juigle.origo.ethz.ch/issues/4
   	 	
-  * (10/12/2010)
+  * (10/12/2010) vsouhrada
   	 #132
   	 	ADDED   : Added target for generating Javadoc by ANT build.xml
   	 	 
-  * (10/12/2010)
+  * (10/12/2010) vsouhrada
   	 #128 - 130
   	 	CHANGED : #ISSUE 19: automatic filling of error code to the error text - http://juigle.origo.ethz.ch/issues/19
   	 	
-  * (10/06/2010)
+  * (10/06/2010) vsouhrada
   	 #125
   	 	CHANGED : #ISSUE 19: automatic filling of error code to the error text - http://juigle.origo.ethz.ch/issues/19
   	 	
-  * (10/05/2010)
+  * (10/05/2010) vsouhrada
   	 # 120
   	 	ADDED   : a new code in LanguagePropertiesLoader class. 
   	 	CHANGED : Method LanguagePropertiesLoader.writePropertyLang renamed on writeLangProperty
