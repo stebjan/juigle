@@ -16,7 +16,7 @@
 
 /*
  *  
- *    Copyright (C) 2009 - 2010 
+ *    Copyright (C) 2009 - 2011 
  *    							University of West Bohemia, 
  *                  Department of Computer Science and Engineering, 
  *                  Pilsen, Czech Republic
@@ -39,7 +39,7 @@ import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
  * 
- * @version 0.1.3 (5/20/2010)
+ * @version 0.1.4 (3/25/2011)
  * @since 0.1.0 (05/18/09)
  * @see JXButton
  * @see JButton
@@ -142,7 +142,6 @@ public class JUIGLEButton extends JXButton implements ILanguage {
 
 			@Override
 			public void run() {
-				setLocalizedResourceBundle(resourcePath);
 				try {
 					if (resourceBundleKey != null && canBeTextShow()) {
 						setText(resource.getString(resourceBundleKey));

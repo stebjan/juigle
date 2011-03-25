@@ -16,7 +16,7 @@
 
 /*
  *  
- *    Copyright (C) 2009 - 2010 
+ *    Copyright (C) 2009 - 2011 
  *    							University of West Bohemia, 
  *                  Department of Computer Science and Engineering, 
  *                  Pilsen, Czech Republic
@@ -42,7 +42,7 @@ import org.jfree.data.xy.XYSeriesCollection;
  * Class construct 2D chart
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.0 (3/26/2010)
+ * @version 0.1.1 (3/25/2011)
  * @since 0.1.0 (3/26/2010)
  * @see JComponent
  * 
@@ -87,14 +87,12 @@ public class Chart2D extends JComponent {
 		g2.drawLine(top, bottom, graphLength, bottom);
 
 		double parts = (double) graphLength / (double) signal.length;
-		System.out.println("Signal length" + signal.length);
-		System.out.println("Parts -> " + parts);
 		double positionX1 = 0;
 		double positionX2 = positionX1 + parts;
 
 		g2.setColor(Color.BLACK);
+		
 		for (int j = 0; j < signal.length - 1; j++) {
-			// System.out.println("X1:" + positionX1 + " X2:" + positionX2);
 			g2.draw(new Line2D.Double((top + positionX1),
 					(bottom - (signal[j] * bottom)), (top + positionX2),
 					(bottom - (signal[j + 1] * bottom))));
@@ -151,31 +149,6 @@ public class Chart2D extends JComponent {
 		ChartFrame cf = new ChartFrame("XY Chart", jc, true);
 		cf.setSize(800, 600);
 		cf.setVisible(true);
-		
-		
-		
-/*
-		JFrame f = new JFrame();
-		f.setSize(350, 400);
-		
-		Chart2D ch = new Chart2D(signals);
-		
-
-    int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
-    int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
-    
-    JScrollPane jsp = new JScrollPane(ch, v, h);
-    jsp.setEnabled(true);
-		
-		f.getContentPane().add(jsp);
-
-		WindowListener wndCloser = new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				System.exit(0);
-			}
-		};
-		f.addWindowListener(wndCloser);
-		f.setVisible(true);*/
 	
 	}
 }
