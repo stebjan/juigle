@@ -16,14 +16,19 @@
 
 /*		JUIGLEFileUtils.java
  *  
- *    Copyright (C) 2009 - 2010 
+ *    Copyright (C) 2009 - 2011 
  *    							University of West Bohemia, 
  *                  Department of Computer Science and Engineering, 
  *                  Pilsen, Czech Republic
  */
 package ch.ethz.origo.juigle.application;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -31,7 +36,7 @@ import java.net.URLClassLoader;
  * Class contains some useful methods for working with files
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.1.01 (10/20/2010)
+ * @version 0.2.0 (3/25/2011)
  * @since 1.0.1 (05/22/2010)
  * 
  */
@@ -94,6 +99,55 @@ public class JUIGLEFileUtils {
 			return file.getPath();
 		} else {
 			return getUserDirectory() + File.separator + file.getPath();
+		}
+	}
+
+	/**
+	 * Creates a file and write the given content to it. Note: the content reader
+	 * is not closed.
+	 * 
+	 * @param file
+	 *          The new file to create, not null
+	 * @param contentReader
+	 *          The stream with the content for the file, not null
+	 * @since 0.2.0 (3/25/2011)
+	 */
+	public static void createFile(File file, Reader contentReader)
+			throws IOException {
+		Writer writer = null;
+		try {
+			writer = new BufferedWriter(new FileWriter(file, false));
+
+			char[] buffer = new char[8192];
+			int nrOfChars;
+			while ((nrOfChars = contentReader.read(buffer)) != -1) {
+				writer.write(buffer, 0, nrOfChars);
+			}
+		} finally {
+			if (writer != null) {
+				writer.close();
+			}
+		}
+	}
+
+	/**
+	 * Creates a file and write the given content to it.
+	 * 
+	 * @param file
+	 *          The new file to create, not null
+	 * @param content
+	 *          The content for the file, not null
+	 * @since 0.2.0 (3/25/2011)
+	 */
+	public static void createFile(File file, String content) throws IOException {
+		Writer writer = null;
+		try {
+			writer = new BufferedWriter(new FileWriter(file, false));
+			writer.write(content);
+		} finally {
+			if (writer != null) {
+				writer.close();
+			}
 		}
 	}
 

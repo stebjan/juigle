@@ -21,10 +21,9 @@
 	<property name="lib" location="${projecthome}/lib" />
 	<property name="deployloc" location="${jerpahome}/lib" />
 	<property name="dir.javadoc" location ="${projecthome}/docs/javadoc" />
-
 	<property name="runloc" location="${jars}" />
-
 	<property name="buildfilename" value="${jarname}-${version}.jar" />
+	<property name="build.filename.src" value="${jarname}-${version}-src.jar" />
 
 	<path id="compile.class.path">
 		<fileset dir=".">
@@ -62,6 +61,8 @@
 		<mkdir dir="${jars}" />
 		<jar jarfile="${jars}/${buildfilename}" basedir="${build}">
 		</jar>
+		<jar jarfile="${jars}/${build.filename.src}" basedir="${src}" includes="**/*.java">
+	    </jar>
 		<antcall target="autoclean" />
 	</target>
 
@@ -83,7 +84,9 @@
 		je nutné změnit cestu deployloc  -->
 	<target name="deploy" depends="makejar">
 		<delete file="${deployloc}/${buildfilename}" />
+		<delete file="${deployloc}/${build.filename.src}" />
 		<copy file="${jars}/${buildfilename}" todir="${deployloc}" />
+		<copy file="${jars}/${build.filename.src}" todir="${deployloc}"/>
 		<copy todir="${deployloc}">
 			<fileset dir="${lib}" />
 		</copy>
