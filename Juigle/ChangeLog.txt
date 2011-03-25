@@ -1,27 +1,39 @@
 *********************************************************************************************
 *                                  CHANGE LOG 1.0.2 - > 2.0.0                               *
 *********************************************************************************************
- * (10/30/2010)
+ 
+ * (3/25/2011) vsouhrada
+     #153
+        ADDED   : Added a support for loading XML file and parse it. Now you can easily construct own XMLParser and parse xml file by calling a specific method. 
+                  More information about this will be in documentation.
+     #151
+        CHANGED : Updated class JUIGLEFileUtils:
+                   - add methods for creates a file and write the given content to it
+        ADDED   : (merged from 1.0.2) 
+                   - Fixed a bug in LanguageObservable when method updateText is calling - method setLocalizedResourceBundle is now calling before the method updateText.
+                   - Now is in target called makejar (build.xml) create jar file with sources
+     
+ * (10/30/2010) vsouhrada
   	 #138
   	 	ADDED   : Added option for adding a Menu Item separator - http://juigle.origo.ethz.ch/issues/4 (merged from 1.0.1)
  
- * (10/29/2010)
+ * (10/29/2010) vsouhrada
   	 #135
   	 	ADDED   : Class ErrorCodes which contains static variables with all JUIGLE's error codes.
   	 	CHANGED : Errors properties now not contains errors caused by PluginEngine. PluginEngine 2.0 has now own errors codes.
   	 	ADDED   : A new method for write actual CLASSPATH. Added to the class JUIGLEFileUtils.java.
   	 	
- * (10/17/2010)
+ * (10/17/2010) vsouhrada
   	 #133
   	 	CHANGED : Switched version of the SwingX library from 1.6.0 to 1.6.2
   	 	CHANGED : Added a new methods to the class JUIGLEFileUtils.
   	 	
-  * (10/06/2010)
+  * (10/06/2010) vsouhrada
   	 #124 - (merged from 1.0.1)
   	 	CHANGED : #ISSUE 19: automatic filling of error code to the error text - http://juigle.origo.ethz.ch/issues/19
   	 	ADDED   : Added target for generating Javadoc by ANT build.xml
   
-  * (10/03/2010)
+  * (10/03/2010) vsouhrada
   	 #119, 116
   	    FIXED   : #ISSUE 10: More informations from EMail Reporter - http://juigle.origo.ethz.ch/issues/10
   	    ADDED   : Added classes: ApplicationException, DBException, BasicPropertiesReader, LanguageUtils
@@ -29,16 +41,18 @@
   	 	ADDED   : Added context classes
   	 	CHANGED : New JUIGLE package structure
   	 	CHANGED : New JUIGLE loading perspectives from properties file. XML is not supported yet.
-  * (9/12/2010) 
+  	 	
+  * (9/12/2010)  vsouhrada
   	 #112
   	 	CHANGED : Class AboutDialog now read as first version from JUIGLEApplication. If is null then read version from AboutDialog.properties file defined by user.
   	 	ADDED   : Added a new class JUIGLEUtils + new image configure-48.png
   	 	CHANGED : Class JUIGLEApplication changed from static class to normal singleton class.
   	 	ADDED   : Added interface IMainFrame.
   	 	
-  * (8/31/2010)
+  * (8/31/2010) vsouhrada
   	 #111 - 110
   		CHANGED : JUIGLE properties and builds files.
+  		
   	 #109
    		ADDED   : Class JUIGLEApplication
    		CHANGED : Added to the LangugePropertiesLoader class method which return true, if lang. properties was be loaded. - (merged from 1.0.1)
