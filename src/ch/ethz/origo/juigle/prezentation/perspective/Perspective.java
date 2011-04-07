@@ -16,7 +16,7 @@
 
 /*
  *  
- *    Copyright (C) 2009 - 2010 
+ *    Copyright (C) 2009 - 2011 
  *    							University of West Bohemia, 
  *                  Department of Computer Science and Engineering, 
  *                  Pilsen, Czech Republic
@@ -45,7 +45,7 @@ import ch.ethz.origo.juigle.prezentation.JUIGLEGraphicsUtils;
  * perspective classes.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.1 (3/28/2010)
+ * @version 0.2.0 (4/3/2011)
  * @since 0.1.0 (07/12/09)
  */
 public class Perspective extends AbstractPerspective {
@@ -55,7 +55,7 @@ public class Perspective extends AbstractPerspective {
 	
 	/** Resource bundle path */
 	protected String resourcePath;
-	
+	/** Logger for this class */
 	protected static final Logger logger = Logger.getLogger(Perspective.class);
 	
 	@Override
@@ -131,6 +131,11 @@ public class Perspective extends AbstractPerspective {
 	@Override
 	public String getRBPerspectiveTitleKey() {
 		return "perspective.title";
+	}
+
+	@Override
+	public String getID() {
+		throw new UnsupportedOperationException("Method is not Override by child...");
 	}
 
 }

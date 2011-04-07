@@ -16,7 +16,8 @@
 
 /*
  *    IPerspective.java
- *    Copyright (C) 2009 University of West Bohemia, 
+ *    Copyright (C) 2009 - 2011 
+ *                       University of West Bohemia, 
  *                       Department of Computer Science and Engineering, 
  *                       Pilsen, Czech Republic
  */
@@ -30,7 +31,7 @@ import ch.ethz.origo.juigle.application.exception.PerspectiveException;
  * Interface which have to be implemented by all perspective.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.1 (3/28/2010)
+ * @version 1.0.0 (4/3/2011)
  * @since 0.1.0 (project version)
  */
 public interface IPerspective {
@@ -53,5 +54,12 @@ public interface IPerspective {
 	 * @since 0.1.0 (07/12/09)
 	 */
 	public Icon getPerspectiveIcon() throws PerspectiveException;
+	
+	/**
+	 * Return a unique identifier (id) of perspective
+	 * @return a unique identifier (id) of perspective
+	 * @since 1.0.0 (4/3/2011)
+	 */
+	public String getID();
 
 }
