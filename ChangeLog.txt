@@ -1,6 +1,11 @@
 *********************************************************************************************
 *                                  CHANGE LOG 1.0.1 - > 1.0.2                               *
 *********************************************************************************************
+  * (4/11/2011) vsouhrada
+     #157
+
+        CHANGED : Final commit before JUIGLE-1.0.2 release
+
   * (4/7/2011) vsouhrada
      #156
      
@@ -8,6 +13,7 @@
         CHANGED : Switched PluginEngine library from 1.0 to 1.0.1
         ADDED   : Method on interface IPerspectiveLoader
         ADDED   : Added a support for switching perspectives from one perspective to the another.
+        
   * (3/21/2011) vsouhrada
      #150
      
