@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="config"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/Filters.jar"/>
+	<classpathentry kind="lib" path="lib/jxlayer.jar"/>
+	<classpathentry kind="lib" path="lib/MultipleGradientPaint.jar"/>
+	<classpathentry kind="lib" path="lib/swing-layout.jar"/>
+	<classpathentry kind="lib" path="lib/swing-worker.jar"/>
+	<classpathentry kind="lib" path="lib/TimingFramework-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="lib/nimrodlf-1.1a.jar"/>
+	<classpathentry kind="lib" path="lib/swingx-1.6.jar" sourcepath="lib/swingx-1.6-src.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/home/womacka/Programming/workspace/Juigle/doc/swingx/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/swingx-beaninfo-1.6.jar"/>
+	<classpathentry kind="lib" path="lib/mail/dsn.jar"/>
+	<classpathentry kind="lib" path="lib/mail/imap.jar"/>
+	<classpathentry kind="lib" path="lib/mail/mail.jar"/>
+	<classpathentry kind="lib" path="lib/mail/mailapi.jar"/>
+	<classpathentry kind="lib" path="lib/mail/pop3.jar"/>
+	<classpathentry kind="lib" path="lib/mail/smtp.jar"/>
+	<classpathentry kind="lib" path="lib/jcommon-1.0.16.jar"/>
+	<classpathentry kind="lib" path="lib/jfreechart-1.0.13.jar"/>
+	<classpathentry kind="lib" path="lib/PluginEngine-1.0.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

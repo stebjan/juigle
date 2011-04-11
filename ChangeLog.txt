@@ -1,0 +1,57 @@
+*********************************************************************************************
+*                                  CHANGE LOG 1.0.1 - > 1.0.2                               *
+*********************************************************************************************
+  * (4/11/2011) vsouhrada
+     #157
+
+        CHANGED : Final commit before JUIGLE-1.0.2 release
+
+  * (4/7/2011) vsouhrada
+     #156
+     
+        CHANGED : JUIGLE library marked as Release Candidate 1 (RC1)
+        CHANGED : Switched PluginEngine library from 1.0 to 1.0.1
+        ADDED   : Method on interface IPerspectiveLoader
+        ADDED   : Added a support for switching perspectives from one perspective to the another.
+        
+  * (3/21/2011) vsouhrada
+     #150
+     
+        ADDED   : Now is in target called makejar (build.xml) create jar file with sources
+         
+  * (3/20/2011) vsouhrada
+     #148
+     
+        FIXED   : Fixed a bug in LanguageObservable when method updateText is calling - method setLocalizedResourceBundle is now called before the method updateText.
+  
+  * (10/30/2010) vsouhrada
+  	 #145
+  	 
+  	 	ADDED   : Class Database which represents database connected object. Allow to you get a database connection a connect to database.
+  	 	ADDED   : Added a DatabaseDialog class for connect to database. It is not complete yet.
+
+*********************************************************************************************
+*                                  CHANGE LOG 1.0.0 - > 1.0.1                               *
+*********************************************************************************************
+  * (10/30/2010) vsouhrada
+  	 #137 - 136
+  	 	ADDED   : Added option for adding a Menu Item separator - http://juigle.origo.ethz.ch/issues/4
+  	 	
+  * (10/12/2010) vsouhrada
+  	 #132
+  	 	ADDED   : Added target for generating Javadoc by ANT build.xml
+  	 	 
+  * (10/12/2010) vsouhrada
+  	 #128 - 130
+  	 	CHANGED : #ISSUE 19: automatic filling of error code to the error text - http://juigle.origo.ethz.ch/issues/19
+  	 	
+  * (10/06/2010) vsouhrada
+  	 #125
+  	 	CHANGED : #ISSUE 19: automatic filling of error code to the error text - http://juigle.origo.ethz.ch/issues/19
+  	 	
+  * (10/05/2010) vsouhrada
+  	 # 120
+  	 	ADDED   : a new code in LanguagePropertiesLoader class. 
+  	 	CHANGED : Method LanguagePropertiesLoader.writePropertyLang renamed on writeLangProperty
+  	 	FIXED   : #ISSUE 10: More informations from EMail Reporter - http://juigle.origo.ethz.ch/issues/10
+  	 	ADDED   : Added class JUIGLEFileUtils
