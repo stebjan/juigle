@@ -10,8 +10,6 @@
 	<!-- symbolic jar name -->
 	<property name="jarname" value="${ant.project.name}" />
 	
-	<property name="jerpahome" value="../JERPA" />
-
 	<!-- author -->
 	<property name="author" value="Vaclav Souhrada" />
 
@@ -19,7 +17,6 @@
 	<property name="build" location="${projecthome}/bin" />
 	<property name="jars" location="${projecthome}/jars" />
 	<property name="lib" location="${projecthome}/lib" />
-	<property name="deployloc" location="${jerpahome}/lib" />
 	<property name="dir.javadoc" location ="${projecthome}/docs/javadoc" />
 	<property name="runloc" location="${jars}" />
 	<property name="buildfilename" value="${jarname}-${version}.jar" />
@@ -34,7 +31,6 @@
 	<target name="init">
 		<mkdir dir="${build}" />
 		<mkdir dir="${jars}" />
-		<mkdir dir="${deployloc}" />
 	</target>
 
 	<target name="compile" depends="init">
@@ -76,21 +72,6 @@
 		<antcall target="autoclean" />
 		<delete dir="${jars}" />
 		<delete dir="${deploy}" />
-	</target>
-
-
-	<!-- volitelný target, který umožní vytvořený jar nakopírovat
-		na libovolné místo na disku, např. do složky deploy. Před použitím
-		je nutné změnit cestu deployloc  -->
-	<target name="deploy" depends="makejar">
-		<delete file="${deployloc}/${buildfilename}" />
-		<delete file="${deployloc}/${build.filename.src}" />
-		<copy file="${jars}/${buildfilename}" todir="${deployloc}" />
-		<copy file="${jars}/${build.filename.src}" todir="${deployloc}"/>
-		<copy todir="${deployloc}">
-			<fileset dir="${lib}" />
-		</copy>
-
 	</target>
 
 	<target name="run">
