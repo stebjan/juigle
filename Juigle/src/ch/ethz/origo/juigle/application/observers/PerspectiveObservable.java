@@ -16,18 +16,20 @@
 
 /*
  *  
- *    Copyright (C) 2009 - 2010 
+ *    Copyright (C) 2009 - 2011 
  *    							University of West Bohemia, 
  *                  Department of Computer Science and Engineering, 
  *                  Pilsen, Czech Republic
  */
 package ch.ethz.origo.juigle.application.observers;
 
+import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
+
 /**
  * Observer pattern for communication between each of perspectives.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.2.0 (2/21/2010)
+ * @version 0.2.1 (3/31/2011)
  * @since 0.1.0 (08/15/09)
  * @see JUIGLEObservable
  */
@@ -52,6 +54,18 @@ public class PerspectiveObservable extends JUIGLEObservable {
 			instance = new PerspectiveObservable();
 		}
 		return instance;
+	}
+	
+	/**
+	 * By this method you inform all observers that you want to change a perspective. Perspective 
+	 * will be changed automatically,
+	 * 
+	 * @param perspective a new perspective which will be displayed on the main perspective panel
+	 * @since 0.2.1 (3/31/2011)
+	 */
+	public synchronized void changePerspective(Perspective perspective) {
+		setState(MSG_PERSPECTIVE_CHANGED);
+		notifyObserver(perspective);
 	}
 
 }

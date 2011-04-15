@@ -200,8 +200,8 @@ public class ClassFinder {
 		for (int i = 0; i < dirs.length; i++) {
 			try {
 				// add the present package
-				map.put(new URL("file://" + dirs[i].getCanonicalPath()), name
-						+ dirs[i].getName());
+				map.put(new URL("file://" + dirs[i].getCanonicalPath()),
+						name + dirs[i].getName());
 			} catch (IOException ioe) {
 				return;
 			}
