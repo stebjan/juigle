@@ -1,7 +1,12 @@
 *********************************************************************************************
 *                                  CHANGE LOG 1.0.2 - > 2.0.0                               *
 *********************************************************************************************
- 
+ * (4/24/2011) vsouhrada
+     #172
+     
+        ADDED   : Added a new database support files. Now you can create a database from XML file, retrieve database data via Dbi objects (Database Interface).
+                : Next you can create a own database repository via DAO objects (Database Access Object).
+        
  * (3/25/2011) vsouhrada
      #153
         ADDED   : Added a support for loading XML file and parse it. Now you can easily construct own XMLParser and parse xml file by calling a specific method. 
