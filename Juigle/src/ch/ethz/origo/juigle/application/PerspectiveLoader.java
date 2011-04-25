@@ -16,7 +16,7 @@
 
 /*
  *  
- *    Copyright (C) 2009 - 2010 
+ *    Copyright (C) 2009 - 2011
  *    							University of West Bohemia, 
  *                  Department of Computer Science and Engineering, 
  *                  Pilsen, Czech Republic
@@ -24,10 +24,14 @@
 package ch.ethz.origo.juigle.application;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 import ch.ethz.origo.juigle.data.ErrorCodes;
+import ch.ethz.origo.juigle.data.JUIGLEUtils;
 import ch.ethz.origo.juigle.data.PropertiesPerspectiveReader;
 import ch.ethz.origo.juigle.data.xml.XMLPerspectiveReader;
 import ch.ethz.origo.juigle.plugin.IPluggable;
@@ -40,20 +44,17 @@ import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
  * Next loader loading classes (perspectives) as Plug-in Engine.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.1.04 (10/29/2010)
+ * @version 1.0.0 (4/25/2010)
  * @since 2.0.0 (07/17/2010) - from the software JERPA
  * @see IPerspectiveLoader
  */
 public class PerspectiveLoader implements IPerspectiveLoader {
 
-	/** PLUGIN key for the perspective */
-	public static final String PLUGIN_PERSPECTIVES_KEY = "Perspective";
-
 	private static PerspectiveLoader loader;
 
 	private IPerspectiveReader perspectiveReader;
 
-	private List<Perspective> perspectives;
+	private Map<String, Perspective> mapOfPerspectives;
 
 	/**
 	 * Default constructor
@@ -70,8 +71,7 @@ public class PerspectiveLoader implements IPerspectiveLoader {
 		return loader;
 	}
 
-	public void loadPerspectives(String perspFilePath)
-			throws PerspectiveException {
+	public void loadPerspectives(String perspFilePath) throws PerspectiveException {
 		if (perspFilePath == null || perspFilePath.length() == 0) {
 			throw new PerspectiveException(
 					ErrorCodes.CFG_PERSPECTIVE_FILE_NOT_FOUND_P + perspFilePath);
@@ -89,7 +89,7 @@ public class PerspectiveLoader implements IPerspectiveLoader {
 		perspectiveReader.readFile();
 		ClassLoader loader = PerspectiveLoader.class.getClassLoader();
 
-		perspectives = new ArrayList<Perspective>();
+		mapOfPerspectives = new HashMap<String, Perspective>();
 		List<String> perspectivesName = perspectiveReader
 				.getListOfInnerPerspectivesNames();
 
@@ -99,7 +99,7 @@ public class PerspectiveLoader implements IPerspectiveLoader {
 						perspectiveReader.getPerspectivePackagePath(name) + "." + name)
 						.newInstance();
 				checkIfPerspectiveIsDefault(prsvClass, name);
-				perspectives.add(prsvClass);
+				mapOfPerspectives.put(prsvClass.getID(), prsvClass);
 			} catch (InstantiationException e) {
 				throw new PerspectiveException(ErrorCodes.PERSPECTIVE_NOT_LOADED_P
 						+ perspectivesName, e);
@@ -113,10 +113,14 @@ public class PerspectiveLoader implements IPerspectiveLoader {
 		}
 		// now load perspectives from plug-ins
 		PluginEngine plugEngine = PluginEngine.getInstance();
-		for (IPluggable plugin : plugEngine
-				.getAllCorrectPluggables(PerspectiveLoader.PLUGIN_PERSPECTIVES_KEY)) {
-			perspectives.add((Perspective) plugin);
-			plugEngine.startPluggable(plugin);
+		List<IPluggable> listOfPluggable = plugEngine
+				.getAllCorrectPluggables(JUIGLEUtils.PLUGIN_PERSPECTIVES_KEY);
+		if (listOfPluggable != null && !listOfPluggable.isEmpty()) {
+			for (IPluggable plugin : listOfPluggable) {
+				Perspective perspective = (Perspective) plugin;
+				mapOfPerspectives.put(perspective.getID(), perspective);
+				plugEngine.startPluggable(plugin);
+			}
 		}
 
 	}
@@ -130,16 +134,32 @@ public class PerspectiveLoader implements IPerspectiveLoader {
 
 	@Override
 	public Perspective getDefaultPerspective() {
-		for (Perspective per : perspectives) {
+		for (Perspective per : getListOfPerspectives()) {
 			if (per.isDefaultPerspective()) {
 				return per;
 			}
 		}
+
 		return null;
 	}
 
 	@Override
 	public List<Perspective> getListOfPerspectives() {
+		List<Perspective> perspectives = new ArrayList<Perspective>();
+		for (Entry<String, Perspective> entry : mapOfPerspectives.entrySet()) {
+			perspectives.add(entry.getValue());
+		}
+
 		return perspectives;
 	}
+
+	@Override
+	public Perspective getPerspective(String id) {
+		if (mapOfPerspectives != null && !mapOfPerspectives.isEmpty()) {
+			return mapOfPerspectives.get(id);
+		}
+
+		return null;
+	}
+	
 }

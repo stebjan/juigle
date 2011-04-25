@@ -16,7 +16,7 @@
 
 /*
  *  
- *    Copyright (C) 2009 - 2010 
+ *    Copyright (C) 2009 - 2011 
  *    							University of West Bohemia, 
  *                  Department of Computer Science and Engineering, 
  *                  Pilsen, Czech Republic
@@ -32,7 +32,7 @@ import ch.ethz.origo.juigle.prezentation.perspective.Perspective;
  * Interface for loader of perspective.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.2 (4/24/2010)
+ * @version 1.0.0 (4/3/2011)
  * @since 0.1.0 (7/20/09)
  */
 public interface IPerspectiveLoader {
@@ -51,5 +51,14 @@ public interface IPerspectiveLoader {
 	 * @return default perspective
 	 */
 	public Perspective getDefaultPerspective(); 
+	
+	/**
+	 * Return perspective by identifier (id)
+	 * 
+	 * @param id a unique identifier of perspective
+	 * @return
+	 * @since 1.0.0 (4/3/2011)
+	 */
+	public Perspective getPerspective(String id);
 	
 }

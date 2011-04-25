@@ -40,7 +40,7 @@ import ch.ethz.origo.juigle.prezentation.menu.JUIGLEPerspectiveMenu;
  * 
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.3 (2/21/2010)
+ * @version 0.2.0 (4/25/2010)
  * @since 0.1.0 (07/12/09)
  * @see IPerspective
  * 
@@ -64,6 +64,8 @@ public abstract class AbstractPerspective implements IPerspective, ILanguage {
 	protected JXPanel mainPanel;
 
 	protected ResourceBundle resource;
+	
+	protected static String ID_PERSPECTIVE;
 
 	/** Global perspective observable */
 	protected static PerspectiveObservable perspectiveObservable = PerspectiveObservable

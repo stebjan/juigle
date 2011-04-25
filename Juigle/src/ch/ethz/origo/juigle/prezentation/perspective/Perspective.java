@@ -132,5 +132,10 @@ public class Perspective extends AbstractPerspective {
 	public String getRBPerspectiveTitleKey() {
 		return "perspective.title";
 	}
+	
+	@Override
+	public String getID() {
+		throw new UnsupportedOperationException("Method is not Override by child...");
+	}
 
 }

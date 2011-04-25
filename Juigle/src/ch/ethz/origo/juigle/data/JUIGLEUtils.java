@@ -7,7 +7,7 @@ package ch.ethz.origo.juigle.data;
  * constants.
  * 
  * @author Vaclav Souhrada (v dot souhrada at gmail dot com)
- * @version 0.1.1.00 (10/03/2010)
+ * @version 0.1.2 (4/25/2011)
  * @since 1.0.1 (9/05/2010)
  * 
  */
@@ -15,6 +15,9 @@ public class JUIGLEUtils {
 
 	/** Path to application used images */
 	public static final String IMAGE_PATH = "ch/ethz/origo/juigle/data/images/";
+	
+	/** PLUGIN key for the perspective */
+	public static final String PLUGIN_PERSPECTIVES_KEY = "Perspective";
 
 	/**
 	 * Return text from error stack trace - same as is print by call e.g.
