@@ -1,7 +1,12 @@
 *********************************************************************************************
 *                                  CHANGE LOG 1.0.2 - > 2.0.0                               *
 *********************************************************************************************
-* (4/24/2011) vsouhrada
+* (4/25/2011) vsouhrada
+
+     #176
+        CHANGED : Switched PluginEnine on a newest version 2.0.0-RC1.
+        FIXED   : Fixed JUIGLEApplication class - now in startApplication method is calling method from IMainFrame interface - initGUI.
+
      #173
        
         CHANGED : PerspectiveLoader and added a method on IPerspectiveLoader interface - merged from branch JUIGLE 1.0.2.
