@@ -2,6 +2,8 @@
 *                                  CHANGE LOG 1.0.2 - > 2.0.0                               *
 *********************************************************************************************
 * (4/25/2011) vsouhrada
+     #177
+        FIXED   : ISSUE - # 21: SplashScreen - Deprecated problem - JXImagePanel / ImagePainter -> http://juigle.origo.ethz.ch/issues/21.
 
      #176
         CHANGED : Switched PluginEnine on a newest version 2.0.0-RC1.

@@ -2,15 +2,12 @@ package ch.ethz.origo.juigle.prezentation.splashscreen;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import org.jdesktop.swingx.JXFrame;
-import org.jdesktop.swingx.JXImagePanel;
 import org.jdesktop.swingx.JXFrame.StartPosition;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.painter.ImagePainter;
-import org.jdesktop.swingx.painter.ImagePainter.ScaleType;
 
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
 import ch.ethz.origo.juigle.application.exception.SplashScreenException;
@@ -85,14 +82,11 @@ public class SplashScreen {
 			ImagePainter ip = new ImagePainter();
 			ip.setImage(image);
 			jp.setBackgroundPainter(ip);
-			
-			// JXImagePanel imagePanel = new JXImagePanel();
-			// imagePanel.setImage(image);
-			// imagePanel.setEditable(false);
+
 			frame.add(jp, BorderLayout.CENTER);
 			frame.setStartPosition(StartPosition.CenterInScreen);
 			frame.setUndecorated(true);
-			frame.pack();
+			frame.setMinimumSize(new Dimension(image.getWidth(), image.getHeight()));
 			frame.setVisible(true);
 		}
 	}
