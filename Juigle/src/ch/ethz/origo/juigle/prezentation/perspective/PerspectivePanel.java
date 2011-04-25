@@ -16,7 +16,7 @@
 
 /*
  *  
- *    Copyright (C) 2009 - 2010 
+ *    Copyright (C) 2009 - 2011 
  *    							University of West Bohemia, 
  *                  Department of Computer Science and Engineering, 
  *                  Pilsen, Czech Republic
@@ -33,23 +33,28 @@ import org.jdesktop.swingx.JXTaskPane;
 import org.jdesktop.swingx.JXTitledPanel;
 
 import ch.ethz.origo.juigle.application.exception.PerspectiveException;
+import ch.ethz.origo.juigle.application.observers.IObservable;
+import ch.ethz.origo.juigle.application.observers.IObserver;
+import ch.ethz.origo.juigle.application.observers.PerspectiveObservable;
 
 /**
  * Construct main panel which contains always current dispalyed 
  * perspective. 
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.2 (4/29/2010
+ * @version 0.2.0 (3/31/2011)
  * @since 0.1.0 (07/19/09)
  * @see JXPanel
  * @see Perspective
  */
-public class PerspectivePanel extends JXPanel {
+public class PerspectivePanel extends JXPanel implements IObserver {
 
 	/** Only for serialization */
 	private static final long serialVersionUID = -6773985483599106242L;
 
 	private Perspective currentPerspective;
+	
+	private PerspectiveObservable perspectiveObservable;
 
 	/**
 	 * Default constructor
@@ -57,7 +62,8 @@ public class PerspectivePanel extends JXPanel {
 	 * @throws PerspectiveException
 	 */
 	public PerspectivePanel() throws PerspectiveException {
-
+    perspectiveObservable = PerspectiveObservable.getInstance();
+    perspectiveObservable.attach(this);
 	}
 
 	/**
@@ -151,6 +157,28 @@ public class PerspectivePanel extends JXPanel {
 		this.removeAll();
 		this.repaint();
 		this.validate();
+	}
+	
+	@Override
+	public void update(Object state) {
+		if (state instanceof Perspective) {
+			try {
+				add((Perspective) state);
+			} catch (PerspectiveException e) {
+				// FIXME - handle with exception
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
+	public void update() {
+		throw new UnsupportedOperationException("Method is not implemented yet...");
+	}
+
+	@Override
+	public void update(IObservable o, Object state) {
+		update(state);
 	}
 	
 }

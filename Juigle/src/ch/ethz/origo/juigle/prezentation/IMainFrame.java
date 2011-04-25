@@ -8,7 +8,7 @@ import ch.ethz.origo.juigle.prezentation.menu.JUIGLEMainMenu;
 /**
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail dot com)
- * @version 0.1.0 (9/04/2010)
+ * @version 1.0.0 (4/25/2010)
  * @since 2.0.0 (9/04/2010)
  * @see IObserver
  * @see ILanguage
@@ -37,4 +37,10 @@ public interface IMainFrame extends IObserver, ILanguage {
 	 * @since 0.1.0 (9/04/2010)
 	 */
 	public String getLogoPath();
+	
+	/**
+	 * 
+	 * @since 1.0.0 (4/25/2010)
+	 */
+	public void initGUI(JUIGLEFrame frame) throws PerspectiveException;
 }

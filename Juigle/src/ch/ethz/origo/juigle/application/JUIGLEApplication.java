@@ -29,7 +29,7 @@ import ch.ethz.origo.juigle.prezentation.splashscreen.SplashScreen;
  * A class for the application global settings and starting.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail dot com)
- * @version 0.2.2.02 (10/20/2010)
+ * @version 0.2.3 (4/25/2011)
  * @since 2.0.0 (8/29/2010)
  * @see IObserver
  * @see ILanguage
@@ -177,7 +177,6 @@ public class JUIGLEApplication implements IObserver, ILanguage {
 	/**
 	 * 
 	 * 
-	 * @version 0.2.0.01 (10/03/2010)
 	 * @throws PerspectiveException
 	 * @since 0.2.0 (9/04/2010)
 	 */
@@ -189,11 +188,12 @@ public class JUIGLEApplication implements IObserver, ILanguage {
 			loader.loadPerspectives(perspectivePath);
 			juigleFrame = new JUIGLEFrame(appVersion,
 					ClassLoader.getSystemResourceAsStream(frame.getLogoPath()));
+			frame.initGUI(juigleFrame);
 			juigleFrame.setMainMenu(frame.getMainMenu());
 			juigleFrame.setPerspectives(loader,
 					JUIGLEMainMenu.KEY_PERSPECTIVE_MAIN_MENU);
-			juigleFrame.setFullScreen(fullScreen);
 			juigleFrame.setVisible(true);
+			juigleFrame.setFullScreen(fullScreen);
 			logger.info("Application started successfully...");
 		}
 	}
