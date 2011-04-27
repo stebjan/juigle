@@ -1,7 +1,16 @@
 *********************************************************************************************
+* Legend :                                                                                  *
+* ADDED   - indicates new functionality or new part of distribution                         *
+* CHANGED - indicates a change in using/behavior JUIGLE                                     *
+* FIXED   - indicates a bug fix                                                             *
+*********************************************************************************************
 *                                  CHANGE LOG 1.0.2 - > 2.0.0                               *
 *********************************************************************************************
-* (4/25/2011) vsouhrada
+ * (4/27/2011) vsouhrada
+     #178
+        FIXED   : Fixed an error in class LanguageObservable - incorrect type of observer in detach method
+     
+ * (4/25/2011) vsouhrada
      #177
         FIXED   : ISSUE - # 21: SplashScreen - Deprecated problem - JXImagePanel / ImagePainter -> http://juigle.origo.ethz.ch/issues/21.
 

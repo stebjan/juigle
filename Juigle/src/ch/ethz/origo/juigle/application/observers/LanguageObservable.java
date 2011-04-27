@@ -16,7 +16,7 @@
 
 /*
  *  
- *    Copyright (C) 2009 - 2010 
+ *    Copyright (C) 2009 - 2011 
  *    							University of West Bohemia, 
  *                  Department of Computer Science and Engineering, 
  *                  Pilsen, Czech Republic
@@ -33,7 +33,7 @@ import ch.ethz.origo.juigle.application.exception.JUIGLELangException;
  * Observar pattern who points his listeners to switch language.
  * 
  * @author Vaclav Souhrada
- * @version 0.1.3 (3/20/2011)
+ * @version 1.0.0 (4/26/2011)
  * @since 0.1.0 (10/15/2010)
  * @see AbstractJUIGLEObservable
  * 
@@ -106,7 +106,7 @@ public class LanguageObservable extends AbstractJUIGLEObservable {
 
 	@Override
 	public void attach(IObserver observer) {
-
+  
 	}
 
 	public void attach(ILanguage observer) {
@@ -120,6 +120,10 @@ public class LanguageObservable extends AbstractJUIGLEObservable {
 
 	@Override
 	public void detach(IObserver observer) {
+
+	}
+	
+	public void detach(ILanguage observer) {
 		listOfObservers.remove(observer);
 	}
 
