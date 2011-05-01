@@ -16,7 +16,8 @@
 
 /*
  *    AbstractPerspective.java
- *    Copyright (C) 2009 University of West Bohemia, 
+ *    Copyright (C) 2009 - 2011
+ *                       University of West Bohemia, 
  *                       Department of Computer Science and Engineering, 
  *                       Pilsen, Czech Republic
  */
@@ -37,10 +38,11 @@ import ch.ethz.origo.juigle.prezentation.menu.JUIGLEMenu;
 import ch.ethz.origo.juigle.prezentation.menu.JUIGLEPerspectiveMenu;
 
 /**
- * 
+ * The basic abstract class for perspective, which will be displayed in GUI of software
+ * which using JUIGLE.
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.2.0 (4/25/2010)
+ * @version 1.0.1 (4/27/2010)
  * @since 0.1.0 (07/12/09)
  * @see IPerspective
  * 
@@ -64,7 +66,7 @@ public abstract class AbstractPerspective implements IPerspective, ILanguage {
 	protected JXPanel mainPanel;
 
 	protected ResourceBundle resource;
-	
+
 	protected static String ID_PERSPECTIVE;
 
 	/** Global perspective observable */

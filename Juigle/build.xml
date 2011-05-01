@@ -5,7 +5,7 @@
 	<property name="projecthome" value="." />
 
 	<!-- jar version -->
-	<property name="version" value="2.0.0-RC2a" />
+	<property name="version" value="2.0.0-RC2u2" />
 
 	<!-- symbolic jar name -->
 	<property name="jarname" value="${ant.project.name}" />

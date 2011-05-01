@@ -128,6 +128,7 @@ public class Chart2D extends JComponent {
 		this.axisY = axisY;
 	}
 
+	/** Only for testing */
 	public static void main(String[] args) {
 		XYSeries series = new XYSeries("ICA result sinus");
 		XYSeries series2 = new XYSeries("ICA result cosinu");

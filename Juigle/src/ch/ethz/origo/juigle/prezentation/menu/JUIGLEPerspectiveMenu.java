@@ -16,7 +16,7 @@
 
 /*
  *  
- *    Copyright (C) 2009 - 2010 
+ *    Copyright (C) 2009 - 2011 
  *    							University of West Bohemia, 
  *                  Department of Computer Science and Engineering, 
  *                  Pilsen, Czech Republic
@@ -37,19 +37,19 @@ import ch.ethz.origo.juigle.prezentation.JUIGLEFrame;
  * Menu which is added to perspectives (If programmer want).
  * 
  * @author Vaclav Souhrada (v.souhrada at gmail.com)
- * @version 0.1.1 (3/21/2010)
+ * @version 1.0.1 (4/27/2011)
  * @since 0.1.0 (05/18/09)
  * @see JUIGLEMenu
- *
+ * 
  */
 public class JUIGLEPerspectiveMenu extends JUIGLEMenu {
 
 	/** Only for serialization */
 	private static final long serialVersionUID = -4279622887648599046L;
-	
+
 	private JUIGLEMenuItem headerCollapseItem;
 	private JUIGLEMenuItem footerrCollapseItem;
-	
+
 	/**
 	 * Create <code>JUIGLE Menu</code>> on specific position.
 	 * 
@@ -60,8 +60,8 @@ public class JUIGLEPerspectiveMenu extends JUIGLEMenu {
 	}
 
 	/**
-	 * Create <code>JUIGLE Menu</code>> on specific position
-	 * and with localized text
+	 * Create <code>JUIGLE Menu</code>> on specific position and with localized
+	 * text
 	 * 
 	 * @param position
 	 * @param resourcePath
@@ -69,23 +69,25 @@ public class JUIGLEPerspectiveMenu extends JUIGLEMenu {
 	public JUIGLEPerspectiveMenu(String position, String resourcePath) {
 		super(position, resourcePath);
 	}
-	
+
 	/**
 	 * Add hide button which hide Header of application.
-	 * @param showText true - if button have to show text
+	 * 
+	 * @param showText
+	 *          true - if button have to show text
 	 */
 	public void addHeaderHideButton(boolean showText) {
-			headerCollapseItem = new JUIGLEMenuItem();
-			headerCollapseItem.showText(false);
+		headerCollapseItem = new JUIGLEMenuItem();
+		headerCollapseItem.showText(false);
 
 		Action headerCollpsAction = JUIGLEFrame.headerCoollapse.getActionMap().get(
 				JXCollapsiblePane.TOGGLE_ACTION);
 
 		// use the collapse/expand icons from the JTree UI
-		headerCollpsAction.putValue(JXCollapsiblePane.COLLAPSE_ICON, UIManager
-				.getIcon("Tree.expandedIcon"));
-		headerCollpsAction.putValue(JXCollapsiblePane.EXPAND_ICON, UIManager
-				.getIcon("Tree.collapsedIcon"));
+		headerCollpsAction.putValue(JXCollapsiblePane.COLLAPSE_ICON,
+				UIManager.getIcon("Tree.expandedIcon"));
+		headerCollpsAction.putValue(JXCollapsiblePane.EXPAND_ICON,
+				UIManager.getIcon("Tree.collapsedIcon"));
 
 		headerCollapseItem.setAction(headerCollpsAction);
 		headerCollapseItem.setResourceBundleKey("juigle.buttons.hide.header");
@@ -94,29 +96,34 @@ public class JUIGLEPerspectiveMenu extends JUIGLEMenu {
 
 	/**
 	 * Add Header hide button with specified image
-	 * @param image of button
+	 * 
+	 * @param image
+	 *          of button
 	 * @throws JUIGLEMenuException
 	 */
 	public void addHeaderHideButton(BufferedImage image)
 			throws JUIGLEMenuException {
-
+		throw new UnsupportedOperationException(
+				"addHeaderHideButton(BufferedImage image) is not implemented in current versio of JUIGLE");
 	}
 
 	/**
-	 *  Add button to persp. menu which hidden FOOTER panel
-	 * @param showText true - if button have to show text
+	 * Add button to persp. menu which hidden FOOTER panel
+	 * 
+	 * @param showText
+	 *          true - if button have to show text
 	 */
 	public void addFooterHideButton(boolean showText) {
-			footerrCollapseItem = new JUIGLEMenuItem();
-			footerrCollapseItem.showText(false);
+		footerrCollapseItem = new JUIGLEMenuItem();
+		footerrCollapseItem.showText(false);
 
 		Action footerCollpsAction = JUIGLEFrame.footerCollapse.getActionMap().get(
 				JXCollapsiblePane.TOGGLE_ACTION);
 		// use the collapse/expand icons from the JTree UI
-		footerCollpsAction.putValue(JXCollapsiblePane.COLLAPSE_ICON, UIManager
-				.getIcon("Tree.expandedIcon"));
-		footerCollpsAction.putValue(JXCollapsiblePane.EXPAND_ICON, UIManager
-				.getIcon("Tree.collapsedIcon"));
+		footerCollpsAction.putValue(JXCollapsiblePane.COLLAPSE_ICON,
+				UIManager.getIcon("Tree.expandedIcon"));
+		footerCollpsAction.putValue(JXCollapsiblePane.EXPAND_ICON,
+				UIManager.getIcon("Tree.collapsedIcon"));
 
 		footerrCollapseItem.setAction(footerCollpsAction);
 		footerrCollapseItem.setResourceBundleKey("juigle.buttons.hide.footer");
@@ -125,6 +132,7 @@ public class JUIGLEPerspectiveMenu extends JUIGLEMenu {
 
 	/**
 	 * Add Footer hide button with specified image
+	 * 
 	 * @param image
 	 * @throws JUIGLEMenuException
 	 */
@@ -132,5 +140,5 @@ public class JUIGLEPerspectiveMenu extends JUIGLEMenu {
 			throws JUIGLEMenuException {
 
 	}
-	
+
 }
