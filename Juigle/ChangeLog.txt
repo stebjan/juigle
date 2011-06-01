@@ -3,9 +3,16 @@
 * ADDED   - indicates new functionality or new part of distribution                         *
 * CHANGED - indicates a change in using/behavior JUIGLE                                     *
 * FIXED   - indicates a bug fix                                                             *
+* INTERNAL - indicates an internal change - information important only for JUIGLE developers*
 *********************************************************************************************
 *                                  CHANGE LOG 1.0.2 - > 2.0.0                               *
 *********************************************************************************************
+ * (6/01/2011) vsouhrada
+     #183
+        ADDED   : A new class JUIGLEFormatter which contains utility methods for text formatting.
+        FIXED   : Fixed LanguageUtilssetLocale() methods. If locale is null - will be used a default ENGLISH locale.
+        CHANGED : Switched PluginEnine on a newest version 2.0.0-RC3. 
+
  * (4/27/2011) vsouhrada
      #178
         FIXED   : Fixed an error in class LanguageObservable - incorrect type of observer in detach method

@@ -8,10 +8,18 @@ import ch.ethz.origo.juigle.application.ILanguage;
 import ch.ethz.origo.juigle.application.LanguagePropertiesLoader;
 import ch.ethz.origo.juigle.application.exception.PropertiesException;
 
+/**
+ * 
+ * @author vsouhrada
+ * 
+ * @version 1.0.1 (5/07/2011)
+ * @since 0.1.0 (10/03/2010)
+ */
 public class LanguageUtils {
-	
+
+	/** Logger for this class */
 	private static Logger logger = Logger.getLogger(LanguageUtils.class);
-	
+
 	/**
 	 * Set application locale.
 	 * 
@@ -23,8 +31,8 @@ public class LanguageUtils {
 	 * 
 	 * @param applicationLocale
 	 *          name of locale
-	 * @version 0.1.0.00 (10/03/2010)
-	 * @since 0.1.0.00 (10/03/2010)
+	 * @version 1.0.1 (5/07/2011)
+	 * @since 0.1.0 (10/03/2010)
 	 */
 	public static void setLocale(String applicationLocale) {
 		Locale locale = null;
@@ -33,6 +41,12 @@ public class LanguageUtils {
 		} else if (applicationLocale.equals(ILanguage.CZECH)) {
 			locale = new Locale("cs", "CZ");
 		}
+		if (locale == null) {
+			locale = new Locale("en");
+			logger.warn("Can not set a locale[" + applicationLocale
+					+ "]. Will be used ENGLISH locale");
+		}
+		// set locale
 		Locale.setDefault(locale);
 	}
 
@@ -41,15 +55,16 @@ public class LanguageUtils {
 	 * 
 	 * @param locale
 	 *          locale which will be set up as default application locale
-	 * @version 0.1.0.00 (10/03/2010)
 	 * @since 0.1.0.00 (10/03/2010)
 	 */
 	public static void setLocale(Locale locale) {
-		if (locale != null) {
-			Locale.setDefault(locale);
-		} else {
-			logger.warn("Locale is null. will be set up default locale...");
+		if (locale == null) {
+			logger.warn("Can not set a locale[" + locale
+					+ "]. Will be used ENGLISH locale");
+			locale = new Locale("en");
 		}
+		// set locale
+		Locale.setDefault(locale);
 	}
 
 	/**
